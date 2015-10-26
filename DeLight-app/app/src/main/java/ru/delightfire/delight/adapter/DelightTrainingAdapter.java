@@ -13,11 +13,18 @@ import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.DelightTraining;
 
 /**
- * Created by dev on 25.10.2015.
+ * Created by scaredChatsky on 25.10.2015.
+ * Adapter for DelightTraining entity
  */
 public class DelightTrainingAdapter extends BaseAdapter{
 
+    /**
+     * Collection of trainings
+     */
     private List<DelightTraining> trainings;
+    /**
+     *
+     */
     private LayoutInflater layoutInflater;
 
     public DelightTrainingAdapter(Context context, List<DelightTraining> events) {

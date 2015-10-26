@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by dev on 24.10.2015.
+ * Created by scaredChatsky on 24.10.2015.
  */
 public class DelightTraining extends DelightEvent{
 

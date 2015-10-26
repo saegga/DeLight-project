@@ -3,7 +3,7 @@ package ru.delightfire.delight.entity;
 import java.util.Date;
 
 /**
- * Created by dev on 24.10.2015.
+ * Created by scaredChatsky on 24.10.2015.
  */
 public class DelightPerformance extends DelightEvent {
 

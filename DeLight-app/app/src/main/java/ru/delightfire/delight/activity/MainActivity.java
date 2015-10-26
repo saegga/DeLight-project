@@ -13,7 +13,7 @@ import ru.delightfire.delight.adapter.DelightTrainingAdapter;
 import ru.delightfire.delight.entity.DelightTraining;
 
 /**
- * Created by dev on 23.10.2015.
+ * Created by scaredChatsky on 23.10.2015.
  */
 public class MainActivity extends Activity{
 

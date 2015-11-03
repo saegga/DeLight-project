@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:id="@+id/chat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListView
+        android:id="@+id/listView_chat_messages"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@null"
+        android:background="@null"
+        android:transcriptMode="alwaysScroll"
+        android:stackFromBottom="true"
+        >
+    </ListView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/inputView_msg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:paddingRight="6dp"
+            android:paddingLeft="12dp"
+            android:textColor="@color/text_msg_input"
+            android:background="@color/back_msg_input"/>
+        <Button
+            android:id="@+id/btnView_send_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_msg"
+            android:layout_gravity="bottom"
+            android:background="@color/btn_send_color"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
+
+</LinearLayout>

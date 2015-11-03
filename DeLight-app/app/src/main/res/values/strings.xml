@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DeLight</string>
+    <string name="send_msg">Отправить</string>
 </resources>

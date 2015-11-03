@@ -3,4 +3,12 @@
     <color name="colorTabs">#C1F66F</color>
     <color name="colorAccent">#D80066</color>
     <color name="mainBackground">#FF8474</color>
+    <color name="back_message_from">#e5e7eb</color>
+    <color name="message_from_name">#777777</color>
+    <color name="message_from_text">#434343</color>
+    <color name="back_message_you">#5eb964</color>
+    <color name="white">#ffffff</color>
+    <color name="back_msg_input">#e8e8e8</color>
+    <color name="text_msg_input">#626262</color>
+    <color name="btn_send_color">#1d514a</color>
 </resources>

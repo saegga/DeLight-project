@@ -29,7 +29,7 @@ public class DelightTrainingAdapter extends BaseAdapter{
 
     public DelightTrainingAdapter(Context context, List<DelightTraining> events) {
         this.trainings = events;
-        layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class DelightTrainingAdapter extends BaseAdapter{
 
         DelightTraining delightTraining= getDelightTraining(position);
 
-        TextView textView = (TextView) view.findViewById(R.id.title);
+        TextView textView = (TextView) view.findViewById(R.id.artist);
         textView.setText(delightTraining.getName());
 
         return view;

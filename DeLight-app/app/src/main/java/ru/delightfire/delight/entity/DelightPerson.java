@@ -13,4 +13,10 @@ public abstract class DelightPerson {
     private String password;
     private boolean status;
 
+    public DelightPerson(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public DelightPerson() {
+    }
 }

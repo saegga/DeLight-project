@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.adapter.DelightChatAdapter;
-import ru.delightfire.delight.adapter.DelightTrainingAdapter;
+import ru.delightfire.delight.adapter.ChatAdapter;
+import ru.delightfire.delight.adapter.TrainingAdapter;
 import ru.delightfire.delight.entity.DelightTraining;
 import ru.delightfire.delight.entity.Message;
 
@@ -55,11 +55,11 @@ public class MainActivity extends Activity{
         listView = (ListView) findViewById(R.id.events_list);
         listMessages = (ListView) findViewById(R.id.listView_chat_messages);
 
-        DelightTrainingAdapter adapter = new DelightTrainingAdapter(this, initEvents());
+        TrainingAdapter adapter = new TrainingAdapter(this, initEvents());
         listView.setAdapter(adapter);
 
 
-        DelightChatAdapter chatAdapter = new DelightChatAdapter(this, initMessage());
+        ChatAdapter chatAdapter = new ChatAdapter(this, initMessage());
         listMessages.setAdapter(chatAdapter);
 
         btnSendMsg.setOnClickListener(new View.OnClickListener() {

@@ -8,10 +8,21 @@ import java.util.List;
  */
 public class DelightTraining extends DelightEvent{
 
+    /**
+     * Присутствующие пользователи
+     */
     private List<DelightUser> usersOnTraining;
 
+    /**
+     * Время
+     */
     String time;
+
+    /**
+     * День недели
+     */
     String dayOfWeek;
+
 
     public DelightTraining(String agenda, String login, String name){
         super(agenda, login, name);
@@ -22,10 +33,18 @@ public class DelightTraining extends DelightEvent{
         super(login, name);
     }
 
+    /**
+     * Добавление нового пользователя
+     * @param user
+     */
     public void addUser(DelightUser user){
         usersOnTraining.add(user);
     }
 
+    /**
+     * Удаление пользователя
+     * @param user
+     */
     public void deleteUser(DelightUser user){
         usersOnTraining.remove(user);
     }

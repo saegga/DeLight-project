@@ -1,22 +1,24 @@
 package ru.delightfire.delight.entity;
 
-import java.util.Date;
+import java.util.List;
 
 /**
- * Created by scaredChatsky on 24.10.2015.
+ * Created by scaredChatsky on 04.11.2015.
+ * Отдельный номер для выступления
  */
-public class DelightPerformance extends DelightEvent {
+public class DelightPerformance {
+    /**
+     * Название номера
+     */
+    private String name;
 
-    private Date date;
-    private DelightClient client;
+    /**
+     * Описание номера
+     */
+    private String description;
 
-    public DelightPerformance(Date d, String agenda, String login, String name){
-        super(agenda, login, name);
-        date = d;
-    }
-
-    public DelightPerformance(Date d, String login, String name) {
-        super(login, name);
-        date = d;
-    }
+    /**
+     * Пользователи, участвующие в номере
+     */
+    private List<DelightUser> usersInPerformance;
 }

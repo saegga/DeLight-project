@@ -2,10 +2,20 @@ package ru.delightfire.delight.entity;
 
 /**
  * Created by scaredChatsky on 24.10.2015.
+ * Участник команды
+ * @author scaredChastky
  */
 public class DelightUser extends DelightPerson{
 
+    /**
+     * Может ли открывать зал
+     */
     private boolean key;
-    DeliteRule rule;
+
+    /**
+     * Роль участника в группе
+     * @see DeliteRole
+     */
+    DeliteRole role;
 
 }

@@ -16,7 +16,7 @@ import ru.delightfire.delight.entity.DelightTraining;
  * Created by scaredChatsky on 25.10.2015.
  * Adapter for DelightTraining entity
  */
-public class DelightTrainingAdapter extends BaseAdapter{
+public class TrainingAdapter extends BaseAdapter{
 
     /**
      * Collection of trainings
@@ -27,7 +27,7 @@ public class DelightTrainingAdapter extends BaseAdapter{
      */
     private LayoutInflater layoutInflater;
 
-    public DelightTrainingAdapter(Context context, List<DelightTraining> events) {
+    public TrainingAdapter(Context context, List<DelightTraining> events) {
         this.trainings = events;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

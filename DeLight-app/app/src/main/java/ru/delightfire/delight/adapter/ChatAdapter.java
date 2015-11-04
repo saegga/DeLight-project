@@ -17,12 +17,12 @@ import ru.delightfire.delight.entity.Message;
 /**
  * Created by sergei on 02.11.2015.
  */
-public class DelightChatAdapter extends BaseAdapter {
+public class ChatAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
     private List<Message> listMessages;
 
-    public DelightChatAdapter(Context context, List<Message> listMessages) {
+    public ChatAdapter(Context context, List<Message> listMessages) {
         this.context = context;
         this.listMessages = listMessages;
     }

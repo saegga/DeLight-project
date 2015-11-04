@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">DeLight</string>
     <string name="send_msg">Отправить</string>
+    <string name="input">Вход</string>
+    <string name="registration">регистрация</string>
+    <string name="hint_name">Введите имя</string>
+    <string name="hint_password">Введите пароль</string>
 </resources>

@@ -3,7 +3,7 @@ package ru.delightfire.delight.entity;
 /**
  * Created by sergei on 02.11.2015.
  */
-public class Message extends DelightPerson{
+public class Message {
 
     private String message;
     private boolean yourMsg;
@@ -12,7 +12,7 @@ public class Message extends DelightPerson{
         this.message = message;
     }
     public Message(String message, String name){
-        super(name);
+        this.name = name;
         this.message = message;
     }
     public Message(String message, String name, boolean yourMsg){

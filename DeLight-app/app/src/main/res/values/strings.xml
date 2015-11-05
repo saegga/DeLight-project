@@ -5,4 +5,5 @@
     <string name="registration">регистрация</string>
     <string name="hint_name">Введите имя</string>
     <string name="hint_password">Введите пароль</string>
+    <string name="nextStep">Далее</string>
 </resources>

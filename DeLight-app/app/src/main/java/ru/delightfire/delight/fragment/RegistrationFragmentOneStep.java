@@ -18,6 +18,7 @@ import ru.delightfire.delight.R;
 /**
  * Created by sergei on 04.11.2015.
  */
+
 public class RegistrationFragmentOneStep extends Fragment {
     private static final String TAG = RegistrationFragmentOneStep.class.getSimpleName();
     private EditText inpKeyValue;

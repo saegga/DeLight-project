@@ -2,28 +2,26 @@
  
 class DB_CONNECT {
  
+    var $con;
+
     function __construct() {
         $this->connect();
     }
  
     function __destruct() {
-        $this->close();
+        $this->con->close();
     }
  
     function connect() {
         require 'db_config.php';
  
-        $con = mysql_connect(DB_SERVER, DB_USER, DB_PASSWORD) or die(mysql_error());
- 
-        $db = mysql_select_db(DB_DATABASE) or die(mysql_error()) or die(mysql_error());
- 
-        return $con;
+        $this->con = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
+
+        if ($this->con->connect_error){
+            die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
+        }
+        
+        return $this->con;
     }
- 
-    function close() {
-        mysql_close();
-    }
- 
 }
- 
 ?>

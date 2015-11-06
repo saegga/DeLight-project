@@ -29,6 +29,8 @@ public class ParserJson{
 
         url = new URL(requestUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setDoInput(true);
+        connection.setDoOutput(true);
         connection.setRequestMethod(method);
 
         OutputStream out = connection.getOutputStream();

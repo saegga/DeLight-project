@@ -14,7 +14,7 @@ import ru.delightfire.delight.R;
 /**
  * Created by sergei on 04.11.2015.
  */
-public class RegistrationFragmentTwoStep extends Fragment {
+public class RegistrationFragmentSecondStep extends Fragment {
 
     EditText nameReg;
     EditText lastNameReg;
@@ -31,7 +31,7 @@ public class RegistrationFragmentTwoStep extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_two_step, container, false);
+        View view = inflater.inflate(R.layout.fragment_second_step, container, false);
         nameReg = (EditText)view.findViewById(R.id.nameRegUser);
         lastNameReg = (EditText)view.findViewById(R.id.lastNameRegUser);
         loginReg = (EditText)view.findViewById(R.id.loginRegUser);

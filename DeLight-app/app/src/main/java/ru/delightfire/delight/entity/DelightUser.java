@@ -16,6 +16,6 @@ public class DelightUser extends DelightPerson{
      * Роль участника в группе
      * @see DeliteRole
      */
-    DeliteRole role;
+     private DeliteRole role;
 
 }

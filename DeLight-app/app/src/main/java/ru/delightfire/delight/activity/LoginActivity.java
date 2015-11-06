@@ -27,6 +27,15 @@ public class LoginActivity extends Activity {
             }
         });
 
+        Button loginBtn = (Button) findViewById(R.id.btnAuth);
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+
     }
 
 }

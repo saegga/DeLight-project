@@ -11,6 +11,10 @@ class DB_CONNECT {
     function __destruct() {
         $this->con->close();
     }
+
+    function getConnection(){
+        return $this->con;
+    }
  
     function connect() {
         require 'db_config.php';

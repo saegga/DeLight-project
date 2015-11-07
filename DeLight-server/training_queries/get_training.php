@@ -9,7 +9,7 @@ $db = new DB_CONNECT();
 if (isset($_GET["training_id"])) {
     $training_id = $_GET['training_id'];
  
-    $result = mysqli_query("SELECT *FROM trainings WHERE training_id = $training_id");
+    $result = $db->getConnection()->query("SELECT *FROM trainings WHERE training_id = $training_id");
  
     if (!empty($result)) {
         if (mysqli_num_rows($result) > 0) {

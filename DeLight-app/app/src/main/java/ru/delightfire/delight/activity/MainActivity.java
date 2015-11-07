@@ -2,6 +2,7 @@ package ru.delightfire.delight.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,17 +11,21 @@ import android.widget.TabHost;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.adapter.ChatAdapter;
 import ru.delightfire.delight.adapter.TrainingAdapter;
 import ru.delightfire.delight.entity.DelightTraining;
 import ru.delightfire.delight.entity.Message;
+import ru.delightfire.delight.utils.DelightContext;
 
 /**
  * Created by scaredChatsky on 23.10.2015.
  */
 public class MainActivity extends Activity{
+
+    DelightContext context = DelightContext.getInstance();
 
     List<DelightTraining> trainings;
     List<Message> messages;
@@ -78,9 +83,22 @@ public class MainActivity extends Activity{
     private List<DelightTraining> initEvents(){
         trainings = new ArrayList<>();
 
-        DelightTraining first = new DelightTraining("admin", "first");
+        DelightTraining first = null;
+        try {
+            first = context.getTraining();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        trainings.add(first);
+        Handler handler = new Handler();
+        final DelightTraining finalFirst = first;
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                trainings.add(finalFirst);
+            }
+        }, 2000);
 
         return trainings;
     }

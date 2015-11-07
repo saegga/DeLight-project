@@ -57,7 +57,7 @@ public class DelightContext {
 
             int success;
             try {
-                JSONObject json = jsonParser.makeRequestHttp(url, "GET", map);
+                JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
                 Log.d("Training: ", json.toString());
                 success = json.getInt(TAG_SUCCESS);
 

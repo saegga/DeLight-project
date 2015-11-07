@@ -6,8 +6,8 @@ require '../db_connect.php';
  
 $db = new DB_CONNECT();
  
-if (isset($_GET["training_id"])) {
-    $training_id = $_GET['training_id'];
+if (isset($_POST["training_id"])) {
+    $training_id = $_POST['training_id'];
  
     $result = $db->getConnection()->query("SELECT *FROM trainings WHERE training_id = $training_id");
  

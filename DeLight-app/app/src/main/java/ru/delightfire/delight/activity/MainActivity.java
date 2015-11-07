@@ -2,7 +2,6 @@ package ru.delightfire.delight.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,13 +91,7 @@ public class MainActivity extends Activity{
             e.printStackTrace();
         }
 
-        Handler handler = new Handler();
-        final DelightTraining finalFirst = first;
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                trainings.add(finalFirst);
-            }
-        }, 2000);
+        trainings.add(first);
 
         return trainings;
     }

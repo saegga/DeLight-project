@@ -24,10 +24,10 @@ import ru.delightfire.delight.utils.DelightContext;
  */
 public class MainActivity extends Activity{
 
-    DelightContext context = DelightContext.getInstance();
+    private DelightContext context = DelightContext.getInstance();
 
-    List<DelightTraining> trainings;
-    List<Message> messages;
+    private List<DelightTraining> trainings;
+    private List<Message> messages;
     private ListView listView;
     private ListView listMessages;
     private Button btnSendMsg;
@@ -84,7 +84,7 @@ public class MainActivity extends Activity{
 
         DelightTraining first = null;
         try {
-            first = context.getTraining();
+            first = context.getTraining(1);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

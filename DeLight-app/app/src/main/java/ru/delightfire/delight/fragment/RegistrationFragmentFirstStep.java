@@ -1,6 +1,5 @@
 package ru.delightfire.delight.fragment;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,13 +9,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.concurrent.ExecutionException;
+
 import ru.delightfire.delight.R;
+import ru.delightfire.delight.utils.DelightContext;
 
 /**
  * Created by sergei on 04.11.2015.
  */
 
 public class RegistrationFragmentFirstStep extends Fragment {
+
+    private DelightContext context = DelightContext.getInstance();
+
     private static final String TAG = RegistrationFragmentFirstStep.class.getSimpleName();
     private EditText inpKeyValue;
     private Button btnNextStep;
@@ -31,20 +36,20 @@ public class RegistrationFragmentFirstStep extends Fragment {
             @Override
             public void onClick(View v) {
                 String key = inpKeyValue.getText().toString();
-                new CheckKey().execute(key);
+                try {
+                    if(context.keyCheck(key)){
+                        //// TODO: 09.11.2015 SecondStep
+                    }
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
         return view;
     }
 
-    public class CheckKey extends AsyncTask<String, Void, Void>{
 
-        @Override
-        protected Void doInBackground(String... params) {
-            //Log.d(TAG, Arrays.asList(params) + "");
-            //todo доделать запросы потестить makeHttp сделать парсинг json
-            return null;
-        }
-    }
 
 }

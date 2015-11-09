@@ -1,20 +1,21 @@
 <?php
  
-$response = array();
- 
 require '../db_connect.php';
  
 $db = new DB_CONNECT();
  
 if (isset($_POST["training_id"])) {
+
+    $response = array();
+
     $training_id = $_POST['training_id'];
  
     $result = $db->getConnection()->query("SELECT *FROM trainings WHERE training_id = $training_id");
  
     if (!empty($result)) {
-        if (mysqli_num_rows($result) > 0) {
+        if ($result->num_rows > 0) {
  
-            $result = mysqli_fetch_array($result);
+            $result = $result->fetch_array();
             
             $training = array();
             $training["training_id"] = $result["training_id"];

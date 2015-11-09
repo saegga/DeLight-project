@@ -3,12 +3,21 @@ package ru.delightfire.delight.utils;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import ru.delightfire.delight.entity.DelightTraining;
@@ -37,14 +46,17 @@ public class DelightContext {
     private static final String TAG_DAY_OF_WEEK = "dayOfWeek";
     private static final String TAG_AGENDA = "agenda";
     private static final String TAG_TRAINING = "training";
+    private static final String TAG_REGKEY = "key_value";
+    private static final String TAG_REGKEY_STATUS = "key_status";
 
-    public DelightTraining getTraining() throws ExecutionException, InterruptedException {
 
-        DelightTraining training = new GetTraining().execute(1).get();
+    public DelightTraining getTraining(int trainingId) throws ExecutionException, InterruptedException {
+
+        DelightTraining training = new GetTraining().execute(trainingId).get();
         return  training;
     }
 
-    class GetTraining extends AsyncTask<Integer, DelightTraining, DelightTraining> {
+    class GetTraining extends AsyncTask<Integer, Void, DelightTraining> {
 
         @Override
         protected DelightTraining doInBackground(Integer... trainingId) {
@@ -75,6 +87,66 @@ public class DelightContext {
             }
 
             return training;
+        }
+    }
+
+    public boolean keyCheck(String key) throws ExecutionException, InterruptedException {
+
+        boolean freeKey;
+        freeKey = new KeyCheck().execute(key).get();
+        return freeKey;
+    }
+
+    class KeyCheck extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... key) {
+            boolean freeKey = false;
+
+            String url = "http://delightfireapp.16mb.com/auth_queries/db_key_check.php";
+
+            HashMap<String, String> map = new HashMap<>();
+            map.put(TAG_REGKEY, key[0].toString());
+
+            int success;
+            try {
+                JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
+                Log.d("Training: ", json.toString());
+                success = json.getInt(TAG_SUCCESS);
+
+                if (success == 1) {
+                    freeKey = json.getInt(TAG_REGKEY_STATUS) == 1 ? true : false;
+
+                }else{
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //makeRequest(url, TAG_REGKEY, key[0]);
+
+            return freeKey;
+        }
+    }
+
+    public void makeRequest(String url, String key, String value){
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost http = new HttpPost(url);
+        List nameValuePairs = new ArrayList();
+        nameValuePairs.add(new BasicNameValuePair(key, value));
+        try {
+            http.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        try {
+            String response = httpclient.execute(http, new BasicResponseHandler());
+            Log.d("Response: ", response);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

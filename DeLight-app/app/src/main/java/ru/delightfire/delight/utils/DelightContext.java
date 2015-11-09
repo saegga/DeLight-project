@@ -36,8 +36,6 @@ public class DelightContext {
         return DelightContextHolder.HOLDER_INSTANCE;
     }
 
-    private static final ParserJson jsonParser = new ParserJson();
-
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_TRAINING_ID = "training_id";
     private static final String TAG_NAME = "name";
@@ -60,6 +58,7 @@ public class DelightContext {
 
         @Override
         protected DelightTraining doInBackground(Integer... trainingId) {
+            ParserJson jsonParser = new ParserJson();
             DelightTraining training = null;
 
             String url = "http://delightfireapp.16mb.com/training_queries/get_training.php";
@@ -101,6 +100,7 @@ public class DelightContext {
 
         @Override
         protected Boolean doInBackground(String... key) {
+            ParserJson jsonParser = new ParserJson();
             boolean freeKey = false;
 
             String url = "http://delightfireapp.16mb.com/auth_queries/db_key_check.php";
@@ -111,7 +111,7 @@ public class DelightContext {
             int success;
             try {
                 JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
-                Log.d("Training: ", json.toString());
+                Log.d("Regkey: ", json.toString());
                 success = json.getInt(TAG_SUCCESS);
 
                 if (success == 1) {
@@ -126,13 +126,13 @@ public class DelightContext {
                 e.printStackTrace();
             }
 
-            //makeRequest(url, TAG_REGKEY, key[0]);
+            //serverFullResponse(url, TAG_REGKEY, key[0]);
 
             return freeKey;
         }
     }
 
-    public void makeRequest(String url, String key, String value){
+    public void serverFullResponse(String url, String key, String value){
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost http = new HttpPost(url);
         List nameValuePairs = new ArrayList();

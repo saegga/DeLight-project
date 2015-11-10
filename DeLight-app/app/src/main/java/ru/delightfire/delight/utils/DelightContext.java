@@ -110,6 +110,7 @@ public class DelightContext {
         return freeKey;
     }
 
+    @Deprecated
     public void serverFullResponse(String url, String key, String value){
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost http = new HttpPost(url);

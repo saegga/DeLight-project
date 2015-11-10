@@ -2,7 +2,7 @@
 <resources>
     <color name="colorTabs">#C1F66F</color>
     <color name="colorAccent">#D80066</color>
-    <color name="mainBackground">#FF8474</color>
+    <color name="mainBackground">#e33f3f</color>
     <color name="back_message_from">#e5e7eb</color>
     <color name="message_from_name">#777777</color>
     <color name="message_from_text">#434343</color>
@@ -11,4 +11,6 @@
     <color name="back_msg_input">#e8e8e8</color>
     <color name="text_msg_input">#626262</color>
     <color name="btn_send_color">#1d514a</color>
+    <color name="btn_login_activity_start">#CC1D1D</color>
+    <color name="btn_registration_activity_start">#CC1D1D</color>
 </resources>

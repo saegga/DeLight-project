@@ -1,6 +1,7 @@
 package ru.delightfire.delight.activity;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -75,16 +76,36 @@ public class MainActivity extends Activity{
         });
     }
 
+    class GetTraining extends AsyncTask<Integer, Void, DelightTraining> {
+
+        @Override
+        protected DelightTraining doInBackground(Integer... trainingId) {
+            DelightTraining training = null;
+
+            try {
+                training = context.getTraining(trainingId[0]);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return training;
+        }
+    }
+
+    @Deprecated
     private void sendMessage(String msg) {
 
     }
 
+    //TODO: Инициализация всех событий
     private List<DelightTraining> initEvents(){
         trainings = new ArrayList<>();
 
         DelightTraining first = null;
         try {
-            first = context.getTraining(1);
+            first = new GetTraining().execute(1).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -95,6 +116,8 @@ public class MainActivity extends Activity{
 
         return trainings;
     }
+
+    @Deprecated
     private List<Message> initMessage(){
         messages = new ArrayList<>();
         Message messageOne = new Message("hello", "anton", false);

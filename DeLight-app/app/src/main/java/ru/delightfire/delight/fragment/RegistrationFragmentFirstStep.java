@@ -1,5 +1,7 @@
 package ru.delightfire.delight.fragment;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,10 +27,13 @@ public class RegistrationFragmentFirstStep extends Fragment {
     private static final String TAG = RegistrationFragmentFirstStep.class.getSimpleName();
     private EditText inpKeyValue;
     private Button btnNextStep;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.fragment_key_check, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_key_check, container, false);
+
         inpKeyValue = (EditText)view.findViewById(R.id.edit_key_value);
         btnNextStep = (Button)view.findViewById(R.id.btnNextStep);
 
@@ -37,7 +42,7 @@ public class RegistrationFragmentFirstStep extends Fragment {
             public void onClick(View v) {
                 String key = inpKeyValue.getText().toString();
                 try {
-                    if(context.keyCheck(key)){
+                    if(new KeyCheck().execute(key).get()){
                         //// TODO: 09.11.2015 SecondStep
                     }
                 } catch (ExecutionException e) {
@@ -47,9 +52,36 @@ public class RegistrationFragmentFirstStep extends Fragment {
                 }
             }
         });
+
         return view;
     }
 
+    class KeyCheck extends AsyncTask<String, Void, Boolean> {
 
+        @Override
+        protected Boolean doInBackground(String... key) {
+            Boolean freeKey = false;
+
+            try {
+                context.keyCheck(key[0]);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return freeKey;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            ProgressDialog dialog = new ProgressDialog(getContext());
+            dialog.setMessage("Загружаюсь...");
+            dialog.setIndeterminate(true);
+            dialog.setCancelable(true);
+            dialog.show();
+            super.onPreExecute();
+        }
+    }
 
 }

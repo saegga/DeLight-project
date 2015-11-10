@@ -1,6 +1,5 @@
 package ru.delightfire.delight.utils;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import org.apache.http.client.HttpClient;
@@ -48,88 +47,67 @@ public class DelightContext {
     private static final String TAG_REGKEY_STATUS = "key_status";
 
 
-    public DelightTraining getTraining(int trainingId) throws ExecutionException, InterruptedException {
+    public DelightTraining getTraining(Integer trainingId) throws ExecutionException, InterruptedException {
 
-        DelightTraining training = new GetTraining().execute(trainingId).get();
-        return  training;
-    }
+        ParserJson jsonParser = new ParserJson();
+        DelightTraining training = null;
 
-    class GetTraining extends AsyncTask<Integer, Void, DelightTraining> {
+        String url = "http://delightfireapp.16mb.com/training_queries/get_training.php";
 
-        @Override
-        protected DelightTraining doInBackground(Integer... trainingId) {
-            ParserJson jsonParser = new ParserJson();
-            DelightTraining training = null;
+        HashMap<String, String> map = new HashMap<>();
+        map.put(TAG_TRAINING_ID, trainingId.toString());
 
-            String url = "http://delightfireapp.16mb.com/training_queries/get_training.php";
+        int success;
+        try {
+            JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
+            Log.d("Training: ", json.toString());
+            success = json.getInt(TAG_SUCCESS);
 
-            HashMap<String, String> map = new HashMap<>();
-            map.put(TAG_TRAINING_ID, trainingId[0].toString());
+            if (success == 1) {
+                JSONArray trainingObj = json.getJSONArray(TAG_TRAINING);
+                JSONObject trainingJsonObj = trainingObj.getJSONObject(0);
+                training = new DelightTraining(trainingJsonObj.getString(TAG_AGENDA), trainingJsonObj.getString(TAG_OWNER_LOGIN), trainingJsonObj.getString(TAG_NAME));
+            }else{
 
-            int success;
-            try {
-                JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
-                Log.d("Training: ", json.toString());
-                success = json.getInt(TAG_SUCCESS);
-
-                if (success == 1) {
-                    JSONArray trainingObj = json.getJSONArray(TAG_TRAINING);
-                    JSONObject trainingJsonObj = trainingObj.getJSONObject(0);
-                    training = new DelightTraining(trainingJsonObj.getString(TAG_AGENDA), trainingJsonObj.getString(TAG_OWNER_LOGIN), trainingJsonObj.getString(TAG_NAME));
-                }else{
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
-            return training;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        return training;
     }
 
     public boolean keyCheck(String key) throws ExecutionException, InterruptedException {
 
-        boolean freeKey;
-        freeKey = new KeyCheck().execute(key).get();
-        return freeKey;
-    }
+        ParserJson jsonParser = new ParserJson();
+        boolean freeKey = false;
 
-    class KeyCheck extends AsyncTask<String, Void, Boolean> {
+        String url = "http://delightfireapp.16mb.com/auth_queries/db_key_check.php";
 
-        @Override
-        protected Boolean doInBackground(String... key) {
-            ParserJson jsonParser = new ParserJson();
-            boolean freeKey = false;
+        HashMap<String, String> map = new HashMap<>();
+        map.put(TAG_REGKEY, key.toString());
 
-            String url = "http://delightfireapp.16mb.com/auth_queries/db_key_check.php";
+        int success;
+        try {
+            JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
+            Log.d("Regkey: ", json.toString());
+            success = json.getInt(TAG_SUCCESS);
 
-            HashMap<String, String> map = new HashMap<>();
-            map.put(TAG_REGKEY, key[0].toString());
+            if (success == 1) {
+                freeKey = json.getInt(TAG_REGKEY_STATUS) == 1 ? true : false;
 
-            int success;
-            try {
-                JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
-                Log.d("Regkey: ", json.toString());
-                success = json.getInt(TAG_SUCCESS);
+            }else{
 
-                if (success == 1) {
-                    freeKey = json.getInt(TAG_REGKEY_STATUS) == 1 ? true : false;
-
-                }else{
-
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
-            //serverFullResponse(url, TAG_REGKEY, key[0]);
-
-            return freeKey;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        return freeKey;
     }
 
     public void serverFullResponse(String url, String key, String value){

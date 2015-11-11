@@ -17,9 +17,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import ru.delightfire.delight.entity.DelightTraining;
+import ru.delightfire.delight.entity.DelightUser;
 import ru.delightfire.delight.parser.ParserJson;
 
 /**
@@ -45,9 +45,14 @@ public class DelightContext {
     private static final String TAG_TRAINING = "training";
     private static final String TAG_REGKEY = "key_value";
     private static final String TAG_REGKEY_STATUS = "key_status";
+    private static final String TAG_PASSWORD = "password";
+    private static final String TAG_LOGIN = "login";
+    private static final String TAG_USER = "user";
+    private static final String TAG_FIRST_NAME = "first_name";
+    private static final String TAG_LAST_NAME = "last_name";
 
 
-    public DelightTraining getTraining(Integer trainingId) throws ExecutionException, InterruptedException {
+    public DelightTraining getTraining(Integer trainingId) {
 
         ParserJson jsonParser = new ParserJson();
         DelightTraining training = null;
@@ -79,7 +84,40 @@ public class DelightContext {
         return training;
     }
 
-    public boolean keyCheck(String key) throws ExecutionException, InterruptedException {
+    public DelightUser userCheck(String login, String password){
+        ParserJson jsonParser = new ParserJson();
+        DelightUser user = null;
+
+        String url = "http://delightfireapp.16mb.com/auth_queries/db_user_check.php";
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put(TAG_LOGIN, login);
+        map.put(TAG_PASSWORD, password);
+
+        int success;
+        try {
+            Log.d("Map: ", map.toString());
+            JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
+            Log.d("User: ", json.toString());
+            success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                JSONArray userObj = json.getJSONArray(TAG_USER);
+                JSONObject userJsonObj = userObj.getJSONObject(0);
+                user = new DelightUser(login, password, userJsonObj.getString(TAG_FIRST_NAME), userJsonObj.getString(TAG_LAST_NAME));
+            }else{
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    public boolean keyCheck(String key) {
 
         ParserJson jsonParser = new ParserJson();
         boolean freeKey = false;
@@ -96,7 +134,7 @@ public class DelightContext {
             success = json.getInt(TAG_SUCCESS);
 
             if (success == 1) {
-                freeKey = json.getInt(TAG_REGKEY_STATUS) == 1 ? true : false;
+                freeKey = json.getInt(TAG_REGKEY_STATUS) == 1;
 
             }else{
 

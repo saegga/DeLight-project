@@ -39,7 +39,7 @@ if (isset($_POST["training_id"])) {
         }
     } else {
         $response["success"] = 0;
-        $response["message"] = "Training not found";
+        $response["message"] = "Empty result";
  
         echo json_encode($response);
     }

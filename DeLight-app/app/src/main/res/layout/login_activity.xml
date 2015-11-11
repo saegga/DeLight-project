@@ -15,7 +15,7 @@
         android:layout_marginTop="120dp"
         android:theme="@style/TextLabel">
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/input_email"
+            android:id="@+id/input_login"
             android:layout_width="@dimen/btns_login_width"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"

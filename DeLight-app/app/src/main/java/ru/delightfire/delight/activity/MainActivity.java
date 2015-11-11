@@ -3,6 +3,7 @@ package ru.delightfire.delight.activity;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,7 @@ import ru.delightfire.delight.utils.DelightContext;
 /**
  * Created by scaredChatsky on 23.10.2015.
  */
-public class MainActivity extends Activity{
+public class MainActivity extends AppCompatActivity{
 
     private DelightContext context = DelightContext.getInstance();
 
@@ -82,13 +83,7 @@ public class MainActivity extends Activity{
         protected DelightTraining doInBackground(Integer... trainingId) {
             DelightTraining training = null;
 
-            try {
-                training = context.getTraining(trainingId[0]);
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            training = context.getTraining(trainingId[0]);
 
             return training;
         }

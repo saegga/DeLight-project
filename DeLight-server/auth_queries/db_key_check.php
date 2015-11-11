@@ -23,13 +23,13 @@ if (isset($_POST["key_value"])){
 			echo json_encode($response);
 		} else {
 			$response["success"] = 0;
-			$response["message"] = "Key not found 2";
+			$response["message"] = "Key not found";
 
 			echo json_encode($response);
 		}
 	} else {
 		$response["success"] = 0;
-		$response["message"] = "Key not found 1" ;
+		$response["message"] = "Empty result" ;
 
 		echo json_encode($response);
 	}

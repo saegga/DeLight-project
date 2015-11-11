@@ -60,15 +60,7 @@ public class RegistrationFragmentFirstStep extends Fragment {
 
         @Override
         protected Boolean doInBackground(String... key) {
-            Boolean freeKey = false;
-
-            try {
-                context.keyCheck(key[0]);
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Boolean freeKey = context.keyCheck(key[0]);
 
             return freeKey;
         }

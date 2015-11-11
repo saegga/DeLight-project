@@ -1,6 +1,5 @@
 package ru.delightfire.delight.activity;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

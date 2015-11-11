@@ -1,7 +1,8 @@
 .gradle
 DeLight-app/local.properties
-DeLight-app/.idea/workspace.xml
-DeLight-app/.idea/libraries
+.idea
 .DS_Store
 /build
 /captures
+DeLight-app/DeLight-app.iml
+DeLight-app/app/app.iml

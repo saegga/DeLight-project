@@ -34,7 +34,7 @@ public class RegistrationFragmentFirstStep extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_key_check, container, false);
 
-        inpKeyValue = (EditText)view.findViewById(R.id.edit_key_value);
+        inpKeyValue = (EditText)view.findViewById(R.id.input_regkey);
         btnNextStep = (Button)view.findViewById(R.id.btnNextStep);
 
         btnNextStep.setOnClickListener(new View.OnClickListener() {

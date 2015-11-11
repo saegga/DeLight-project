@@ -13,4 +13,6 @@
     <color name="btn_send_color">#1d514a</color>
     <color name="btn_login_activity_start">#DD4844</color>
     <color name="btn_registration_activity_start">#DD4844</color>
+    <color name="regkey_background">#24030A</color>
+    <color name="regkey_btn">#4E1406</color>
 </resources>

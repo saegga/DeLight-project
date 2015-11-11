@@ -1,20 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
-    <EditText
-        android:id="@+id/edit_key_value"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/mainBackground"
+    tools:context="ru.delightfire.delight.fragment.RegistrationFragmentFirstStep">
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
+        android:textColorHint="@color/white"
+        android:gravity="center"
         android:layout_height="wrap_content"
-        android:hint="Введите ключ регистрации"
-        />
-    <Button
+        android:layout_marginTop="220dp"
+        android:theme="@style/TextLabel">
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/input_regkey"
+            android:layout_width="@dimen/btns_login_width"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/regkey_hint" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.v7.widget.AppCompatButton
+        android:layout_width="@dimen/btns_login_width"
+        android:layout_height="wrap_content"
+        android:text="@string/check"
         android:id="@+id/btnNextStep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/nextStep"
-       />
-</LinearLayout>
-    <!--todo сделать дизайн нормально-->
+        android:layout_marginTop="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_login"
+        />
+</RelativeLayout>

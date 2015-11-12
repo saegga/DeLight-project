@@ -12,11 +12,5 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
     }
-    ParserJson parserJson = new ParserJson();
 
-
-    public void test(){
-       assert 5==5;
-        System.out.printf("eg");
-    }
 }

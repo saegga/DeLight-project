@@ -13,39 +13,16 @@ public abstract class DelightPerson {
     protected String phone;
 
     /**
-     * Регистрационный ключ
-     */
-    protected String regKey;
-
-    /**
-     * Логин дял входа
-     */
-    private String login;
-
-    /**
      * Имя
      */
-    private String firstName;
+    protected String firstName;
 
     /**
      * Фамилия
      */
-    private String lastName;
-
-    /**
-     * Пароль
-     */
-    private String password;
-
-    /**
-     * Онлайн/оффлайн
-     */
-    private boolean status;
+    protected String lastName;
 
     public DelightPerson(String firstName) {
         this.firstName = firstName;
-    }
-
-    public DelightPerson() {
     }
 }

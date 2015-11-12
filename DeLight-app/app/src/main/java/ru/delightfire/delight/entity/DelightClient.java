@@ -6,6 +6,9 @@ package ru.delightfire.delight.entity;
  */
 public class DelightClient extends DelightPerson{
 
-
+    DelightClient(String firstName, String phone){
+        super(firstName);
+        this.phone = phone;
+    }
 
 }

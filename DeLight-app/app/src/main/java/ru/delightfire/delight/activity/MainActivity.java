@@ -1,7 +1,8 @@
 package ru.delightfire.delight.activity;
 
-import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,20 +11,24 @@ import android.widget.TabHost;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.adapter.ChatAdapter;
 import ru.delightfire.delight.adapter.TrainingAdapter;
 import ru.delightfire.delight.entity.DelightTraining;
 import ru.delightfire.delight.entity.Message;
+import ru.delightfire.delight.utils.DelightContext;
 
 /**
  * Created by scaredChatsky on 23.10.2015.
  */
-public class MainActivity extends Activity{
+public class MainActivity extends AppCompatActivity{
 
-    List<DelightTraining> trainings;
-    List<Message> messages;
+    private DelightContext context = DelightContext.getInstance();
+
+    private List<DelightTraining> trainings;
+    private List<Message> messages;
     private ListView listView;
     private ListView listMessages;
     private Button btnSendMsg;
@@ -71,19 +76,42 @@ public class MainActivity extends Activity{
         });
     }
 
+    class GetTraining extends AsyncTask<Integer, Void, DelightTraining> {
+
+        @Override
+        protected DelightTraining doInBackground(Integer... trainingId) {
+            DelightTraining training = null;
+
+            training = context.getTraining(trainingId[0]);
+
+            return training;
+        }
+    }
+
+    @Deprecated
     private void sendMessage(String msg) {
 
     }
 
+    //TODO: Инициализация всех событий
     private List<DelightTraining> initEvents(){
         trainings = new ArrayList<>();
 
-        DelightTraining first = new DelightTraining("admin", "first");
+        DelightTraining first = null;
+        try {
+            first = new GetTraining().execute(1).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         trainings.add(first);
 
         return trainings;
     }
+
+    @Deprecated
     private List<Message> initMessage(){
         messages = new ArrayList<>();
         Message messageOne = new Message("hello", "anton", false);

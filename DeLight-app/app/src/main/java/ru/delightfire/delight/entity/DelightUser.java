@@ -16,6 +16,24 @@ public class DelightUser extends DelightPerson{
      * Роль участника в группе
      * @see DeliteRole
      */
-     private DeliteRole role;
+    private DeliteRole role;
+
+    private boolean status;
+
+    /**
+     * Логин пользователя
+     */
+    private String login;
+
+    /**
+     * Пароль
+     */
+    private String password;
+
+    public DelightUser(String login, String password, String firstName, String lastName){
+        super(firstName);
+        this.login = login;
+        this.password = password;
+    }
 
 }

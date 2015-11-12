@@ -4,14 +4,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
-import java.util.Arrays;
 
 import ru.delightfire.delight.R;
 
@@ -19,8 +16,8 @@ import ru.delightfire.delight.R;
  * Created by sergei on 04.11.2015.
  */
 
-public class RegistrationFragmentOneStep extends Fragment {
-    private static final String TAG = RegistrationFragmentOneStep.class.getSimpleName();
+public class RegistrationFragmentFirstStep extends Fragment {
+    private static final String TAG = RegistrationFragmentFirstStep.class.getSimpleName();
     private EditText inpKeyValue;
     private Button btnNextStep;
     @Nullable

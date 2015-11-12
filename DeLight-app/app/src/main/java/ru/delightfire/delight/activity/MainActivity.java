@@ -1,9 +1,14 @@
 package ru.delightfire.delight.activity;
 
+import android.app.FragmentManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,6 +23,7 @@ import ru.delightfire.delight.adapter.ChatAdapter;
 import ru.delightfire.delight.adapter.TrainingAdapter;
 import ru.delightfire.delight.entity.DelightTraining;
 import ru.delightfire.delight.entity.Message;
+import ru.delightfire.delight.fragment.MyProfileFragment;
 import ru.delightfire.delight.utils.DelightContext;
 
 /**
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity{
     private ListView listMessages;
     private Button btnSendMsg;
     private EditText messageTxt;
+    private DrawerLayout drawerLayout;
+    private ListView drawerListView;
+    private String[] listItems;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,11 +78,21 @@ public class MainActivity extends AppCompatActivity{
 
         btnSendMsg.setOnClickListener(new View.OnClickListener() {
             String msg = messageTxt.getText().toString();
+
             @Override
             public void onClick(View v) {
                 sendMessage(msg);
             }
         });
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerListView = (ListView) findViewById(R.id.list_drawer);
+        listItems = getResources().getStringArray(R.array.drawer_items);
+        drawerListView.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_layout_item, listItems));
+        drawerListView.setOnItemClickListener(new DrawerItemClick());
+
+
+
     }
 
     class GetTraining extends AsyncTask<Integer, Void, DelightTraining> {
@@ -120,5 +139,25 @@ public class MainActivity extends AppCompatActivity{
         messages.add(messageTwo);
         return messages;
     }
+    private class DrawerItemClick implements ListView.OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Fragment fragment = null;
+            switch (position){
+                case 0 : fragment = new MyProfileFragment();
+                case 1 : break;
+                case 2 : break;
+                default: break;
+            }
+            FragmentManager fragmentManager = getFragmentManager();
+//            fragmentManager.beginTransaction()
+//                  //  .replace(R.id.content_frame, fragment)
+//                    .commit();
+            //todo переделать main под фрагменты с использованием frameLayout
+
+        }
+    }
+
 
 }

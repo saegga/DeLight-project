@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/my_profile"
+            android:icon="@mipmap/ic_assignment_ind_black_24dp"
+            android:title="Мой профиль" />
+        <item
+            android:icon="@mipmap/ic_build_black_24dp"
+            android:id="@+id/my_settings"
+            android:title="Настройки" />
+        <item
+            android:icon="@mipmap/ic_trending_up_black_24dp"
+            android:id="@+id/my_skill"
+            android:title="Навыки" />
+    </group>
+
+</menu>

@@ -8,9 +8,4 @@
     <string name="register">Регистрация</string>
     <string name="regkey_hint">Введите ключ регистрации</string>
 
-    <string-array name="drawer_items">
-        <item>Профиль</item>
-        <item>Номера</item>
-        <item>Навыки</item>
-    </string-array>
 </resources>

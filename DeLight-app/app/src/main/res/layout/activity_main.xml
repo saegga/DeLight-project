@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBackground">
+    >
 
-    <include layout="@layout/tab_host"/>
-    
-    <ListView
-        android:id="@+id/list_drawer"
-        android:layout_width="240dp"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:dividerHeight="0dp"
-        android:background="#111"
+    <!--<include layout="@layout/tab_host"/>-->
+
+    <FrameLayout
+        android:id="@+id/containerFragment"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+
+        app:headerLayout="@layout/header_drawer"
+        app:menu="@menu/drawer_menu"
+        />
 </android.support.v4.widget.DrawerLayout>

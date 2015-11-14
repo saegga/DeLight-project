@@ -4,7 +4,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -44,7 +47,7 @@ public class MainTabFragment extends Fragment {
         btnSendMsg = (Button) view.findViewById(R.id.btnView_send_msg);
         messageTxt = (EditText) view.findViewById(R.id.inputView_msg);
         TabHost tabs = (TabHost) view.findViewById(android.R.id.tabhost);
-
+        setHasOptionsMenu(true);
         tabs.setup();
 
         TabHost.TabSpec spec = tabs.newTabSpec("tag1");
@@ -81,6 +84,13 @@ public class MainTabFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
     class GetTraining extends AsyncTask<Integer, Void, DelightTraining> {
 
         @Override

@@ -3,9 +3,15 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import ru.delightfire.delight.R;
@@ -20,6 +26,7 @@ import ru.delightfire.delight.fragment.MySkillFragment;
 public class MainActivity extends AppCompatActivity{
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +35,6 @@ public class MainActivity extends AppCompatActivity{
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainerRegister);
-
         if(fragment == null){
             fragment = new MainTabFragment();
             manager.beginTransaction()
@@ -40,6 +46,31 @@ public class MainActivity extends AppCompatActivity{
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new DrawerItemClick());
         //navigationView.setOnClickListener();
+        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+}
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.app_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home :
+                onBackPressed();
+                return true;
+            case R.id.one : Log.d("one", "break"); break;
+            case R.id.two : Log.d("two", "break"); break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class DrawerItemClick implements NavigationView.OnNavigationItemSelectedListener{
@@ -73,5 +104,4 @@ public class MainActivity extends AppCompatActivity{
             return true;
         }
     }
-
 }

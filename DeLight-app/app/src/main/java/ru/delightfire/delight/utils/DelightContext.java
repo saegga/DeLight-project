@@ -151,8 +151,7 @@ public class DelightContext {
     public DelightUser createUser(String login, String password){
         DelightUser user = null;
 
-        //// TODO: 16.11.2015 User create query 
-
+        //// TODO: 16.11.2015 User create query
 
         user = this.userCheck(login, password);
 

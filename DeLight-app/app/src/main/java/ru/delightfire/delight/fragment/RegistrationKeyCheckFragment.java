@@ -1,11 +1,9 @@
 package ru.delightfire.delight.fragment;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import android.widget.EditText;
 import java.util.concurrent.ExecutionException;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.activity.MainActivity;
 import ru.delightfire.delight.activity.RegisterActivity;
 import ru.delightfire.delight.utils.DelightContext;
 

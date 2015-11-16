@@ -148,6 +148,17 @@ public class DelightContext {
         return freeKey;
     }
 
+    public DelightUser createUser(String login, String password){
+        DelightUser user = null;
+
+        //// TODO: 16.11.2015 User create query 
+
+
+        user = this.userCheck(login, password);
+
+        return user;
+    }
+
     @Deprecated
     public void serverFullResponse(String url, String key, String value){
         HttpClient httpclient = new DefaultHttpClient();

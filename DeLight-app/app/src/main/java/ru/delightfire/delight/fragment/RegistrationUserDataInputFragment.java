@@ -54,6 +54,10 @@ public class RegistrationUserDataInputFragment extends Fragment {
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 }
+
+                if (user != null) {
+                    startActivity(new Intent(getContext(), MainActivity.class));
+                }
             }
         });
 

@@ -150,10 +150,31 @@ public class DelightContext {
 
     public DelightUser createUser(String login, String password){
         DelightUser user = null;
+        JsonParser jsonParser = new JsonParser();
 
-        //// TODO: 16.11.2015 User create query
+        String url = "http://delightfireapp.16mb.com/auth_queries/db_user_create.php";
 
-        user = this.userCheck(login, password);
+        HashMap<String, String> map = new HashMap<>();
+        map.put(TAG_LOGIN, login);
+        map.put(TAG_PASSWORD, password);
+
+        int success;
+        try {
+            Log.d("Map: ", map.toString());
+            JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
+            Log.d("Response: ", json.toString());
+            success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                user = this.userCheck(login, password);
+            }else{
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return user;
     }

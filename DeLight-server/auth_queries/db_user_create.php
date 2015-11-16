@@ -13,16 +13,17 @@ if (isset($_POST["login"])&&isset($_POST["password"])){
 	
 	$result = $db->getConnection()->query("INSERT INTO users(login, password) VALUES('$login', '$password')");
 
-
 	if (!empty($result)) {
+
+		$result = $db->getConnection()->query("SELECT *FROM users WHERE login = '$login'");
+
         if ($result->num_rows > 0) {
 
         	$result = $result->fetch_array();
 
         	if ($password == $result["password"]){
         		$response["success"] = 1;
-        		$response["message"] = "User successfully added"
-
+        		$response["message"] = "User successfully added";
         	}
 
 			echo json_encode($response);

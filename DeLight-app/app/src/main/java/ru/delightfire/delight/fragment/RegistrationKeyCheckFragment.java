@@ -74,12 +74,7 @@ public class RegistrationKeyCheckFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            ProgressDialog dialog = new ProgressDialog(getContext());
-            dialog.setMessage("Загружаюсь...");
-            dialog.setIndeterminate(true);
-            dialog.setCancelable(true);
-            dialog.show();
-            super.onPreExecute();
+
         }
     }
 

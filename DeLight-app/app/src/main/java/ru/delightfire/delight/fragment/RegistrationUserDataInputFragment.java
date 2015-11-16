@@ -16,11 +16,8 @@ import ru.delightfire.delight.R;
  */
 public class RegistrationUserDataInputFragment extends Fragment {
 
-    EditText nameReg;
-    EditText lastNameReg;
-    EditText loginReg;
-    EditText phoneReg;
-    Button btnRegOk;
+    private EditText registerLogin;
+    private EditText registerPassword;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,11 +29,8 @@ public class RegistrationUserDataInputFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_second_step, container, false);
-        nameReg = (EditText)view.findViewById(R.id.nameRegUser);
-        lastNameReg = (EditText)view.findViewById(R.id.lastNameRegUser);
-        loginReg = (EditText)view.findViewById(R.id.loginRegUser);
-        phoneReg = (EditText)view.findViewById(R.id.phoneRegUser);
-        btnRegOk = (Button)view.findViewById(R.id.btnRegOk);
+        registerLogin = (EditText) view.findViewById(R.id.input_register_login);
+        registerPassword = (EditText) view.findViewById(R.id.input_register_password);
         return view;
     }
 }

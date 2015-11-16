@@ -4,10 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,7 +20,7 @@ import ru.delightfire.delight.R;
 import ru.delightfire.delight.adapter.ChatAdapter;
 import ru.delightfire.delight.adapter.TrainingAdapter;
 import ru.delightfire.delight.entity.DelightTraining;
-import ru.delightfire.delight.entity.Message;
+import ru.delightfire.delight.entity.ChatMessage;
 import ru.delightfire.delight.utils.DelightContext;
 
 /**
@@ -33,7 +30,7 @@ public class MainTabFragment extends Fragment {
 
     private DelightContext context = DelightContext.getInstance();
     private List<DelightTraining> trainings;
-    private List<Message> messages;
+    private List<ChatMessage> chatMessages;
     private ListView listView;
     private ListView listMessages;
     private Button btnSendMsg;
@@ -42,7 +39,7 @@ public class MainTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.tab_host, container, false);
+        View view  = inflater.inflate(R.layout.element_tab_host, container, false);
 
         btnSendMsg = (Button) view.findViewById(R.id.btnView_send_msg);
         messageTxt = (EditText) view.findViewById(R.id.inputView_msg);
@@ -127,13 +124,13 @@ public class MainTabFragment extends Fragment {
     }
 
     @Deprecated
-    private List<Message> initMessage(){
-        messages = new ArrayList<>();
-        Message messageOne = new Message("hello", "anton", false);
-        Message messageTwo = new Message("hello", "anton", true);
-        messages.add(messageOne);
-        messages.add(messageTwo);
-        return messages;
+    private List<ChatMessage> initMessage(){
+        chatMessages = new ArrayList<>();
+        ChatMessage chatMessageOne = new ChatMessage("hello", "anton", false);
+        ChatMessage chatMessageTwo = new ChatMessage("hello", "anton", true);
+        chatMessages.add(chatMessageOne);
+        chatMessages.add(chatMessageTwo);
+        return chatMessages;
     }
 
 }

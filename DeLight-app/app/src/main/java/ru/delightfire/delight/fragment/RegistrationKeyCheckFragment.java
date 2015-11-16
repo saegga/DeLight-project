@@ -20,11 +20,11 @@ import ru.delightfire.delight.utils.DelightContext;
  * Created by sergei on 04.11.2015.
  */
 
-public class RegistrationFragmentFirstStep extends Fragment {
+public class RegistrationKeyCheckFragment extends Fragment {
 
     private DelightContext context = DelightContext.getInstance();
 
-    private static final String TAG = RegistrationFragmentFirstStep.class.getSimpleName();
+    private static final String TAG = RegistrationKeyCheckFragment.class.getSimpleName();
     private EditText inpKeyValue;
     private Button btnNextStep;
 
@@ -43,7 +43,7 @@ public class RegistrationFragmentFirstStep extends Fragment {
                 String key = inpKeyValue.getText().toString();
                 try {
                     if(new KeyCheck().execute(key).get()){
-                        //// TODO: 09.11.2015 SecondStep
+
                     }
                 } catch (ExecutionException e) {
                     e.printStackTrace();

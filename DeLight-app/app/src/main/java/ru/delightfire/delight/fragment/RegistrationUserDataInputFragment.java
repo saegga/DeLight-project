@@ -14,7 +14,7 @@ import ru.delightfire.delight.R;
 /**
  * Created by sergei on 04.11.2015.
  */
-public class RegistrationFragmentSecondStep extends Fragment {
+public class RegistrationUserDataInputFragment extends Fragment {
 
     EditText nameReg;
     EditText lastNameReg;

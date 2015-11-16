@@ -20,7 +20,7 @@ import java.util.List;
 
 import ru.delightfire.delight.entity.DelightTraining;
 import ru.delightfire.delight.entity.DelightUser;
-import ru.delightfire.delight.parser.ParserJson;
+import ru.delightfire.delight.parser.JsonParser;
 
 /**
  * Created by scaredChatsky on 07.11.2015.
@@ -54,7 +54,7 @@ public class DelightContext {
 
     public DelightTraining getTraining(Integer trainingId) {
 
-        ParserJson jsonParser = new ParserJson();
+        JsonParser jsonParser = new JsonParser();
         DelightTraining training = null;
 
         String url = "http://delightfireapp.16mb.com/training_queries/get_training.php";
@@ -85,7 +85,7 @@ public class DelightContext {
     }
 
     public DelightUser userCheck(String login, String password){
-        ParserJson jsonParser = new ParserJson();
+        JsonParser jsonParser = new JsonParser();
         DelightUser user = null;
 
         String url = "http://delightfireapp.16mb.com/auth_queries/db_user_check.php";
@@ -119,7 +119,7 @@ public class DelightContext {
 
     public boolean keyCheck(String key) {
 
-        ParserJson jsonParser = new ParserJson();
+        JsonParser jsonParser = new JsonParser();
         boolean freeKey = false;
 
         String url = "http://delightfireapp.16mb.com/auth_queries/db_key_check.php";

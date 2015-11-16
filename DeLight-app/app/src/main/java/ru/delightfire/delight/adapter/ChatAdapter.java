@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.entity.Message;
+import ru.delightfire.delight.entity.ChatMessage;
 
 /**
  * Created by sergei on 02.11.2015.
@@ -20,21 +18,21 @@ import ru.delightfire.delight.entity.Message;
 public class ChatAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
-    private List<Message> listMessages;
+    private List<ChatMessage> listChatMessages;
 
-    public ChatAdapter(Context context, List<Message> listMessages) {
+    public ChatAdapter(Context context, List<ChatMessage> listChatMessages) {
         this.context = context;
-        this.listMessages = listMessages;
+        this.listChatMessages = listChatMessages;
     }
 
     @Override
     public int getCount() {
-        return listMessages.size();
+        return listChatMessages.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return listMessages.get(position);
+        return listChatMessages.get(position);
     }
 
     @Override
@@ -46,21 +44,21 @@ public class ChatAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         layoutInflater = (LayoutInflater)
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        Message messageItem = listMessages.get(position);
+        ChatMessage chatMessageItem = listChatMessages.get(position);
 
        if(convertView == null){
-           if(messageItem.isYourMsg()){
-               convertView = layoutInflater.inflate(R.layout.right_chat_dialog,
+           if(chatMessageItem.isYourMsg()){
+               convertView = layoutInflater.inflate(R.layout.element_right_chat_dialog,
                        null);
            }else{
-               convertView = layoutInflater.inflate(R.layout.left_chat_dialog,
+               convertView = layoutInflater.inflate(R.layout.element_left_chat_dialog,
                        null);
            }
        }
         TextView textMsg = (TextView) convertView.findViewById(R.id.textMsg);
         TextView nameMsg = (TextView) convertView.findViewById(R.id.nameMsg);
-        textMsg.setText(messageItem.getMessage());
-        nameMsg.setText(messageItem.getName());
+        textMsg.setText(chatMessageItem.getMessage());
+        nameMsg.setText(chatMessageItem.getName());
         return convertView;
     }
 

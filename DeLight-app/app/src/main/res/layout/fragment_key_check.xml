@@ -26,7 +26,7 @@
         android:layout_width="@dimen/btns_login_width"
         android:layout_height="wrap_content"
         android:text="@string/check"
-        android:id="@+id/btnNextStep"
+        android:id="@+id/btn_next_step"
         android:layout_marginTop="300dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"

@@ -25,28 +25,36 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:id="@+id/events"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
 
-                <android.support.design.widget.FloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:elevation="4dp"
-                    android:id="@+id/fab"
-                    android:src="@mipmap/ic_add_white_24dp"
-                    android:layout_gravity="end|bottom"
-                    android:layout_margin="20dp"
-                    />
+            <android.support.design.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/events_list">
-                </ListView>
+                    android:id="@+id/events_list"/>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fab"
+                    app:backgroundTint="@color/fab_color"
+                    android:src="@mipmap/ic_add_white_24dp"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="20dp"
+                    />
+            </android.support.design.widget.CoordinatorLayout>
+
 
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:orientation="vertical"

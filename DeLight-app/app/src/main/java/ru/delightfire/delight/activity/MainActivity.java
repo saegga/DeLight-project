@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.fragment.MainTabFragment;
 import ru.delightfire.delight.fragment.MyProfileFragment;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
                     .commit();
         }
 
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new DrawerItemClick());
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home :
-                ///drawerLayout.openDrawer(drawerLayout);
+                drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.one : Log.d("one", "break"); break;
             case R.id.two : Log.d("two", "break"); break;
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity{
             }
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
+                    .addToBackStack(null)
                     .replace(R.id.containerFragment, fragment)
                     .commit();
             return true;

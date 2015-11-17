@@ -1,13 +1,12 @@
 package ru.delightfire.delight.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.concurrent.ExecutionException;
 
@@ -22,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.activity_login);
 
         Button registerBtn = (Button) findViewById(R.id.btnRegistrationActivity);
 
@@ -35,8 +34,8 @@ public class LoginActivity extends AppCompatActivity {
 
         Button loginBtn = (Button) findViewById(R.id.btnAuth);
 
-        final AppCompatEditText inputEmail = (AppCompatEditText) findViewById(R.id.input_login);
-        final AppCompatEditText inputPassword = (AppCompatEditText) findViewById(R.id.input_password);
+        final EditText inputEmail = (EditText) findViewById(R.id.input_login);
+        final EditText inputPassword = (EditText) findViewById(R.id.input_password);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(user != null) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
+                ////TODO: Errors
             }
         });
     }

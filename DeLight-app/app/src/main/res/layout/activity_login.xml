@@ -7,7 +7,7 @@
     android:background="@color/mainBackground"
     tools:context="ru.delightfire.delight.activity.LoginActivity">
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:layout_width="@dimen/btns_login_width"
         android:layout_height="wrap_content"
         android:text="@string/login"
@@ -18,7 +18,7 @@
         android:layout_centerInParent="true"
         android:background="@drawable/btn_login" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:layout_width="@dimen/btns_login_width"
         android:layout_height="wrap_content"
         android:text="@string/register"
@@ -28,29 +28,37 @@
         android:layout_below="@id/btnAuth"
         android:background="@drawable/btn_registration_activity_start"/>
 
-    <EditText
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/edittexttheme_edit_text_holo_dark"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:textColorHint="@color/white"
-        android:textColorHighlight="@color/white"
-        android:id="@+id/input_password"
+        android:gravity="center"
+        android:layout_height="wrap_content"
         android:layout_above="@id/btnAuth"
-        android:layout_width="@dimen/btns_login_width"
-        android:textColor="@color/white"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="@string/hint_password" />
+        android:theme="@style/TextLabel"
+        android:id="@+id/input_password_layout">
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/input_password"
+            android:layout_width="@dimen/btns_login_width"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/hint_password" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/edittexttheme_edit_text_holo_dark"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:textColorHint="@color/white"
-        android:id="@+id/input_login"
-        android:layout_above="@id/input_password"
-        android:layout_width="@dimen/btns_login_width"
+        android:gravity="center"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/hint_name"
-        android:textColor="@color/white"/>
+        android:layout_above="@id/input_password_layout"
+        android:theme="@style/TextLabel">
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/input_login"
+            android:layout_width="@dimen/btns_login_width"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/hint_name" />
+    </android.support.design.widget.TextInputLayout>
 
 </RelativeLayout>

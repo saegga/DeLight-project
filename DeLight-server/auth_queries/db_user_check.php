@@ -4,7 +4,7 @@ require '../db_connect.php';
 
 $db = new DB_CONNECT();
 
-if (isset($_POST["login"])){
+if (isset($_POST["login"]) && isset($_POST["password"])){
 	
 	$response = array();
 

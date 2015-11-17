@@ -51,7 +51,7 @@ public class TrainingAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if (view == null){
-            view = layoutInflater.inflate(R.layout.list_row_event, parent, false);
+            view = layoutInflater.inflate(R.layout.element_list_row_event, parent, false);
         }
 
         DelightTraining delightTraining= getDelightTraining(position);

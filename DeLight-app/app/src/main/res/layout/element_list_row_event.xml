@@ -3,7 +3,7 @@
     android:layout_width="300dp"
     android:layout_gravity="center_horizontal"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_selector"
+    android:background="@drawable/selector_list"
     android:orientation="horizontal"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:padding="3dip"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/image_bg"
+        android:background="@drawable/backgr_image"
         android:layout_marginRight="5dip">
 
         <ImageView

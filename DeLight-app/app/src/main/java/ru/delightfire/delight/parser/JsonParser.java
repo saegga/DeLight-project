@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Created by sergei on 04.11.2015.
  */
-public class ParserJson{
+public class JsonParser {
     URL url = null;
     int responseCode;
     StringBuilder response = new StringBuilder();

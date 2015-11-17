@@ -3,11 +3,8 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,9 +21,12 @@ import ru.delightfire.delight.fragment.MySkillFragment;
  * Created by scaredChatsky on 23.10.2015.
  */
 public class MainActivity extends AppCompatActivity{
+
     private DrawerLayout drawerLayout;
+
     private NavigationView navigationView;
-    Toolbar toolbar;
+
+    private Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         FragmentManager manager = getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentById(R.id.fragmentContainerRegister);
+        Fragment fragment = manager.findFragmentById(R.id.fragmentContainerMain);
         if(fragment == null){
             fragment = new MainTabFragment();
             manager.beginTransaction()
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home :
-                onBackPressed();
+                ///drawerLayout.openDrawer(drawerLayout);
                 return true;
             case R.id.one : Log.d("one", "break"); break;
             case R.id.two : Log.d("two", "break"); break;
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity{
             }
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .addToBackStack(null)
                     .replace(R.id.containerFragment, fragment)
                     .commit();
             return true;

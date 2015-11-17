@@ -62,6 +62,7 @@ public class TrainingAdapter extends BaseAdapter{
         return view;
     }
 
+
     private DelightTraining getDelightTraining(int position){
         return (DelightTraining) getItem(position);
     }

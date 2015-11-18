@@ -25,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:id="@+id/events"
@@ -51,10 +50,7 @@
                     />
             </android.support.design.widget.CoordinatorLayout>
 
-
             </LinearLayout>
-
-
 
             <LinearLayout
                 android:orientation="vertical"
@@ -96,9 +92,7 @@
                             />
                     </LinearLayout>
             </LinearLayout>
-
         </FrameLayout>
-
     </LinearLayout>
 
 </TabHost>

@@ -1,6 +1,7 @@
 package ru.delightfire.delight.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private DelightContext context = DelightContext.getInstance();
 
+    public static final String PREF_AUTH = "prefs_auth";
+    public static final String PREF_AUTH_STATE = "auth_state";
+    private boolean isAuth;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,16 +62,23 @@ public class LoginActivity extends AppCompatActivity {
                 }*/
 
                 if(user != null) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+                    SharedPreferences sharedPreferences = getSharedPreferences(PREF_AUTH, 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(PREF_AUTH_STATE, true);
+                    editor.commit();
+                    redirectToMain();
                 }
                 ////TODO: Errors
             }
         });
     }
 
+<<<<<<< HEAD
     /*class UserCheck extends AsyncTask<String, Void, DelightUser> {
+=======
+
+    class UserCheck extends AsyncTask<String, Void, DelightUser> {
+>>>>>>> 45adb8b773475c2ecdd64e47139ca540609c1418
 
         @Override
         protected DelightUser doInBackground(String... userData) {
@@ -86,5 +97,22 @@ public class LoginActivity extends AppCompatActivity {
             super.onPreExecute();
         }
     }
+<<<<<<< HEAD
 */
+=======
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPreferences = getSharedPreferences(PREF_AUTH, 0);
+        isAuth = sharedPreferences.getBoolean(PREF_AUTH_STATE, false);
+        if(isAuth)
+            redirectToMain();
+    }
+    private void redirectToMain(){
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+>>>>>>> 45adb8b773475c2ecdd64e47139ca540609c1418
 }

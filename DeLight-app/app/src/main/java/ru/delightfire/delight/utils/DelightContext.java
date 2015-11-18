@@ -81,12 +81,12 @@ public class DelightContext extends Application{
     }
 
     private JSONObject makeRequest(String url, HashMap<String, String> params){
-        final JSONObject[] jsonObject = new JSONObject[1];
+        //final JSONObject[] jsonObject = new JSONObject[1];
         final JsonObjectRequest request = new JsonObjectRequest(JsonObjectRequest.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("Response: ", response.toString());
-                jsonObject[0] = response;
+                //jsonObject[0] = response;
             }
         }, new Response.ErrorListener() {
             @Override
@@ -98,7 +98,7 @@ public class DelightContext extends Application{
         Log.d("Request: ", request.toString());
         addToRequestQueue(request);
 
-        return jsonObject[0];
+        //return jsonObject[0];
     }
 
 

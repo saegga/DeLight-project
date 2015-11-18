@@ -1,13 +1,21 @@
 package ru.delightfire.delight.utils;
 
+import android.app.Application;
+import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.android.volley.Request;
-
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -18,7 +26,7 @@ import ru.delightfire.delight.parser.JsonParser;
 /**
  * Created by scaredChatsky on 07.11.2015.
  */
-public class DelightContext {
+public class DelightContext extends Application{
 
     private static class DelightContextHolder{
         public static final DelightContext HOLDER_INSTANCE = new DelightContext();
@@ -43,6 +51,55 @@ public class DelightContext {
     private static final String TAG_USER = "user";
     private static final String TAG_FIRST_NAME = "first_name";
     private static final String TAG_LAST_NAME = "last_name";
+
+    private static final String TAG = "VolleyPatterns";
+
+    private static Context context = null;
+    private RequestQueue requestQueue;
+
+    public void setContext(Context contextToSet){
+        this.context = contextToSet;
+        requestQueue = Volley.newRequestQueue(context);
+    }
+
+    private  <T> void addToRequestQueue(Request<T> req, String tag) {
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+
+        requestQueue.add(req);
+    }
+
+    private  <T> void addToRequestQueue(Request<T> req) {
+        req.setTag(TAG);
+
+        requestQueue.add(req);
+    }
+
+    private void cancelPendingRequests(Object tag) {
+        if (requestQueue != null) {
+            requestQueue.cancelAll(tag);
+        }
+    }
+
+    private JSONObject makeRequest(String url, HashMap<String, String> params){
+        final JSONObject[] jsonObject = new JSONObject[1];
+        final JsonObjectRequest request = new JsonObjectRequest(JsonObjectRequest.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("Response: ", response.toString());
+                jsonObject[0] = response;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+            }
+        });
+
+        Log.d("Request: ", request.toString());
+        addToRequestQueue(request);
+
+        return jsonObject[0];
+    }
 
 
     public DelightTraining getTraining(Integer trainingId) {
@@ -78,32 +135,22 @@ public class DelightContext {
     }
 
     public DelightUser userCheck(String login, String password){
-        JsonParser jsonParser = new JsonParser();
         DelightUser user = null;
 
         String url = "http://delightfireapp.16mb.com/auth_queries/db_user_check.php";
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put(TAG_LOGIN, login);
-        map.put(TAG_PASSWORD, password);
+        HashMap<String, String> params = new HashMap<>();
+        params.put(TAG_LOGIN, login);
+        params.put(TAG_PASSWORD, password);
 
-        int success;
+        JSONObject response = makeRequest(url, params);
+
         try {
-            Log.d("Map: ", map.toString());
-            JSONObject json = jsonParser.makeRequestHttp(url, "POST", map);
-            Log.d("User: ", json.toString());
-            success = json.getInt(TAG_SUCCESS);
-
-            if (success == 1) {
-                JSONArray userObj = json.getJSONArray(TAG_USER);
-                JSONObject userJsonObj = userObj.getJSONObject(0);
-                user = new DelightUser(login, password, userJsonObj.getString(TAG_FIRST_NAME), userJsonObj.getString(TAG_LAST_NAME));
-            }else{
-
+            int success = response.getInt(TAG_SUCCESS);
+            if (success == 1){
+                user = new DelightUser(login, password, response.getString(TAG_FIRST_NAME), response.getString(TAG_LAST_NAME));
             }
         } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -171,5 +218,7 @@ public class DelightContext {
 
         return user;
     }
+
+
 
 }

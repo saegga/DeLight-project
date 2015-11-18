@@ -4,11 +4,13 @@ require '../db_connect.php';
 
 $db = new DB_CONNECT();
 
-if (isset($_POST["login"]) && isset($_POST["password"])){
+$post = json_decode(file_get_contents("php://input"), true);
+
+if (isset($post["login"]) && isset($post["password"])){
 	
 	$response = array();
 
-	$login = $_POST["login"];
+	$login = $post["login"];
 	
 	$result = $db->getConnection()->query("SELECT *FROM users WHERE login = '$login'");
 
@@ -18,7 +20,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
 
         	$result = $result->fetch_array();
 
-        	if (sha1($_POST["password"]) == $result["password"]){
+        	if (sha1($post["password"]) == $result["password"]){
         		$response["success"] = 1;
 
         		$user = array();

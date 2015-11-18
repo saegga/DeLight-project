@@ -16,12 +16,13 @@ import ru.delightfire.delight.utils.DelightContext;
 
 public class LoginActivity extends AppCompatActivity {
 
-    DelightContext context = DelightContext.getInstance();
+    private DelightContext context = DelightContext.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        context.setContext(getApplicationContext());
 
         Button registerBtn = (Button) findViewById(R.id.btnRegistrationActivity);
 
@@ -45,13 +46,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 DelightUser user = null;
 
+                context.userCheck(login, password);
+
+                /*
                 try {
                     user = new UserCheck().execute(login, password).get();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 if(user != null) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -63,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    class UserCheck extends AsyncTask<String, Void, DelightUser> {
+    /*class UserCheck extends AsyncTask<String, Void, DelightUser> {
 
         @Override
         protected DelightUser doInBackground(String... userData) {
@@ -80,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             dialog.setCancelable(true);
             dialog.show();
             super.onPreExecute();
-        }*/
+        }
     }
-
+*/
 }

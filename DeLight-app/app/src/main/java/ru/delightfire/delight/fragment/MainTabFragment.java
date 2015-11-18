@@ -1,27 +1,34 @@
 package ru.delightfire.delight.fragment;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import ru.delightfire.delight.R;
+import ru.delightfire.delight.activity.AddEventActivity;
 import ru.delightfire.delight.adapter.ChatAdapter;
 import ru.delightfire.delight.adapter.TrainingAdapter;
 import ru.delightfire.delight.entity.DelightTraining;
 import ru.delightfire.delight.entity.ChatMessage;
 import ru.delightfire.delight.utils.DelightContext;
+
 
 /**
  * Created by sergei on 12.11.2015.
@@ -35,7 +42,9 @@ public class MainTabFragment extends Fragment {
     private ListView listMessages;
     private Button btnSendMsg;
     private EditText messageTxt;
+    private FloatingActionButton addActionBtn;
 
+    private static final int REQUEST_ADD = 2;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,6 +87,10 @@ public class MainTabFragment extends Fragment {
                 sendMessage(msg);
             }
         });
+        addActionBtn = (FloatingActionButton)view.findViewById(R.id.fab);
+        addActionBtn.setClickable(true);
+
+        addActionBtn.setOnClickListener(clickFab);
 
         return view;
     }
@@ -85,7 +98,6 @@ public class MainTabFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     class GetTraining extends AsyncTask<Integer, Void, DelightTraining> {
@@ -132,5 +144,12 @@ public class MainTabFragment extends Fragment {
         chatMessages.add(chatMessageTwo);
         return chatMessages;
     }
+     View.OnClickListener clickFab = new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent = new Intent(getActivity(), AddEventActivity.class);
+             startActivityForResult(intent, REQUEST_ADD);
+         }
+     };
 
 }

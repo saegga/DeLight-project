@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.concurrent.ExecutionException;
 
@@ -57,6 +58,9 @@ public class RegistrationUserDataInputFragment extends Fragment {
 
                 if (user != null) {
                     startActivity(new Intent(getContext(), MainActivity.class));
+                }else{
+                    Toast.makeText(getActivity(), "Не удалось зарегистрироваться", Toast.LENGTH_SHORT)
+                            .show();
                 }
             }
         });

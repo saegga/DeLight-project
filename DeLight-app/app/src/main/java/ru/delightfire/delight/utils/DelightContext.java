@@ -1,17 +1,7 @@
 package ru.delightfire.delight.utils;
 
 import android.app.Application;
-import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +16,7 @@ import ru.delightfire.delight.parser.JsonParser;
 /**
  * Created by scaredChatsky on 07.11.2015.
  */
-public class DelightContext extends Application{
+public class DelightContext{
 
     private static class DelightContextHolder{
         public static final DelightContext HOLDER_INSTANCE = new DelightContext();
@@ -51,56 +41,6 @@ public class DelightContext extends Application{
     private static final String TAG_USER = "user";
     private static final String TAG_FIRST_NAME = "first_name";
     private static final String TAG_LAST_NAME = "last_name";
-
-    private static final String TAG = "VolleyPatterns";
-
-    private static Context context = null;
-    private RequestQueue requestQueue;
-
-    public void setContext(Context contextToSet){
-        this.context = contextToSet;
-        requestQueue = Volley.newRequestQueue(context);
-    }
-
-    private  <T> void addToRequestQueue(Request<T> req, String tag) {
-        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
-
-        requestQueue.add(req);
-    }
-
-    private  <T> void addToRequestQueue(Request<T> req) {
-        req.setTag(TAG);
-
-        requestQueue.add(req);
-    }
-
-    private void cancelPendingRequests(Object tag) {
-        if (requestQueue != null) {
-            requestQueue.cancelAll(tag);
-        }
-    }
-
-    private JSONObject makeRequest(String url, HashMap<String, String> params){
-        //final JSONObject[] jsonObject = new JSONObject[1];
-        final JsonObjectRequest request = new JsonObjectRequest(JsonObjectRequest.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("Response: ", response.toString());
-                //jsonObject[0] = response;
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.e("Error: ", error.getMessage());
-            }
-        });
-
-        Log.d("Request: ", request.toString());
-        addToRequestQueue(request);
-
-        //return jsonObject[0];
-    }
-
 
     public DelightTraining getTraining(Integer trainingId) {
 
@@ -136,6 +76,7 @@ public class DelightContext extends Application{
 
     public DelightUser userCheck(String login, String password){
         DelightUser user = null;
+        JsonParser jsonParser = new JsonParser();
 
         String url = "http://delightfireapp.16mb.com/auth_queries/db_user_check.php";
 
@@ -143,12 +84,19 @@ public class DelightContext extends Application{
         params.put(TAG_LOGIN, login);
         params.put(TAG_PASSWORD, password);
 
-        JSONObject response = makeRequest(url, params);
+        JSONObject jsonObject = null;
 
         try {
-            int success = response.getInt(TAG_SUCCESS);
+            jsonObject = jsonParser.makeRequestHttp(url, "POST", params);
+            Log.d("Response: ", jsonObject.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            int success = jsonObject.getInt(TAG_SUCCESS);
             if (success == 1){
-                user = new DelightUser(login, password, response.getString(TAG_FIRST_NAME), response.getString(TAG_LAST_NAME));
+                user = new DelightUser(login, password, jsonObject.getString(TAG_FIRST_NAME), jsonObject.getString(TAG_LAST_NAME));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -218,7 +166,5 @@ public class DelightContext extends Application{
 
         return user;
     }
-
-
 
 }

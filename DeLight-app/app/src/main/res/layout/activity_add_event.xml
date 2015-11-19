@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_height="wrap_content"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Выберите событие"
+        android:layout_margin="15dp"
+        android:textColor="#212121"
+        android:id="@+id/textView" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:layout_marginLeft="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:textColor="#727272"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Тренировка"/>
+            <RadioButton
+                android:textColor="#727272"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Встреча"/>
+            <RadioButton
+                android:textColor="#727272"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="выступление"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+</LinearLayout>

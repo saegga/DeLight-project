@@ -148,7 +148,8 @@ public class MainTabFragment extends Fragment {
          @Override
          public void onClick(View v) {
              Intent intent = new Intent(getActivity(), AddEventActivity.class);
-             startActivityForResult(intent, REQUEST_ADD);
+             //startActivityForResult(intent, REQUEST_ADD);
+             startActivity(intent);
          }
      };
 

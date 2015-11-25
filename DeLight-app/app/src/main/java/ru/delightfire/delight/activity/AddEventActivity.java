@@ -9,7 +9,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.fragment.AddPerformanceFragment;
+import ru.delightfire.delight.fragment.AddMeetFragment;
+import ru.delightfire.delight.fragment.AddShowFragment;
 
 /**
  * Created by sergei on 18.11.2015.
@@ -21,7 +22,8 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
     private RadioButton btnTraining;
     private FragmentManager manager;
     private FragmentTransaction transaction;
-    private AddPerformanceFragment performanceFragment;
+    private AddShowFragment performanceFragment;
+    private AddMeetFragment meetFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +34,8 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
         btnTraining = (RadioButton) findViewById(R.id.btn_training);
         group.setOnCheckedChangeListener(this);
         manager = getSupportFragmentManager();
-        performanceFragment = new AddPerformanceFragment();
+        performanceFragment = new AddShowFragment();
+        meetFragment = new AddMeetFragment();
 
     }
 
@@ -50,7 +53,15 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
                 }
                 break;
             case  R.id.btn_meet :
-                Log.d("AddEventActivity", "check" + checkedId );break;
+                if(manager.getFragments() != null){
+                    Log.d("AddEventActivity", "replace");
+                    transaction.replace(R.id.add_event_container , meetFragment);
+                }else{
+                    Log.d("AddEventActivity", "add");
+                    transaction.add(R.id.add_event_container , meetFragment);
+                }
+                Log.d("AddEventActivity", "check" + checkedId );
+                break;
             case  R.id.btn_training : Log.d("AddEventActivity", "check" + checkedId);break;
         }
         transaction.commit();

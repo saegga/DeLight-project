@@ -15,6 +15,8 @@
     <color name="btn_send_color">#1d514a</color>
     <color name="btn_login_color">#DD4844</color>
 
+    <color name="secondary_text">#727272</color>
+
     <color name="fab_color">#ff5252</color>
 
 </resources>

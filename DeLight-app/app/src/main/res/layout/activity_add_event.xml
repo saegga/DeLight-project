@@ -29,20 +29,24 @@
         android:layout_height="wrap_content">
 
         <RadioGroup
+            android:id="@+id/group_choose"
             android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RadioButton
+                android:id="@+id/btn_training"
                 android:textColor="#727272"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Тренировка"/>
             <RadioButton
+                android:id="@+id/btn_meet"
                 android:textColor="#727272"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Встреча"/>
             <RadioButton
+                android:id="@+id/btn_performance"
                 android:textColor="#727272"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,5 +55,11 @@
         </RadioGroup>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/add_event_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

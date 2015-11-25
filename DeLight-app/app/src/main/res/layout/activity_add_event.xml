@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/mainBackground"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
@@ -19,8 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Выберите событие"
-        android:layout_margin="15dp"
-        android:textColor="#212121"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/white"
         android:id="@+id/textView" />
 
     <LinearLayout
@@ -35,22 +38,22 @@
             android:layout_height="wrap_content">
             <RadioButton
                 android:id="@+id/btn_training"
-                android:textColor="#727272"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Тренировка"/>
             <RadioButton
                 android:id="@+id/btn_meet"
-                android:textColor="#727272"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Встреча"/>
             <RadioButton
                 android:id="@+id/btn_performance"
-                android:textColor="#727272"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="выступление"/>
+                android:text="Выступление"/>
 
         </RadioGroup>
 

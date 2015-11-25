@@ -7,5 +7,9 @@
     <string name="login">Вход</string>
     <string name="register">Регистрация</string>
     <string name="regkey_hint">Введите ключ регистрации</string>
+    <string name="text_view_name">Номера:</string>
+    <string name="text_view_description">Клиент:</string>
+    <string name="text_view_date">Дата:</string>
+    <string name="ok">Ok</string>
 
 </resources>

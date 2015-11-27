@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="328dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <TimePicker
+        android:id="@+id/timePicker1"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content"
+
+        android:layout_alignTop="@+id/datePicker"
+        android:layout_toRightOf="@+id/datePicker"
+        android:layout_toEndOf="@+id/datePicker" />
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></LinearLayout>
+
+    <Button
+        android:id="@+id/btnSet"
+        android:layout_width="fill_parent"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:background="@color/back_message_you"
+        android:text="@string/ok"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/timePicker1"
+        android:layout_alignEnd="@+id/timePicker1" />
+
+</RelativeLayout>
+
+
+
+
+
+
+
+

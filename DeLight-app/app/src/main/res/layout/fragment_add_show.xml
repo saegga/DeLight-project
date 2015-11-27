@@ -20,13 +20,25 @@
         android:text="@string/text_view_description"
         android:layout_height="wrap_content" />
     <!--todo вывод клиентов из бд-->
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:text="@string/text_view_date"
+        android:layout_marginRight="5dp"
+        android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/date_performance"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text="@string/text_view_date"
-        android:layout_height="wrap_content" />
+        />
+</LinearLayout>
+
     <Button
         android:id="@+id/choose_date"
         android:layout_width="match_parent"

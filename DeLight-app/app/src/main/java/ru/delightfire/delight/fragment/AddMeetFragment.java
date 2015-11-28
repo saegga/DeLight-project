@@ -7,14 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import ru.delightfire.delight.R;
+
 /**
  * Created by sergei on 24.11.2015.
  */
 public class AddMeetFragment extends Fragment {
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
+//    @Nullable
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fragment_add_training, container, false);
+//        return view;
+//    }
 }

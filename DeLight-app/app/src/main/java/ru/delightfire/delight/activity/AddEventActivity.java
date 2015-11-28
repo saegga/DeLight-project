@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.fragment.AddMeetFragment;
 import ru.delightfire.delight.fragment.AddShowFragment;
+import ru.delightfire.delight.fragment.AddTrainingFragment;
 
 /**
  * Created by sergei on 18.11.2015.
@@ -47,27 +48,18 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
         switch (checkedId){
             case  R.id.btn_performance :
                 actionFragment = new AddShowFragment();
-                if(manager.getFragments() != null){
-                    Log.d("AddEventActivity", "replace");
-
-                    transaction.replace(R.id.add_event_container , actionFragment);
-                }else{
-                    Log.d("AddEventActivity", "add");
-                    transaction.add(R.id.add_event_container , actionFragment);
-                }
+                createActionFragment();
                 break;
             case  R.id.btn_meet :
                 actionFragment = new AddMeetFragment();
-                if(manager.getFragments() != null){
-                    Log.d("AddEventActivity", "replace");
-                    transaction.replace(R.id.add_event_container , actionFragment);
-                }else{
-                    Log.d("AddEventActivity", "add");
-                    transaction.add(R.id.add_event_container , actionFragment);
-                }
+                createActionFragment();
                 Log.d("AddEventActivity", "check" + checkedId );
                 break;
-            case  R.id.btn_training : Log.d("AddEventActivity", "check" + checkedId);break;
+            case  R.id.btn_training :
+                actionFragment = new AddTrainingFragment();
+                createActionFragment();
+                Log.d("AddEventActivity", "check" + checkedId);
+                break;
         }
         transaction.commit();
     }
@@ -93,6 +85,15 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
             transaction = manager.beginTransaction();
             transaction.replace(R.id.add_event_container , actionFragment);
             transaction.commit();
+        }
+    }
+    private void createActionFragment(){
+        if(manager.getFragments() != null){
+            //Log.d("AddEventActivity", "replace");
+            transaction.replace(R.id.add_event_container , actionFragment);
+        }else{
+            //Log.d("AddEventActivity", "add");
+            transaction.add(R.id.add_event_container , actionFragment);
         }
     }
 }

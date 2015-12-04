@@ -13,7 +13,7 @@
     <string name="ok">Ok</string>
     <string name="text_view_users">Выбери участников</string>
     <string name="text_view_day">День недели</string>
-    <string name="text_view_time">Время</string>
+    <string name="text_view_time">Время: </string>
     <string name="choose_time">Выбери время</string>
 
 </resources>

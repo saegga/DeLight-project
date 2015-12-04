@@ -39,7 +39,7 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
     private Calendar calendar;
     private Date dateTime;
 
-    public static final String DATE_BUNDLE_KEY = "date_bundle_key";
+    private static final String DATE_BUNDLE_KEY = "date_bundle_key";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

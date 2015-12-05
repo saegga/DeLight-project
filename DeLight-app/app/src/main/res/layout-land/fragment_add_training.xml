@@ -4,29 +4,49 @@
     android:layout_marginLeft="15dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-   <TextView
-       android:id="@+id/text_view_choose_users"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:text="@string/text_view_users"
-       android:textColor="@color/white"
-       android:layout_marginBottom="5dp"/>
+    <TextView
+        android:id="@+id/text_view_choose_users"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_view_users"
+        android:textColor="@color/white"
+        android:layout_marginBottom="5dp"/>
     <Spinner
         android:id="@+id/list_users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/text_view_day"
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="@string/text_view_day"/>
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:id="@+id/text_view_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginRight="5dp"
+            android:text="@string/text_view_day"/>
+        <TextView
+            android:id="@+id/day_of_week_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginBottom="5dp"/>
+    </LinearLayout>
 
-    <Spinner
-        android:id="@+id/day_of_week"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <GridView
+        android:id="@+id/test_grid"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:columnWidth="35dp"
+        android:stretchMode="columnWidth"
+        android:layout_height="30dp"
+        android:layout_marginBottom="5dp"
+        android:choiceMode="singleChoice"/>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -43,8 +63,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:layout_marginLeft="5dp"
-           />
-
+            />
 
     </LinearLayout>
     <LinearLayout
@@ -61,4 +80,5 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+
 </LinearLayout>

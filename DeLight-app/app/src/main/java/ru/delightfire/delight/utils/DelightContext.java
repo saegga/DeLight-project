@@ -74,37 +74,6 @@ public class DelightContext{
         return training;
     }
 
-    public DelightUser userCheck(String login, String password){
-        DelightUser user = null;
-        JsonParser jsonParser = new JsonParser();
-
-        String url = "http://delightfireapp.16mb.com/auth_queries/db_user_check.php";
-
-        HashMap<String, String> params = new HashMap<>();
-        params.put(TAG_LOGIN, login);
-        params.put(TAG_PASSWORD, password);
-
-        JSONObject jsonObject = null;
-
-        try {
-            jsonObject = jsonParser.makeRequestHttp(url, "POST", params);
-            Log.d("Response: ", jsonObject.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            int success = jsonObject.getInt(TAG_SUCCESS);
-            if (success == 1){
-                user = new DelightUser(login, password, jsonObject.getString(TAG_FIRST_NAME), jsonObject.getString(TAG_LAST_NAME));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        return user;
-    }
-
     public boolean keyCheck(String key) {
 
         JsonParser jsonParser = new JsonParser();
@@ -154,7 +123,7 @@ public class DelightContext{
             success = json.getInt(TAG_SUCCESS);
 
             if (success == 1) {
-                user = this.userCheck(login, password);
+                //user = this.userCheck(login, password);
             }else{
 
             }

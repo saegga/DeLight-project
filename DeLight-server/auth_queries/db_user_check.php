@@ -2,17 +2,18 @@
  
 require '../db_connect.php';
 
-$db = new DB_CONNECT();
+if (isset($_POST["login"]) && isset($_POST["password"])){
 
-$post = json_decode(file_get_contents("php://input"), true);
+	$db = new DB_CONNECT();
 
-if (isset($post["login"]) && isset($post["password"])){
+	$login = $_POST["login"];
+	$password = $_POST["password"];
 	
 	$response = array();
 
-	$login = $post["login"];
+	$login = $_POST["login"];
 	
-	$result = $db->getConnection()->query("SELECT *FROM users WHERE login = '$login'");
+	$result = $db->getConnection()->query("SELECT * FROM users WHERE login = '$login'");
 
 
 	if (!empty($result)) {
@@ -20,22 +21,21 @@ if (isset($post["login"]) && isset($post["password"])){
 
         	$result = $result->fetch_array();
 
-        	if (sha1($post["password"]) == $result["password"]){
+        	if (sha1($password) == $result["password"]){
         		$response["success"] = 1;
 
-        		$user = array();
-        		$user["first_name"] = $result["first_name"];
-        		$user["last_name"] = $result["last_name"];
-
         		$response["user"] = array();
- 
-            	array_push($response["user"], $user);
+
+        		$response["user"]["first_name"] = $result["first_name"];
+        		$response["user"]["last_name"] = $result["last_name"];
+
         	} else {
         		$response["success"] = 0;
 				$response["message"] = "Wrong password";
         	}
 
 			echo json_encode($response);
+			
 		} else {
 			$response["success"] = 0;
 			$response["message"] = "User not found";

@@ -12,8 +12,26 @@
     <string name="text_view_date">Дата:</string>
     <string name="ok">Ok</string>
     <string name="text_view_users">Выбери участников</string>
-    <string name="text_view_day">День недели</string>
-    <string name="text_view_time">Время</string>
+    <string name="text_view_day">День недели: </string>
+    <string name="text_view_time">Время: </string>
     <string name="choose_time">Выбери время</string>
 
+    <string-array name="arr_days_full">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>Воскресенье</item>
+    </string-array>
+    <string-array name="arr_days">
+        <item>Пн</item>
+        <item>Вт</item>
+        <item>Ср</item>
+        <item>Чт</item>
+        <item>Пт</item>
+        <item>Сб</item>
+        <item>Вс</item>
+    </string-array>
 </resources>

@@ -27,8 +27,6 @@ import ru.delightfire.delight.R;
  */
 public class AddShowFragment extends Fragment implements View.OnClickListener {
 
-    private TextView namePerformance;
-    private TextView descPerformance;
     private TextView datePerformance;
     private Button chooseDate;
     private TimePicker time;
@@ -39,13 +37,11 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
     private Calendar calendar;
     private Date dateTime;
 
-    public static final String DATE_BUNDLE_KEY = "date_bundle_key";
+    private static final String DATE_BUNDLE_KEY = "date_bundle_key";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_show, container, false);
-        namePerformance = (TextView) view.findViewById(R.id.name_performance);
-        descPerformance = (TextView) view.findViewById(R.id.description_performance);
         datePerformance = (TextView) view.findViewById(R.id.date_performance);
         chooseDate = (Button) view.findViewById(R.id.choose_date);
         chooseDate.setOnClickListener(this);
@@ -58,10 +54,7 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
             DateFormat df = DateFormat.getDateTimeInstance
                     (DateFormat.LONG, DateFormat.DEFAULT, new Locale("ru", "RU"));
             datePerformance.setText(df.format(dateTime));
-            //dateTime =
         }
-
-        //String.format()
         return view;
     }
 
@@ -96,9 +89,6 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MINUTE, minute);
                 calendar.set(Calendar.HOUR_OF_DAY, hour);
-                dateTime = calendar.getTime();// установленная дата
-//                Log.d("Date"," month " + month +  " day " + day + " hour " + hour);
-//                Log.d("DateTime", dateTime.toString());
                 DateFormat df = DateFormat.getDateTimeInstance
                         (DateFormat.LONG, DateFormat.DEFAULT, new Locale("ru", "RU"));
                 datePerformance.setText(df.format(dateTime));

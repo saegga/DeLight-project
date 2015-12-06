@@ -1,7 +1,6 @@
 package ru.delightfire.delight.fragment;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,19 +11,18 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.concurrent.ExecutionException;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.activity.MainActivity;
 import ru.delightfire.delight.entity.DelightUser;
-import ru.delightfire.delight.utils.DelightContext;
 
 /**
  * Created by sergei on 04.11.2015.
  */
 public class RegistrationUserDataInputFragment extends Fragment {
-
-    private DelightContext context = DelightContext.getInstance();
 
     private EditText registerLogin;
     private EditText registerPassword;
@@ -47,34 +45,31 @@ public class RegistrationUserDataInputFragment extends Fragment {
         registrationConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DelightUser user = null;
-                try {
-                    user = new CreateUser().execute(registerLogin.getText().toString(), registerPassword.getText().toString()).get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+                Ion.with(getActivity())
+                        .load("POST", "http://delightfireapp.16mb.com/auth_queries/db_user_create.php")
+                        .setBodyParameter("login", registerLogin.getText().toString())
+                        .setBodyParameter("password", registerPassword.getText().toString())
+                        .asJsonObject()
+                        .setCallback(new FutureCallback<JsonObject>() {
+                            @Override
+                            public void onCompleted(Exception e, JsonObject result) {
+                                DelightUser user = null;
 
-                if (user != null) {
-                    startActivity(new Intent(getContext(), MainActivity.class));
-                }else{
-                    Toast.makeText(getActivity(), "Не удалось зарегистрироваться", Toast.LENGTH_SHORT)
-                            .show();
-                }
+                                if (result.get("success").getAsInt() == 1){
+                                    user = new DelightUser(registerLogin.getText().toString(),
+                                            registerPassword.getText().toString());
+                                }
+
+                                if (user != null) {
+                                    startActivity(new Intent(getContext(), MainActivity.class));
+                                } else {
+                                    Toast.makeText(getActivity(), "Не удалось зарегистрироваться", Toast.LENGTH_SHORT)
+                                            .show();
+                                }
+                            }
+                        });
             }
         });
-
         return view;
     }
-
-    class CreateUser extends AsyncTask<String, Void, DelightUser>{
-        @Override
-        protected DelightUser doInBackground(String... userData) {
-            DelightUser user = context.createUser(userData[0], userData[1]);
-
-            return user;
-        }
-    }
-
 }

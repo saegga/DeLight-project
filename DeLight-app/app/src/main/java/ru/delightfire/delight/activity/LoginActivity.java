@@ -15,11 +15,8 @@ import com.koushikdutta.ion.Ion;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.DelightUser;
-import ru.delightfire.delight.utils.DelightContext;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private DelightContext context = DelightContext.getInstance();
 
     public static final String PREF_AUTH = "prefs_auth";
     public static final String PREF_AUTH_STATE = "auth_state";
@@ -49,8 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                 final String login = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
-                final DelightUser[] user = {null};
-
                 //Ion library for async query
                 Ion.with(getApplicationContext())
                         .load("POST", "http://delightfireapp.16mb.com/auth_queries/db_user_check.php")
@@ -62,30 +57,24 @@ public class LoginActivity extends AppCompatActivity {
                             public void onCompleted(Exception e, JsonObject result) {
                                 Log.d("Response:: ", result.toString());
 
+                                DelightUser user = null;
+
                                 if (result.get("success").getAsInt() == 1) {
                                     JsonObject userInfo = result.get("user").getAsJsonObject();
-                                    user[0] = new DelightUser(login, password, userInfo.get("first_name").getAsString(),
+                                    user = new DelightUser(login, password, userInfo.get("first_name").getAsString(),
                                             userInfo.get("last_name").getAsString());
                                 }
 
-                                if (user[0] != null) {
+                                if (user != null) {
                                     SharedPreferences sharedPreferences = getSharedPreferences(PREF_AUTH, 0);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putBoolean(PREF_AUTH_STATE, true);
                                     editor.commit();
                                     redirectToMain();
                                 }
+                                ////TODO: Errors
                             }
                         });
-
-                if (user[0] != null) {
-                    SharedPreferences sharedPreferences = getSharedPreferences(PREF_AUTH, 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean(PREF_AUTH_STATE, true);
-                    editor.commit();
-                    redirectToMain();
-                }
-                ////TODO: Errors
             }
         });
     }

@@ -6,7 +6,7 @@ class AuthClass {
 
     private $_login;
     private $_password;
- 
+    
     public function isAuth() {
 
         if (isset($_SESSION["is_auth"])) {
@@ -14,7 +14,7 @@ class AuthClass {
         }
         else return false;
     }
-     
+    
     public function auth($login, $passwors) {
 
         if ($login == $this->_login && $passwors == $this->_password) { 
@@ -31,11 +31,11 @@ class AuthClass {
     }
 
     public function getLogin() {
-        if ($this->isAuth()) { //Если пользователь авторизован
-            return $_SESSION["login"]; //Возвращаем логин, который записан в сессию
+        if ($this->isAuth()) {
+            return $_SESSION["login"];
         }
     }
-     
+    
     public function out() {
         $_SESSION = array();
         session_destroy();

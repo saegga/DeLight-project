@@ -1,7 +1,11 @@
+<?php
+	header('Content-type: text/html; charset=utf-8');
+?>
 <!doctype html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	
 	<title>DeLight - Огненное шоу в благовещенске</title>
 	<link rel="shortcut icon" href="favicon.png" />
 	<link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css" />
@@ -11,11 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
 
-
-<?php
-
-?>
-
+	
 
 	<script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -42,6 +42,17 @@
 						<li><a href="#about">О нас</a></li>
 						<li><a href="#media">Фото и видео</a></li>
 						<li><a href="#order">Заказ шоу</a></li>
+						<li class="dropdown">
+							<a href="#auth">Авторизация</a>
+							<ul>
+								<li>
+									<a href="login.php">Вход</a>
+								</li>
+								<li>
+									<a href="register.php">Регистрация</a>
+								</li>
+							</ul>
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -105,45 +116,45 @@
 	</section>
 
 -->
-	<section id="media" class="s_media s_light_bg">
-		<div class="section_header animated">
-			<h2>Фото и видео</h2>
-		</div>
+<section id="media" class="s_media s_light_bg">
+	<div class="section_header animated">
+		<h2>Фото и видео</h2>
+	</div>
 
-		<div class="section_content animated">
-			<div class="container">
-				<div class="tabs_block">
-    				<ul class="tabs">
-				        <li class="active">Фото</li>
-				        <li>Видео</li>
-    				</ul>
-				    <div class="box visible"> 
-				        <div class="fotorama" data-nav="thumbs" data-width="100%"
-				        data-loop="true" data-keyboard="true" data-allowfullscreen="true">
-							<img src="img/gallery/image15.jpg">
-							<img src="img/gallery/image2.jpg">
-							<img src="img/gallery/image6.jpg">
-							<img src="img/gallery/image7.jpg">
-							<img src="img/gallery/image4.jpg">
-							<img src="img/gallery/image8.jpg">
-							<img src="img/gallery/image10.jpg">		
-							<img src="img/gallery/image11.jpg">
-							<img src="img/gallery/image14.jpg">
-						</div>
-			    	</div>
-				    <div class="box">
-						<div class="fotorama" data-nav="thumbs" data-width="100%"
-						data-loop="true" data-keyboard="true" data-allowfullscreen="true">
-							<a href="http://www.youtube.com/watch?v=y1N6n63ogk0"></a>
-							<a href="http://www.youtube.com/watch?v=mGe_0wqq85g"></a>
-							<a href="http://www.youtube.com/watch?v=SHNqAklAQLs"></a>
-							<a href="http://www.youtube.com/watch?v=b0o5x6AFkyE"></a>
-						</div>
-				    </div>
+	<div class="section_content animated">
+		<div class="container">
+			<div class="tabs_block">
+				<ul class="tabs">
+					<li class="active">Фото</li>
+					<li>Видео</li>
+				</ul>
+				<div class="box visible"> 
+					<div class="fotorama" data-nav="thumbs" data-width="100%"
+					data-loop="true" data-keyboard="true" data-allowfullscreen="true">
+					<img src="img/gallery/image15.jpg">
+					<img src="img/gallery/image2.jpg">
+					<img src="img/gallery/image6.jpg">
+					<img src="img/gallery/image7.jpg">
+					<img src="img/gallery/image4.jpg">
+					<img src="img/gallery/image8.jpg">
+					<img src="img/gallery/image10.jpg">		
+					<img src="img/gallery/image11.jpg">
+					<img src="img/gallery/image14.jpg">
 				</div>
 			</div>
+			<div class="box">
+				<div class="fotorama" data-nav="thumbs" data-width="100%"
+				data-loop="true" data-keyboard="true" data-allowfullscreen="true">
+				<a href="http://www.youtube.com/watch?v=y1N6n63ogk0"></a>
+				<a href="http://www.youtube.com/watch?v=mGe_0wqq85g"></a>
+				<a href="http://www.youtube.com/watch?v=SHNqAklAQLs"></a>
+				<a href="http://www.youtube.com/watch?v=b0o5x6AFkyE"></a>
+			</div>
 		</div>
-	</section>
+	</div>
+</div>
+</div>
+</section>
 
 	<!--
 	<section id="order" class="s_contacts s_bg">

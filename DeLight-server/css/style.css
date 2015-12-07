@@ -163,6 +163,7 @@ footer.main_footer{
 
 /*Top menu*/
 .top_menu{
+	height: 60px;
 	position: fixed;
 	width: 100%;
 	background-color: rgba(255,255,255,0.8);
@@ -418,4 +419,29 @@ body textarea{
 	.tabs, .tabs li {
 		float: none;
 	}
+}
+
+.dropdown:hover ul{
+	display: block;
+	background-color: rgba(255,255,255,0.9);
+}
+
+.dropdown ul{
+	border-radius: 0px 0px 10px 10px;
+	background-color: rgba(255,255,255,0.8);
+	display: none;
+	color: black;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 150px;
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 60px;
+	transition: all ease-out 0.5s;
+}
+
+li.dropdown{
+	height: 60px;
 }

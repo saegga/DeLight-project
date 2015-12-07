@@ -2,7 +2,7 @@
  
 class DB_CONNECT {
  
-    var $con;
+    private $con;
 
     function __construct() {
         $this->connect();

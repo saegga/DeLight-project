@@ -68,14 +68,22 @@ body {
 	text-transform: uppercase;
 	color: white;
 	position: relative;
-	top: 50px;
-	width: 400px;
+	top: 10%;
+	width: 950px;
 	display: block;
 	margin: 0 auto;
 	position: relative;
 	background-color: rgba(68, 66, 115, 0.8);
 	border-radius: 20px;
 	padding: 40px;
+}
+
+.small-form{
+	width: 400px;
+}
+
+.big-form{
+	width: 950px;
 }
 
 .form-group{
@@ -112,12 +120,34 @@ button{
 	font-weight: 700;
 	position: relative;
 	border-radius: 5px;
-	margin: 0 auto;
-	width: 100%;
 	margin-top: 20px;
+}
+
+.login-button{
+	width: 100%;
+}
+
+.register-button{
+	width: 400px;
+	margin: 0 auto;
+	display: inline-block;
+	position: relative;
 }
 
 ::-webkit-input-placeholder{color:white;}
 ::-moz-placeholder{color:white;}
 :-moz-placeholder{color:white;}
 :-ms-input-placeholder{color:white;}
+
+.side{
+	display: inline-block;
+	width: 400px;
+}
+
+.main-form div{
+	margin-left: 50px;
+}
+
+.main-form div:nth-child(1){
+	margin-left: 0px;
+}

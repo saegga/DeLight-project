@@ -1,4 +1,5 @@
 <?php
+session_start();
 header('Content-type: text/html; charset=utf-8');
 ?>
 <!doctype html>
@@ -16,8 +17,8 @@ header('Content-type: text/html; charset=utf-8');
 <body>
 
 	<div class="main">
-		<div class="centered">
-			<form method="POST" action="" class="">
+		<div class="centered small-form">
+			<form method="POST" action="authorization.php" class="">
 				<label class="form-group">
 					<span class="input">Имя пользователя:</span>
 					<input type="text" name="login" placeholder="Введите имя" required>
@@ -26,8 +27,9 @@ header('Content-type: text/html; charset=utf-8');
 					<span class="input">Пароль:</span>
 					<input type="password" name="password" placeholder="Введите пароль" required>
 				</label>
-				<button>Вход</button>
-				<button>Регистрация</button>
+				<button class="login-button" type="submit">Вход</button>
+				<button class="login-button" type="button" id="register">Регистрация</button>
+				<input type="hidden" value="register" name="from">
 			</form>
 		</div>
 	</div>
@@ -41,6 +43,10 @@ header('Content-type: text/html; charset=utf-8');
 		$(".main").css("height", $(window).height());
 
         $('.main').tubular({videoId: 'k5kmjb0Eq1Y'});
+
+        $('#register').click(function(){
+        	location.href = "register.php";
+        });
 
 	});
 	</script>

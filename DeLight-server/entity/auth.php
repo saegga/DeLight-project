@@ -1,23 +1,20 @@
 <?php
 
-class User
-{
-    private $id;
-    private $username;
-    private $db;
-    private $user_id;
+require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
 
-    private $db_host = "localhost";
-    private $db_name = "testdb";
-    private $db_user = "testdb";
-    private $db_pass = "testdb";
+class Auth
+{
+    private $login;
+    private $db;
+    private $password;
 
     private $is_authorized = false;
 
-    public function __construct($username = null, $password = null)
+    public function __construct($login, $password)
     {
-        $this->username = $username;
-        $this->connectDb($this->db_name, $this->db_user, $this->db_pass, $this->db_host);
+        $this->password = $password;
+        $this->login = $login;
+        $this->db = new DB_CONNECT();
     }
 
     public function __destruct()
@@ -45,46 +42,39 @@ class User
         return array('hash' => $hash, 'salt' => $salt);
     }
 
-    public function getSalt($username) {
-        $query = "select salt from users where username = :username limit 1";
-        $sth = $this->db->prepare($query);
-        $sth->execute(
-            array(
-                ":username" => $username
-            )
-        );
-        $row = $sth->fetch();
+    public function getSalt($login) {
+        $query = "select salt from users where login = '$login'";
+        $result = $this->db->getConnection()->query($query);
+        $row = $result->fetch_array();
         if (!$row) {
             return false;
         }
         return $row["salt"];
     }
 
-    public function authorize($username, $password, $remember=false)
+    public function authorize($remember = false)
     {
-        $query = "select id, username from users where
-            username = :username and password = :password limit 1";
-        $sth = $this->db->prepare($query);
-        $salt = $this->getSalt($username);
+        $login = $this->login;
+        $password = $this->password;
+        $query = "select login from users where
+            login = '$login' and password = '$password'";
+        $salt = $this->getSalt($login);
 
         if (!$salt) {
             return false;
         }
 
         $hashes = $this->passwordHash($password, $salt);
-        $sth->execute(
-            array(
-                ":username" => $username,
-                ":password" => $hashes['hash'],
-            )
-        );
-        $this->user = $sth->fetch();
+        $password = $hashes["hash"];
+        
+        $result = $this->db->getConnection()->query($query);
 
-        if (!$this->user) {
+        $user = $result->fetch_array();
+
+        if (!$user) {
             $this->is_authorized = false;
         } else {
             $this->is_authorized = true;
-            $this->user_id = $this->user['id'];
             $this->saveSession($remember);
         }
 
@@ -100,14 +90,14 @@ class User
 
     public function saveSession($remember = false, $http_only = true, $days = 7)
     {
-        $_SESSION["user_id"] = $this->user_id;
+        $_SESSION["user_id"] = $this->login;
 
         if ($remember) {
-            // Save session id in cookies
+
             $sid = session_id();
 
             $expire = time() + $days * 24 * 3600;
-            $domain = ""; // default domain
+            $domain = "";
             $secure = false;
             $path = "/";
 
@@ -115,54 +105,21 @@ class User
         }
     }
 
-    public function create($username, $password) {
-        $user_exists = $this->getSalt($username);
+    public function create() {
+        $login = $this->login;
+        $password = $this->password;
+        $user_exists = $this->getSalt($login);
 
         if ($user_exists) {
-            throw new \Exception("User exists: " . $username, 1);
+            throw new \Exception("User exists: " . $login, 1);
         }
 
-        $query = "insert into users (username, password, salt)
-            values (:username, :password, :salt)";
+        $query = "insert into users (login, password, salt)
+            values ('$login', '$password', '$salt')";
         $hashes = $this->passwordHash($password);
-        $sth = $this->db->prepare($query);
 
-        try {
-            $this->db->beginTransaction();
-            $result = $sth->execute(
-                array(
-                    ':username' => $username,
-                    ':password' => $hashes['hash'],
-                    ':salt' => $hashes['salt'],
-                )
-            );
-            $this->db->commit();
-        } catch (\PDOException $e) {
-            $this->db->rollback();
-            echo "Database error: " . $e->getMessage();
-            die();
-        }
+        $db->getConnection->query($query);
 
-        if (!$result) {
-            $info = $sth->errorInfo();
-            printf("Database error %d %s", $info[1], $info[2]);
-            die();
-        } 
-
-        return $result;
-    }
-
-    public function connectdb($db_name, $db_user, $db_pass, $db_host = "localhost")
-    {
-        try {
-            $this->db = new \pdo("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
-        } catch (\pdoexception $e) {
-            echo "database error: " . $e->getmessage();
-            die();
-        }
-        $this->db->query('set names utf8');
-
-        return $this;
     }
 }
 

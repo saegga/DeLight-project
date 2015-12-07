@@ -1,0 +1,123 @@
+/*CSS Reset start*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*CSS Reset end*/
+
+.main{
+	display: block;
+}
+
+/*Basic*/
+body {
+	font-family: "Raleway", sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+	min-width: 320px;
+	position: relative;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialised; 
+}
+
+.hidden{
+	display: none;
+}
+
+.centered{
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: white;
+	position: relative;
+	top: 50px;
+	width: 400px;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	background-color: #444273;
+	border-radius: 20px;
+	padding: 40px;
+}
+
+.form-group{
+	display: block;
+}
+
+input{
+	width: 100%;
+	display: block;
+	margin-top: 5px;
+	letter-spacing: 2px;
+	padding-left: 14px;
+	line-height: 40px;
+	height: 46px;
+	border-radius: 5px;
+	background-color: #444273;
+	border-color: white;
+	border-style: solid;
+}
+
+.input{
+	padding-left: 14px;
+}
+
+button{
+	background-color: #DD4844;
+	border: none;
+	font-size: 12px;
+	padding: 0 25px;
+	color: #fff;
+	line-height: 40px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 700;
+	position: relative;
+	border-radius: 5px;
+	margin: 0 auto;
+	width: 100%;
+	margin-top: 20px;
+}
+
+::-webkit-input-placeholder{color:white;}
+::-moz-placeholder{color:white;}
+:-moz-placeholder{color:white;}
+:-ms-input-placeholder{color:white;}

@@ -10,14 +10,15 @@ $password = $_POST["password"];
 $auth = new Auth($login, $password);
 
 if ($_POST["from"] == "login"){
-	if ($auth->authorize()){
-		echo "success";
+	if ($auth->authorize(true)){
 	} else {
-
+		echo "->failed";
 	}
 
 } else if ($_POST["from"] == "register"){
-	$auth->create();
+	if ($auth->create()){
+		echo "->success";
+	}
 }
 
 ?>

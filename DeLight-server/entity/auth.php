@@ -47,25 +47,31 @@ class Auth
         $result = $this->db->getConnection()->query($query);
         $row = $result->fetch_array();
         if (!$row) {
-            return false;
+            $query = "select salt from candidate_users where login = '$login'";
+            $result = $this->db->getConnection()->query($query);
+            $row = $result->fetch_array();
+            if (!$row) {
+                return false;
+            }
         }
         return $row["salt"];
     }
 
     public function authorize($remember = false)
     {
+
         $login = $this->login;
-        $password = $this->password;
-        $query = "select login from users where
-            login = '$login' and password = '$password'";
         $salt = $this->getSalt($login);
 
         if (!$salt) {
             return false;
         }
 
-        $hashes = $this->passwordHash($password, $salt);
+        $hashes = $this->passwordHash($this->password, $salt);
         $password = $hashes["hash"];
+
+        $query = "select login from users where
+            login = '$login' and password = '$password'";
         
         $result = $this->db->getConnection()->query($query);
 
@@ -90,7 +96,8 @@ class Auth
 
     public function saveSession($remember = false, $http_only = true, $days = 7)
     {
-        $_SESSION["user_id"] = $this->login;
+        $login = $this->login;
+        $_SESSION["user_id"] = $login;
 
         if ($remember) {
 
@@ -102,6 +109,11 @@ class Auth
             $path = "/";
 
             $cookie = setcookie("sid", $sid, $expire, $path, $domain, $secure, $http_only);
+
+            $cookie = $_COOKIE["sid"];
+            $query = "update users set cookie = '$cookie' where login = '$login'";
+
+            $this->db->getConnection()->query($query);
         }
     }
 
@@ -110,7 +122,8 @@ class Auth
         $user_exists = $this->getSalt($login);
 
         if ($user_exists) {
-            throw new \Exception("User exists: " . $login, 1);
+            print_r($user_exists);
+            return false;
         }
 
         $hashes = $this->passwordHash($this->password);
@@ -121,11 +134,9 @@ class Auth
         $query = "insert into candidate_users (login, password, salt)
             values ('$login', '$password', '$salt')";
 
-        print_r($hashes);
-
         $this->db->getConnection()->query($query);
 
-        echo "register";
+        return true;
     }
 }
 

@@ -18,16 +18,16 @@ header('Content-type: text/html; charset=utf-8');
 
 	<div class="main">
 		<div class="centered small-form">
-			<form method="POST" action="authorization.php" class="">
+			<form method="POST" action="authorization" class="">
 				<label class="form-group">
 					<span class="input">Имя пользователя:</span>
-					<input type="text" name="login" placeholder="Введите имя" required>
+					<input id="username" type="text" name="login" placeholder="Введите имя" required>
 				</label>
 				<label class="form-group">
 					<span class="input">Пароль:</span>
-					<input type="password" name="password" placeholder="Введите пароль" required>
+					<input id="password" type="password" name="password" placeholder="Введите пароль" required>
 				</label>
-				<button class="login-button" type="submit">Вход</button>
+				<button class="login-button" type="button" id="login">Вход</button>
 				<button class="login-button" type="button" id="register">Регистрация</button>
 				<input type="hidden" value="login" name="from">
 			</form>
@@ -42,14 +42,16 @@ header('Content-type: text/html; charset=utf-8');
 
 		$(".main").css("height", $(window).height());
 
-        $('.main').tubular({videoId: 'k5kmjb0Eq1Y'});
+		$('.main').tubular({videoId: 'k5kmjb0Eq1Y'});
 
-        $('#register').click(function(){
-        	location.href = "register.php";
-        });
+		$('#register').click(function(){
+			location.href = "register";
+		});
 
 	});
 	</script>
+
+	<script src="js/autorization.js"></script>
 
 </body>
 </html>

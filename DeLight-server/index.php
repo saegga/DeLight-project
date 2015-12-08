@@ -34,10 +34,10 @@
 							<a href="#auth">Авторизация</a>
 							<ul>
 								<li>
-									<a href="login.php">Вход</a>
+									<a href="login">Вход</a>
 								</li>
 								<li>
-									<a href="register.php">Регистрация</a>
+									<a href="register">Регистрация</a>
 								</li>
 							</ul>
 						</li>

@@ -151,3 +151,7 @@ button{
 .main-form div:nth-child(1){
 	margin-left: 0px;
 }
+
+.blocked{
+	background-color: #E09492;
+}

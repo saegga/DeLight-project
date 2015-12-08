@@ -11,13 +11,14 @@ $auth = new Auth($login, $password);
 
 if ($_POST["from"] == "login"){
 	if ($auth->authorize(true)){
+		echo true;
 	} else {
-		echo "->failed";
+		echo false;
 	}
 
 } else if ($_POST["from"] == "register"){
 	if ($auth->create()){
-		echo "->success";
+		echo true;
 	}
 }
 

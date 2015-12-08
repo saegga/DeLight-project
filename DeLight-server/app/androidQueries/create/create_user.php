@@ -2,7 +2,7 @@
 
 if (isset($_POST["login"])&&isset($_POST["password"])){
 
-	require '../db_connect.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
 
 	$db = new DB_CONNECT();
 	
@@ -17,14 +17,14 @@ if (isset($_POST["login"])&&isset($_POST["password"])){
 
 		$result = $db->getConnection()->query("SELECT *FROM users WHERE login = '$login'");
 
-        if ($result->num_rows > 0) {
+		if ($result->num_rows > 0) {
 
-        	$result = $result->fetch_array();
+			$result = $result->fetch_array();
 
-        	if ($password == $result["password"]){
-        		$response["success"] = 1;
-        		$response["message"] = "User successfully added";
-        	}
+			if ($password == $result["password"]){
+				$response["success"] = 1;
+				$response["message"] = "User successfully added";
+			}
 
 			echo json_encode($response);
 		} else {
@@ -41,8 +41,8 @@ if (isset($_POST["login"])&&isset($_POST["password"])){
 	}
 } else {
 	$response["success"] = 0;
-    $response["message"] = "Required field(s) is missing";
+	$response["message"] = "Required field(s) is missing";
 
-    echo json_encode($response);
+	echo json_encode($response);
 }
 ?>

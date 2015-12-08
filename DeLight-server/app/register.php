@@ -1,20 +1,4 @@
-<?php
-session_start();
-header('Content-type: text/html; charset=utf-8');
-?>
-<!doctype html>
-<html>
-<head>
-
-	<title>DeLight - Огненное шоу в благовещенске</title>
-	<link rel="shortcut icon" href="favicon.png" />
-	<link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css" />
-	<link rel="stylesheet" href="libs/linea/styles.css" />
-	<link rel="stylesheet" type="text/css" href="css/fonts.css" />
-	<link rel="stylesheet" type="text/css" href="css/intarface.css" />
-
-</head>
-<body>
+<?php include "include/header.php" ?>
 
 	<div class="main">
 		<div class="centered small-form">
@@ -38,7 +22,7 @@ header('Content-type: text/html; charset=utf-8');
 	</div>
 	
 	<script src="libs/jquery/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="libs/jquery.tubular.1.0.1/js/jquery.tubular.1.0.js"></script> 
+	<script type="text/javascript" charset="utf-8" src="..libs/jquery.tubular.1.0.1/js/jquery.tubular.1.0.js"></script> 
 
 	<script>
 	$(document).ready(function() {
@@ -54,5 +38,4 @@ header('Content-type: text/html; charset=utf-8');
 	});
 	</script>
 
-</body>
-</html>
+<?php include "include/footer.php" ?>

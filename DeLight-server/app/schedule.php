@@ -1,20 +1,4 @@
-<?php
-session_start();
-header('Content-type: text/html; charset=utf-8');
-?>
-<!doctype html>
-<html>
-<head>
-
-	<title>Расписание тренировок</title>
-	<link rel="shortcut icon" href="favicon.png" />
-	<link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css" />
-	<link rel="stylesheet" href="libs/linea/styles.css" />
-	<link rel="stylesheet" type="text/css" href="css/fonts.css" />
-	<link rel="stylesheet" type="text/css" href="css/intarface.css" />
-
-</head>
-<body>
+<?php include "include/header.php" ?>
 
 	<div class="main schedule-container">
 		<div class="centered">
@@ -35,5 +19,4 @@ header('Content-type: text/html; charset=utf-8');
 
 	<script src="js/autorization.js"></script>
 
-</body>
-</html>
+<?php include "include/footer.php" ?>

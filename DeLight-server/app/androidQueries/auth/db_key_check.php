@@ -1,6 +1,6 @@
 <?php
  
-require '../db_connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
 
 $db = new DB_CONNECT();
 

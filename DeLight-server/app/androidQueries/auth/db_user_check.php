@@ -1,6 +1,6 @@
 <?php
  
-require '../db_connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
 
 if (isset($_POST["login"]) && isset($_POST["password"])){
 

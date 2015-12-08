@@ -34,10 +34,10 @@
 							<a href="#auth">Авторизация</a>
 							<ul>
 								<li>
-									<a href="login">Вход</a>
+									<a href="app/login">Вход</a>
 								</li>
 								<li>
-									<a href="register">Регистрация</a>
+									<a href="app/register">Регистрация</a>
 								</li>
 							</ul>
 						</li>

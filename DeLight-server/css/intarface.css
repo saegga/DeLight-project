@@ -155,3 +155,10 @@ button{
 .blocked{
 	background-color: #E09492;
 }
+
+.schedule-container{
+	background-image: url(../img/gallery/image11.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+}

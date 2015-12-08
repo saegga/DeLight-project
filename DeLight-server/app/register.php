@@ -16,13 +16,13 @@
 					<input type="password" name="password_confirm" placeholder="Введите пароль" required>
 				</label>
 				<input type="hidden" value="register" name="from">
-				<button class="login-button" type="submit" id="register">Регистрация</button>
+				<button class="login-button" type="button" id="register">Регистрация</button>
 			</form>
 		</div>
 	</div>
 	
-	<script src="libs/jquery/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="..libs/jquery.tubular.1.0.1/js/jquery.tubular.1.0.js"></script> 
+	<script src="../libs/jquery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../libs/jquery.tubular.1.0.1/js/jquery.tubular.1.0.js"></script> 
 
 	<script>
 	$(document).ready(function() {
@@ -31,11 +31,9 @@
 
 		$('.main').tubular({videoId: 'k5kmjb0Eq1Y'});
 
-		$('#register').click(function(){
-			location.href = "register.php";
-		});
-
 	});
 	</script>
+
+	<script src="js/registration.js"></script>
 
 <?php include "include/footer.php" ?>

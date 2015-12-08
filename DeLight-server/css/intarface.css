@@ -69,7 +69,6 @@ body {
 	color: white;
 	position: relative;
 	top: 10%;
-	width: 950px;
 	display: block;
 	margin: 0 auto;
 	position: relative;
@@ -156,9 +155,50 @@ button{
 	background-color: #E09492;
 }
 
-.schedule-container{
+.schedule-wrapper{
 	background-image: url(../img/gallery/image11.jpg);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 100%;
+}
+
+.schedule-container{
+	width: 500px;
+}
+
+.schedule-row{
+	height: 80px;
+	background-color: rgba(221,72,68,0.8);
+	border-radius: 5px;
+	position: relative;
+	margin: 10px;
+	margin-top: 20px;
+	vertical-align: middle;
+}
+
+.schedule-row:nth-child(1){
+	margin-top: 10px;
+}
+
+.vert-divider{
+	display: inline-block;
+	position: relative;
+	border-radius: 5px 0px 0px 5px;
+	background-color: rgba(169,224,150,0.8);
+	width: 20px;
+	height: 80px;
+}
+
+.dayofweek{
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 20px;
+	margin-left: 10px;
+	position: relative;
+	bottom: 35px;
+	vertical-align: middle;
+}
+
+.autorization-error{
+	text-align: center;
 }

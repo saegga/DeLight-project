@@ -29,7 +29,7 @@ header('Content-type: text/html; charset=utf-8');
 				</label>
 				<button class="login-button" type="submit">Вход</button>
 				<button class="login-button" type="button" id="register">Регистрация</button>
-				<input type="hidden" value="register" name="from">
+				<input type="hidden" value="login" name="from">
 			</form>
 		</div>
 	</div>

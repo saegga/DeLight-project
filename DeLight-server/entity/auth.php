@@ -107,19 +107,25 @@ class Auth
 
     public function create() {
         $login = $this->login;
-        $password = $this->password;
         $user_exists = $this->getSalt($login);
 
         if ($user_exists) {
             throw new \Exception("User exists: " . $login, 1);
         }
 
-        $query = "insert into users (login, password, salt)
+        $hashes = $this->passwordHash($this->password);
+
+        $password = $hashes["hash"];
+        $salt = $hashes["salt"];
+
+        $query = "insert into candidate_users (login, password, salt)
             values ('$login', '$password', '$salt')";
-        $hashes = $this->passwordHash($password);
 
-        $db->getConnection->query($query);
+        print_r($hashes);
 
+        $this->db->getConnection()->query($query);
+
+        echo "register";
     }
 }
 

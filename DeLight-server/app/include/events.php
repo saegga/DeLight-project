@@ -2,9 +2,9 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
 
-$user_id = $_SESSION["user_id"];
+//$user_id = $_SESSION["user_id"];
 
-if ($user_id){
+//if ($user_id){
 
 	$query = "select login from users where login = '$user_id'";
 
@@ -26,8 +26,8 @@ if ($user_id){
 			.'</div>'."\n";
 		}
 	}
-} else {
-	echo '<p class="autorization-error">Для доступа к данной странице, необходимо авторизироваться.</p>';
-}
+//} else {
+	//echo '<p class="autorization-error">Для доступа к данной странице, необходимо авторизироваться.</p>';
+//}
 
 ?>

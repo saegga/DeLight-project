@@ -1,15 +1,23 @@
 <?php include "include/header.php" ?>
 
-<div class="fullscreen schedule-wrapper">
-	<div class="centered schedule-container ">
-		<?php include "include/events.php" ?>
+<div class="fullscreen wrapper">
+	<div class="centered user-area-wrapper">
+		<div class="user-area">
+			<div class="menu violet-style">
+				<div class="tab-button">
+					<span class="icon-basic-todo-txt"></span>
+					<span class="menu-item">Расписание</span>
+				</div>
+				<div class="tab-button">
+					<span class="menu-item">Выход</span>
+					<span class="fa fa-sign-out"></span>
+				</div>
+			</div>
+			<div class="schedule-container violet-style">
+				<?php include "include/events.php" ?>
+			</div>
+		</div>
 	</div>
 </div>
-
-<script src="../libs/jquery/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="../libs/jquery.tubular.1.0.1/js/jquery.tubular.1.0.js"></script> 
-
-<script src="../libs/toastr/toastr.min.js"></script>
-<script src="js/interface.js"></script>
 
 <?php include "include/footer.php" ?>

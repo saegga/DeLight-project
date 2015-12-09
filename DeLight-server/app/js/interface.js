@@ -2,6 +2,10 @@ $(document).ready(function() {
 
 	$(".fullscreen").css("height", $(window).height());
 
+	$(window).resize(function(){
+		$(".wrapper").prop("background-size", "100%");
+	});
+
 });
 
 function toggleButtonStatus(buttonSelector){

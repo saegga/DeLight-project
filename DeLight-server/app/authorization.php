@@ -14,8 +14,7 @@ if ($_POST["from"] == "login"){
 	}
 
 } else if ($_POST["from"] == "register"){
-	$passwordConfirm = $_POST["passwordConfim"];
-	echo $passwordConfirm == $password;
+	$passwordConfirm = $_POST["passwordConfirm"];
 	if ($passwordConfirm == $password){
 		$auth = new Auth($login, $password);
 		if ($auth->create()){

@@ -20,3 +20,28 @@ function hasWhiteSpace(s) {
 	return s.indexOf(' ') > 0;
 }
 
+function checkData(jqElement){
+
+	var value = jqElement.val();
+
+	if (jqElement.hasClass("js-check-login")){
+		if (!value){
+			toastr.error('Все поля обязательны для заполнения');
+			return false;
+		} 
+		else if (hasWhiteSpace(value)){
+			toastr.error("Неверный формат имени пользователя. Имя пользователя должно состоять только из " 
+				+ "символов латинского алфавита, цифр, знака подчеркивания и иметь длинну от 4 до 20 символов");
+			return false;
+		}
+		else return true;
+	}
+
+	if (jqElement.hasClass("js-check-password")){
+		if (!value){
+			toastr.error('Все поля обязательны для заполнения');
+			return false;
+		}
+		else return true;
+	}
+}

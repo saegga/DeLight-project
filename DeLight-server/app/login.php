@@ -5,11 +5,11 @@
 		<form method="POST" action="authorization" class="">
 			<label class="form-group">
 				<span class="input">Имя пользователя:</span>
-				<input id="username" type="text" name="login" placeholder="Введите имя">
+				<input class="js-check-login" id="username" type="text" name="login" placeholder="Введите имя">
 			</label>
 			<label class="form-group">
 				<span class="input">Пароль:</span>
-				<input id="password" type="password" name="password" placeholder="Введите пароль">
+				<input class="js-check-password" id="password" type="password" name="password" placeholder="Введите пароль">
 			</label>
 			<button class="login-button" type="button" id="login">Вход</button>
 			<button class="login-button" type="button" id="register">Регистрация</button>
@@ -33,6 +33,8 @@ $(document).ready(function() {
 });
 </script>
 
+<script src="../libs/toastr/toastr.min.js"></script>
+<script src="js/interface.js"></script>
 <script src="js/autorization.js"></script>
 
 <?php include "include/footer.php" ?>

@@ -5,11 +5,11 @@
 			<form method="POST" action="authorization.php" class="main-form">
 				<label class="form-group">
 					<span class="input">Имя пользователя:</span>
-					<input type="text" name="username" placeholder="Введите имя">
+					<input type="text" class="js-check-password" name="username" placeholder="Введите имя">
 				</label>
 				<label class="form-group">
 					<span class="input">Пароль:</span>
-					<input type="password" name="password" placeholder="Введите пароль">
+					<input type="password" class="js-check-password" name="password" placeholder="Введите пароль">
 				</label>
 				<label class="form-group">
 					<span class="input">Подтвердите пароль:</span>

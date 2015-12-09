@@ -63,26 +63,25 @@ body {
 	display: none;
 }
 
-.centered{
-	letter-spacing: 2px;
-	text-transform: uppercase;
-	color: white;
-	position: relative;
-	top: 10%;
-	display: block;
-	margin: 0 auto;
-	position: relative;
-	background-color: rgba(68, 66, 115, 0.8);
-	border-radius: 20px;
-	padding: 40px;
-}
-
 .small-form{
 	width: 400px;
 }
 
 .big-form{
 	width: 950px;
+}
+
+.centered{
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: white;
+	top: 100px;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+	background-color: rgba(68, 66, 115, 0.8);
+	border-radius: 20px;
+	padding: 40px;
 }
 
 .form-group{

@@ -2,25 +2,33 @@ $(document).ready(function() {
 
 	$('#login').click(function(){
 
-		toggleButtonStatus(#login);
+		toggleButtonStatus("#login");
 
-		var login = $('#username').val();
-		var password = $('#password').val();
+		var login = $('#username');
+		var password = $('#password');
 
-		$.ajax({
-			type: "POST",
-			url: "authorization",
-			data: {
-				login: login, 
-				password: password, 
-				from: "login"
-			},
-			success: function (data) {
-				toggleButtonStatus(#login);
-				if (data == "1"){
-					location.href = "schedule";
+		if (checkData(login) && checkData(password)){
+			$.ajax({
+				type: "POST",
+				url: "authorization",
+				data: {
+					login: login.val(), 
+					password: password.val(), 
+					from: "login"
+				},
+				success: function (data) {
+					toggleButtonStatus("#login");
+					if (data == "1"){
+						location.href = "schedule";
+					}
+					else {
+						toastr.error("Неверный логин или пароль");
+					}
 				}
-			}
-		})
+			})
+		}
+		else {
+			toggleButtonStatus("#login");
+		}
 	})
 });

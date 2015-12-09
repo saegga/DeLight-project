@@ -9,6 +9,7 @@
 <script src="../libs/jquery/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="../libs/jquery.tubular.1.0.1/js/jquery.tubular.1.0.js"></script> 
 
-<script src="js/autorization.js"></script>
+<script src="../libs/toastr/toastr.min.js"></script>
+<script src="js/interface.js"></script>
 
 <?php include "include/footer.php" ?>

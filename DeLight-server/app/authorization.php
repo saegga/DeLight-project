@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require 'entity/Auth.php';
 
 $login = $_POST["login"];

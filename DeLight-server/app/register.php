@@ -1,19 +1,19 @@
 <?php include "include/header.php" ?>
 
-	<div class="main">
+	<div class="fullscreen">
 		<div class="centered small-form">
 			<form method="POST" action="authorization.php" class="main-form">
 				<label class="form-group">
 					<span class="input">Имя пользователя:</span>
-					<input type="text" name="login" placeholder="Введите имя" required>
+					<input type="text" name="username" placeholder="Введите имя">
 				</label>
 				<label class="form-group">
 					<span class="input">Пароль:</span>
-					<input type="password" name="password" placeholder="Введите пароль" required>
+					<input type="password" name="password" placeholder="Введите пароль">
 				</label>
 				<label class="form-group">
 					<span class="input">Подтвердите пароль:</span>
-					<input type="password" name="password_confirm" placeholder="Введите пароль" required>
+					<input type="password" name="password_confirm" placeholder="Введите пароль">
 				</label>
 				<input type="hidden" value="register" name="from">
 				<button class="login-button" type="button" id="register">Регистрация</button>
@@ -27,13 +27,13 @@
 	<script>
 	$(document).ready(function() {
 
-		$(".main").css("height", $(window).height());
-
-		$('.main').tubular({videoId: 'k5kmjb0Eq1Y'});
+		$('.fullscreen').tubular({videoId: 'k5kmjb0Eq1Y'});
 
 	});
 	</script>
 
+	<script src="../libs/toastr/toastr.min.js"></script>
+	<script src="js/interface.js"></script>
 	<script src="js/registration.js"></script>
 
 <?php include "include/footer.php" ?>

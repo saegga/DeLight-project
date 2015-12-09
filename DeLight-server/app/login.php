@@ -1,15 +1,15 @@
 <?php include "include/header.php" ?>
 
-<div class="main">
+<div class="fullscreen">
 	<div class="centered small-form">
 		<form method="POST" action="authorization" class="">
 			<label class="form-group">
 				<span class="input">Имя пользователя:</span>
-				<input id="username" type="text" name="login" placeholder="Введите имя" required>
+				<input id="username" type="text" name="login" placeholder="Введите имя">
 			</label>
 			<label class="form-group">
 				<span class="input">Пароль:</span>
-				<input id="password" type="password" name="password" placeholder="Введите пароль" required>
+				<input id="password" type="password" name="password" placeholder="Введите пароль">
 			</label>
 			<button class="login-button" type="button" id="login">Вход</button>
 			<button class="login-button" type="button" id="register">Регистрация</button>
@@ -24,9 +24,7 @@
 <script>
 $(document).ready(function() {
 
-	$(".main").css("height", $(window).height());
-
-	$('.main').tubular({videoId: 'k5kmjb0Eq1Y'});
+	$('.fullscreen').tubular({videoId: 'k5kmjb0Eq1Y'});
 
 	$('#register').click(function(){
 		location.href = "register";

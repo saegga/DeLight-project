@@ -2,8 +2,7 @@ $(document).ready(function() {
 
 	$('#login').click(function(){
 
-		$('#login').prop('disabled', true);
-		$('#login').addClass("blocked");
+		toggleButtonStatus(#login);
 
 		var login = $('#username').val();
 		var password = $('#password').val();
@@ -17,8 +16,7 @@ $(document).ready(function() {
 				from: "login"
 			},
 			success: function (data) {
-				$('#login').prop('disabled', false);
-				$('#login').removeClass("blocked");
+				toggleButtonStatus(#login);
 				if (data == "1"){
 					location.href = "schedule";
 				}

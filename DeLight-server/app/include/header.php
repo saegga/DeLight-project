@@ -11,6 +11,7 @@ header('Content-type: text/html; charset=utf-8');
 	<link rel="stylesheet" href="../libs/bootstrap/bootstrap.min.css" />
 	<link rel="stylesheet" href="../libs/linea/styles.css" />
 	<link rel="stylesheet" type="text/css" href="../css/fonts.css" />
+	<link href="../libs/toastr/toastr.min.css" type="text/css" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" href="../css/intarface.css" />
 
 </head>

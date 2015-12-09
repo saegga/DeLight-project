@@ -4,8 +4,8 @@
 		<div class="centered small-form">
 			<form method="POST" action="authorization.php" class="main-form">
 				<label class="form-group">
-					<span class="input">Имя пользователя:</span>
-					<input type="text" class="js-check-password" name="username" placeholder="Введите имя">
+					<span class="input">Логин:</span>
+					<input type="text" class="js-check-password" name="username" placeholder="Введите логин">
 				</label>
 				<label class="form-group">
 					<span class="input">Пароль:</span>
@@ -17,6 +17,9 @@
 				</label>
 				<input type="hidden" value="register" name="from">
 				<button class="login-button" type="button" id="register">Регистрация</button>
+				<p class="already-registered">
+					<span>Уже зарегистрированы?</span><a href="login">Войти</a>
+				</p>
 			</form>
 		</div>
 	</div>

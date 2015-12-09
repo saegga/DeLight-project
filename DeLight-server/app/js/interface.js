@@ -25,12 +25,13 @@ function checkData(jqElement){
 	var value = jqElement.val();
 
 	if (jqElement.hasClass("js-check-login")){
+		var pattern = /^[a-z][a-z0-9]*?([_][a-z0-9]+){0,2}$/i;
 		if (!value){
 			toastr.error('Все поля обязательны для заполнения');
 			return false;
 		} 
-		else if (hasWhiteSpace(value)){
-			toastr.error("Неверный формат имени пользователя. Имя пользователя должно состоять только из " 
+		else if (!pattern.test(value) || (value.length < 4 || value.length > 20)){
+			toastr.error("Неверный формат логина. Логин должно состоять только из " 
 				+ "символов латинского алфавита, цифр, знака подчеркивания и иметь длинну от 4 до 20 символов");
 			return false;
 		}
@@ -41,6 +42,9 @@ function checkData(jqElement){
 		if (!value){
 			toastr.error('Все поля обязательны для заполнения');
 			return false;
+		}
+		else if (value.length < 6 || value.length > 20){
+			toastr.error("Длина пароля должна быть 6 - 20 символов");
 		}
 		else return true;
 	}

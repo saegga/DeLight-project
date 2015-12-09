@@ -201,3 +201,15 @@ button{
 .autorization-error{
 	text-align: center;
 }
+
+.already-registered{
+	position: relative;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.already-registered a{
+	font-weight: 900;
+	color: white;
+	margin-left: 5px;
+}

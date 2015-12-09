@@ -4,8 +4,8 @@
 	<div class="centered small-form">
 		<form method="POST" action="authorization" class="">
 			<label class="form-group">
-				<span class="input">Имя пользователя:</span>
-				<input class="js-check-login" id="username" type="text" name="login" placeholder="Введите имя">
+				<span class="input">Логин:</span>
+				<input class="js-check-login" id="username" type="text" name="login" placeholder="Введите логин">
 			</label>
 			<label class="form-group">
 				<span class="input">Пароль:</span>

@@ -244,6 +244,10 @@ button{
 }
 
 .tab-button{
+	width: 100%;
+	margin-right: 0px;
+	display: inline-block;
+	color: white;
 	height: 40px;
 	margin-top: 10px;
 	background-color: rgb(148, 51, 145);
@@ -273,4 +277,8 @@ span.menu-item{
 .menu span[class^="fa"]{
 	margin-left: 15px;
 	top: 7px;
+}
+
+.tab-button:hover{
+	color: white;
 }

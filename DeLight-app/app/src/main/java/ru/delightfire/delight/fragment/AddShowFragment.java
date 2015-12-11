@@ -10,14 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import ru.delightfire.delight.R;
@@ -35,9 +33,9 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
     private Button setDate;
     private int month, day, year, hour, minute;
     private Calendar calendar;
-    private Date dateTime;
-
-    private static final String DATE_BUNDLE_KEY = "date_bundle_key";
+    private Date dateTime = null;
+    private Button btnSaveShow;
+    private static final String DATE_SHOW_BUNDLE_KEY = "date_show_bundle_key";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,15 +43,18 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
         datePerformance = (TextView) view.findViewById(R.id.date_performance);
         chooseDate = (Button) view.findViewById(R.id.choose_date);
         chooseDate.setOnClickListener(this);
+        btnSaveShow = (Button) view.findViewById(R.id.btn_save);
+        btnSaveShow.setOnClickListener(saveListener);
         if(calendar == null){
             calendar = Calendar.getInstance();
         }
-        if(savedInstanceState != null && savedInstanceState.containsKey(DATE_BUNDLE_KEY)){
-            dateTime = calendar.getTime();
-            dateTime.setTime(savedInstanceState.getLong(DATE_BUNDLE_KEY));
+        if(savedInstanceState != null && savedInstanceState.containsKey(DATE_SHOW_BUNDLE_KEY)){
+            dateTime = new Date();//
+            dateTime.setTime(savedInstanceState.getLong(DATE_SHOW_BUNDLE_KEY));
             DateFormat df = DateFormat.getDateTimeInstance
                     (DateFormat.LONG, DateFormat.DEFAULT, new Locale("ru", "RU"));
             datePerformance.setText(df.format(dateTime));
+            Log.d("On Create View: ", "date: " + df.format(dateTime));
         }
         return view;
     }
@@ -66,6 +67,7 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
         dialogPicker = new Dialog(getActivity());
         dialogPicker.setContentView(R.layout.picker_dialog);
         dialogPicker.setTitle("Выбери дату и время");
@@ -78,7 +80,7 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                dateTime = new Date();// инициализация даты
                 month = date.getMonth();
                 year = date.getYear();
                 day = date.getDayOfMonth();
@@ -89,9 +91,10 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MINUTE, minute);
                 calendar.set(Calendar.HOUR_OF_DAY, hour);
+                dateTime = calendar.getTime();
                 DateFormat df = DateFormat.getDateTimeInstance
                         (DateFormat.LONG, DateFormat.DEFAULT, new Locale("ru", "RU"));
-                datePerformance.setText(df.format(dateTime));
+                datePerformance.setText(df.format(calendar.getTime()));
                 dialogPicker.dismiss();
             }
         });
@@ -102,7 +105,13 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if(dateTime != null){
-            outState.putLong(DATE_BUNDLE_KEY, dateTime.getTime());
+            outState.putLong(DATE_SHOW_BUNDLE_KEY, dateTime.getTime());
         }
     }
+    View.OnClickListener saveListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 }

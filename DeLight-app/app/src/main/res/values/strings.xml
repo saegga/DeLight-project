@@ -15,6 +15,9 @@
     <string name="text_view_day">День недели: </string>
     <string name="text_view_time">Время: </string>
     <string name="choose_time">Выбери время</string>
+    <string name="text_view_agenda">Описание события:</string>
+    <string name="choose_date">Выбрать дату</string>
+    <string name="save">сохранить</string>
 
     <string-array name="arr_days_full">
         <item>Понедельник</item>

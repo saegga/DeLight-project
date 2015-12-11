@@ -1,0 +1,276 @@
+/*CSS Reset start*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*CSS Reset end*/
+
+.fullscreen{
+	display: block;
+}
+
+/*Basic*/
+body {
+	font-family: "Raleway", sans-serif;
+	font-weight: normal;
+	font-size: 12px;
+	min-width: 320px;
+	position: relative;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialised; 
+}
+
+.hidden{
+	display: none;
+}
+
+.small-form{
+	width: 400px;
+	top:100px;
+}
+
+.big-form{
+	width: 950px;
+}
+
+.centered{
+	display: block;
+	margin: 0 auto;
+	position: relative;
+}
+
+.violet-style{
+	background-color: rgba(68, 66, 115, 0.8);
+	border-radius: 20px;
+	padding: 40px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	color: white;
+}
+
+.form-group{
+	display: block;
+}
+
+input{
+	width: 100%;
+	display: block;
+	margin-top: 5px;
+	letter-spacing: 2px;
+	padding-left: 14px;
+	line-height: 40px;
+	height: 46px;
+	border-radius: 5px;
+	background-color: #444273;
+	border-color: white;
+	border-style: solid;
+}
+
+.input{
+	padding-left: 14px;
+}
+
+button{
+	background-color: #DD4844;
+	border: none;
+	font-size: 12px;
+	padding: 0 25px;
+	color: #fff;
+	line-height: 40px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 700;
+	position: relative;
+	border-radius: 5px;
+	margin-top: 20px;
+}
+
+.login-button{
+	width: 100%;
+}
+
+.register-button{
+	width: 400px;
+	margin: 0 auto;
+	display: inline-block;
+	position: relative;
+}
+
+::-webkit-input-placeholder{color:white;}
+::-moz-placeholder{color:white;}
+:-moz-placeholder{color:white;}
+:-ms-input-placeholder{color:white;}
+
+.side{
+	display: inline-block;
+	width: 400px;
+}
+
+.main-form div{
+	margin-left: 50px;
+}
+
+.main-form div:nth-child(1){
+	margin-left: 0px;
+}
+
+.blocked{
+	background-color: #E09492;
+}
+
+.wrapper{
+	background-image: url(../img/gallery/image11.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.schedule-container{
+	position: absolute;
+	top: 0px;
+	width: 500px;
+	display: inline-block;
+}
+
+.schedule-row{
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+	height: 60px;
+	background-color: rgba(221,72,68,0.8);
+	border-radius: 5px;
+	position: relative;
+	margin: 10px;
+	margin-top: 15px;
+	vertical-align: middle;
+}
+
+.schedule-row:nth-child(1){
+	margin-top: 10px;
+}
+
+.vert-divider{
+	display: inline-block;
+	position: relative;
+	border-radius: 5px 0px 0px 5px;
+	background-color: rgba(169,224,150,0.8);
+	width: 20px;
+	height: 60px;
+}
+
+.dayofweek{
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 20px;
+	margin-left: 10px;
+	position: relative;
+	bottom: 25px;
+	vertical-align: middle;
+}
+
+.autorization-error{
+	text-align: center;
+}
+
+.already-registered{
+	position: relative;
+	text-align: center;
+	margin-top: 20px;
+}
+
+.already-registered a{
+	font-weight: 900;
+	color: white;
+	margin-left: 5px;
+}
+
+.menu{
+	padding-right: 0px;
+	margin-right: 20px;
+	position: relative;
+	display: inline-block;
+	width: 220px;
+	height: 400px;
+}
+
+.user-area-wrapper{
+	width: 1000px;
+	top: 100px;
+}
+
+.user-area{
+	width: 850px;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+}
+
+.tab-button{
+	height: 40px;
+	margin-top: 10px;
+	background-color: rgb(148, 51, 145);
+	padding-right: 20px;
+	border-radius: 10px 0px 0px 10px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.tab-button span{
+	display: inline-block;
+	position: relative;
+	font-weight: 700;
+}
+
+span.menu-item{
+	float: right;
+	top: 10px;
+}
+
+.menu span[class^="icon"], .menu span[class^="fa"]{
+	top: 2px;
+	font-weight: 500;
+	font-size: 25px;
+	margin-left: 13px;
+}
+
+.menu span[class^="fa"]{
+	margin-left: 15px;
+	top: 7px;
+}

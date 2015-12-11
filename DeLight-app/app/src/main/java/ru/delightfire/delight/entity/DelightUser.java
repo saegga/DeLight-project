@@ -36,4 +36,9 @@ public class DelightUser extends DelightPerson{
         this.password = password;
     }
 
+    public DelightUser(String login, String password){
+        this.login = login;
+        this.password = password;
+    }
+
 }

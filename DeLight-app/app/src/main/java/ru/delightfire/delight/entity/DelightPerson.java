@@ -25,4 +25,8 @@ public abstract class DelightPerson {
     public DelightPerson(String firstName) {
         this.firstName = firstName;
     }
+
+    public DelightPerson(){
+
+    }
 }

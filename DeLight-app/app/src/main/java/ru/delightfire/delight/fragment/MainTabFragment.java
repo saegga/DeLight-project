@@ -1,33 +1,27 @@
 package ru.delightfire.delight.fragment;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.activity.AddEventActivity;
 import ru.delightfire.delight.adapter.ChatAdapter;
 import ru.delightfire.delight.adapter.TrainingAdapter;
-import ru.delightfire.delight.entity.DelightTraining;
 import ru.delightfire.delight.entity.ChatMessage;
-import ru.delightfire.delight.utils.DelightContext;
+import ru.delightfire.delight.entity.DelightTraining;
 
 
 /**
@@ -35,23 +29,15 @@ import ru.delightfire.delight.utils.DelightContext;
  */
 public class MainTabFragment extends Fragment {
 
-    private DelightContext context = DelightContext.getInstance();
-    private List<DelightTraining> trainings;
-    private List<ChatMessage> chatMessages;
-    private ListView listView;
-    private ListView listMessages;
-    private Button btnSendMsg;
-    private EditText messageTxt;
-    private FloatingActionButton addActionBtn;
-
     private static final int REQUEST_ADD = 2;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view  = inflater.inflate(R.layout.element_tab_host, container, false);
+        View view = inflater.inflate(R.layout.element_tab_host, container, false);
 
-        btnSendMsg = (Button) view.findViewById(R.id.btnView_send_msg);
-        messageTxt = (EditText) view.findViewById(R.id.inputView_msg);
+        Button btnSendMsg = (Button) view.findViewById(R.id.btnView_send_msg);
+        final EditText messageTxt = (EditText) view.findViewById(R.id.inputView_msg);
         TabHost tabs = (TabHost) view.findViewById(android.R.id.tabhost);
         setHasOptionsMenu(true);
         tabs.setup();
@@ -69,8 +55,8 @@ public class MainTabFragment extends Fragment {
 
         tabs.setCurrentTab(0);
 
-        listView = (ListView) view.findViewById(R.id.events_list);
-        listMessages = (ListView) view.findViewById(R.id.listView_chat_messages);
+        ListView listView = (ListView) view.findViewById(R.id.events_list);
+        ListView listMessages = (ListView) view.findViewById(R.id.listView_chat_messages);
 
         TrainingAdapter adapter = new TrainingAdapter(getActivity(), initEvents());
         listView.setAdapter(adapter);
@@ -87,7 +73,7 @@ public class MainTabFragment extends Fragment {
                 sendMessage(msg);
             }
         });
-        addActionBtn = (FloatingActionButton)view.findViewById(R.id.fab);
+        FloatingActionButton addActionBtn = (FloatingActionButton) view.findViewById(R.id.fab);
         addActionBtn.setClickable(true);
 
         addActionBtn.setOnClickListener(clickFab);
@@ -100,17 +86,6 @@ public class MainTabFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    class GetTraining extends AsyncTask<Integer, Void, DelightTraining> {
-
-        @Override
-        protected DelightTraining doInBackground(Integer... trainingId) {
-            DelightTraining training = null;
-
-            training = context.getTraining(trainingId[0]);
-
-            return training;
-        }
-    }
 
     @Deprecated
     private void sendMessage(String msg) {
@@ -118,39 +93,33 @@ public class MainTabFragment extends Fragment {
     }
 
     //TODO: Инициализация всех событий
-    private List<DelightTraining> initEvents(){
-        trainings = new ArrayList<>();
+    private List<DelightTraining> initEvents() {
+        List<DelightTraining> trainings = new ArrayList<>();
 
         DelightTraining first = null;
-        try {
-            first = new GetTraining().execute(1).get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-        trainings.add(first);
+        //trainings.add(first);
 
         return trainings;
     }
 
     @Deprecated
-    private List<ChatMessage> initMessage(){
-        chatMessages = new ArrayList<>();
+    private List<ChatMessage> initMessage() {
+        List<ChatMessage> chatMessages = new ArrayList<>();
         ChatMessage chatMessageOne = new ChatMessage("hello", "anton", false);
         ChatMessage chatMessageTwo = new ChatMessage("hello", "anton", true);
         chatMessages.add(chatMessageOne);
         chatMessages.add(chatMessageTwo);
         return chatMessages;
     }
-     View.OnClickListener clickFab = new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             Intent intent = new Intent(getActivity(), AddEventActivity.class);
-             //startActivityForResult(intent, REQUEST_ADD);
-             startActivity(intent);
-         }
-     };
+
+    View.OnClickListener clickFab = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), AddEventActivity.class);
+            //startActivityForResult(intent, REQUEST_ADD);
+            startActivity(intent);
+        }
+    };
 
 }

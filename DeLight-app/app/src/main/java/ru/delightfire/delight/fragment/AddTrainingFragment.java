@@ -47,6 +47,7 @@ public class AddTrainingFragment extends Fragment implements View.OnClickListene
     private String timeData;
     private String[] arrDays;
     private String day;
+    private Button btnSaveTraining;
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Nullable
     @Override
@@ -61,6 +62,8 @@ public class AddTrainingFragment extends Fragment implements View.OnClickListene
         dayOfWeek = (TextView) view.findViewById(R.id.day_of_week_data);
         btnSetTime = (Button) view.findViewById(R.id.btn_set_time);
         btnSetTime.setOnClickListener(this);
+        btnSaveTraining = (Button) view.findViewById(R.id.btn_save);
+        //btnSaveTraining.setOnClickListener(saveListener);
         if(calendar == null){
           calendar = Calendar.getInstance();
         }
@@ -136,5 +139,10 @@ public class AddTrainingFragment extends Fragment implements View.OnClickListene
         super.onCreate(savedInstanceState);
         arrDays = getResources().getStringArray(R.array.arr_days_full);
     }
+    View.OnClickListener saveListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
+        }
+    };
 }

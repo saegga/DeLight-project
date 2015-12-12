@@ -1,4 +1,5 @@
 package ru.delightfire.delight.activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 
 
 import ru.delightfire.delight.R;
+import ru.delightfire.delight.entity.DelightUser;
 import ru.delightfire.delight.fragment.MainTabFragment;
 import ru.delightfire.delight.fragment.MyProfileFragment;
 import ru.delightfire.delight.fragment.MySettingsFragment;
@@ -95,7 +97,9 @@ public class MainActivity extends AppCompatActivity{
                     fragment = new MySkillFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
-
+                case R.id.exit :
+                    exit();
+                    return true;
                 default: break;
             }
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -105,5 +109,12 @@ public class MainActivity extends AppCompatActivity{
                     .commit();
             return true;
         }
+    }
+
+    private void exit() {
+        DelightUser.deleteUser(this);
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

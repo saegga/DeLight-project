@@ -35,4 +35,11 @@ public class DelightShow extends DelightEvent {
         super(login, name);
         date = d;
     }
+
+    public DelightShow(String login, String name, Date date, DelightClient client, List<DelightPerformance> performances) {
+        super(login, name);
+        this.date = date;
+        this.client = client;
+        this.performances = performances;
+    }
 }

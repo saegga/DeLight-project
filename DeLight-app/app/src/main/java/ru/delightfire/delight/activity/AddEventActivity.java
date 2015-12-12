@@ -18,15 +18,15 @@ import ru.delightfire.delight.fragment.AddTrainingFragment;
  * Created by sergei on 18.11.2015.
  */
 public class AddEventActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
-    public static final String FRAGMENT_ADD_SAVE_STATE = "fragment_add_save_state";
+    private static final String FRAGMENT_ADD_SAVE_STATE = "fragment_add_save_state";
+    private static final String BUNDLE_KEY_STATE_CHECK = "bundle_key_state_check";
     private RadioGroup group;
     private RadioButton btnPerformance;
     private RadioButton btnMeet;
     private RadioButton btnTraining;
     private FragmentManager manager;
     private FragmentTransaction transaction;
-    private AddShowFragment performanceFragment;
-    private AddMeetFragment meetFragment;
+    private int check = -1;
     Fragment actionFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         transaction = manager.beginTransaction();
+        check = checkedId;
         switch (checkedId){
             case  R.id.btn_performance :
                 actionFragment = new AddShowFragment();
@@ -67,7 +68,10 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if(actionFragment != null){
-            manager.putFragment(outState, FRAGMENT_ADD_SAVE_STATE, actionFragment);
+            //manager.putFragment(outState, FRAGMENT_ADD_SAVE_STATE, actionFragment);
+        }
+        if(check != -1){
+            outState.putInt(BUNDLE_KEY_STATE_CHECK, check);
         }
         super.onSaveInstanceState(outState);
     }
@@ -75,25 +79,29 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         //super.onRestoreInstanceState(savedInstanceState);
-        actionFragment = manager.getFragment(savedInstanceState, FRAGMENT_ADD_SAVE_STATE);
+        check = savedInstanceState.getInt(BUNDLE_KEY_STATE_CHECK);
+        group.check(check);
+        //actionFragment = manager.getFragment(savedInstanceState, FRAGMENT_ADD_SAVE_STATE);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if(actionFragment != null){
-            transaction = manager.beginTransaction();
-            transaction.replace(R.id.add_event_container , actionFragment);
-            transaction.commit();
+//            transaction = manager.beginTransaction();
+//            transaction.replace(R.id.add_event_container , actionFragment);
+//            transaction.commit();
         }
     }
     private void createActionFragment(){
         if(manager.getFragments() != null){
-            //Log.d("AddEventActivity", "replace");
+            Log.d("AddEventActivity", "replace");
             transaction.replace(R.id.add_event_container , actionFragment);
         }else{
-            //Log.d("AddEventActivity", "add");
+            Log.d("AddEventActivity", "add");
             transaction.add(R.id.add_event_container , actionFragment);
         }
     }
 }
+// todo сделать сохранение состояния

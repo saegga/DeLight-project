@@ -29,6 +29,13 @@ public class DelightTraining extends DelightEvent{
         usersOnTraining = new ArrayList<DelightUser>();
     }
 
+    public DelightTraining(String login, String name, List<DelightUser> usersOnTraining, String time, String dayOfWeek) {
+        super(login, name);
+        this.usersOnTraining = usersOnTraining;
+        this.time = time;
+        this.dayOfWeek = dayOfWeek;
+    }
+
     public DelightTraining(String login, String name){
         super(login, name);
     }

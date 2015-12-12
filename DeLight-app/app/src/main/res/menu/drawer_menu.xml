@@ -16,6 +16,9 @@
             android:icon="@mipmap/ic_trending_up_black_24dp"
             android:id="@+id/my_skill"
             android:title="Навыки" />
+        <item
+            android:id="@+id/exit"
+            android:title="выход"/>
     </group>
 
 </menu>

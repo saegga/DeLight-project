@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.fragment.RegistrationKeyCheckFragment;
 import ru.delightfire.delight.fragment.RegistrationUserDataInputFragment;
 
 /**
@@ -21,17 +20,10 @@ public class RegisterActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Fragment fragment = new RegistrationKeyCheckFragment();
+        Fragment fragment = new RegistrationUserDataInputFragment();
         fragmentManager.beginTransaction()
                 .add(R.id.fragmentContainerMain, fragment)
                 .commit();
 
-    }
-
-    public void userDataSet(){
-
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerMain, new RegistrationUserDataInputFragment())
-                .commit();
     }
 }

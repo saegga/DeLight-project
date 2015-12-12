@@ -20,8 +20,17 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
         if ($result->num_rows > 0) {
 
         	$result = $result->fetch_array();
+        	$salt = $result["salt"];
 
-        	if (sha1($password) == $result["password"]){
+        	$hash = md5(md5($password . md5(sha1($salt))));
+
+        	$iterations = 10;
+
+	        for ($i = 0; $i < $iterations; ++$i) {
+	            $hash = md5(md5(sha1($hash)));
+	        }
+
+        	if ($hash == $result["password"]){
         		$response["success"] = 1;
 
         		$response["user"] = array();
@@ -31,6 +40,8 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
 
         	} else {
         		$response["success"] = 0;
+        		$response["salt"] = $salt;
+        		$response["password"] = $hash;
 				$response["message"] = "Wrong password";
         	}
 

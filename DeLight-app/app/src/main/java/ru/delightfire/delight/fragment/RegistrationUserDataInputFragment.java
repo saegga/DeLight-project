@@ -46,7 +46,7 @@ public class RegistrationUserDataInputFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Ion.with(getActivity())
-                        .load("POST", "http://delightfireapp.16mb.com/auth_queries/db_user_create.php")
+                        .load("POST", "http://delightfireapp.16mb.com/app/androidQueries/create/db_user_create.php")
                         .setBodyParameter("login", registerLogin.getText().toString())
                         .setBodyParameter("password", registerPassword.getText().toString())
                         .asJsonObject()

@@ -18,10 +18,6 @@ import ru.delightfire.delight.entity.DelightUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static final String PREF_AUTH = "prefs_auth";
-    public static final String PREF_AUTH_STATE = "auth_state";
-    private boolean isAuth;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Ion library for async query
                 Ion.with(getApplicationContext())
-                        .load("POST", "http://delightfireapp.16mb.com/auth_queries/db_user_check.php")
+                        .load("POST", "http://delightfireapp.16mb.com/app/androidQueries/auth/db_user_check.php")
                         .setBodyParameter("login", login)
                         .setBodyParameter("password", password)
                         .asJsonObject()
@@ -61,16 +57,14 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (result.get("success").getAsInt() == 1) {
                                     JsonObject userInfo = result.get("user").getAsJsonObject();
-                                    user = new DelightUser(login, password, userInfo.get("first_name").getAsString(),
-                                            userInfo.get("last_name").getAsString());
+//                                    user = new DelightUser(login, password, userInfo.get("first_name").getAsString(),
+//                                            userInfo.get("last_name").getAsString());
+                                    user = new DelightUser(login, password);
                                 }
 
                                 if (user != null) {
-                                    SharedPreferences sharedPreferences = getSharedPreferences(PREF_AUTH, 0);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putBoolean(PREF_AUTH_STATE, true);
-                                    editor.commit();
-                                    redirectToMain();
+                                     user.saveUser(getApplicationContext());
+                                     redirectToMain();
                                 }
                                 ////TODO: Errors
                             }
@@ -82,10 +76,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        SharedPreferences sharedPreferences = getSharedPreferences(PREF_AUTH, 0);
-        isAuth = sharedPreferences.getBoolean(PREF_AUTH_STATE, false);
-        if (isAuth)
+        SharedPreferences sharedPreferences = getSharedPreferences(DelightUser.PREF_AUTH, MODE_PRIVATE);
+        if(sharedPreferences.contains(DelightUser.PREF_LOGIN)){
             redirectToMain();
+        }
     }
 
     private void redirectToMain() {

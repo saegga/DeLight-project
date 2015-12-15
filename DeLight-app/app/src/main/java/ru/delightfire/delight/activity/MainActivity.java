@@ -6,11 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
 import ru.delightfire.delight.R;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity{
     private NavigationView navigationView;
 
     private Toolbar toolbar;
+    private TextView nameDrawer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,8 +54,11 @@ public class MainActivity extends AppCompatActivity{
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new DrawerItemClick());
-        //navigationView.setOnClickListener();
+        View headerView = navigationView.inflateHeaderView(R.layout.element_header_drawer);
+        nameDrawer = (TextView) headerView.findViewById(R.id.drawer_name);
+        nameDrawer.setText("ЮзерНейм");//todo сделать синглтон для хранения логина юзера , сохранение в момент onPause
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        toolbar.setNavigationIcon(R.mipmap.ic_menu_black_24dp);
         setSupportActionBar(toolbar);
 
         if (getSupportActionBar() != null) {
@@ -60,19 +68,13 @@ public class MainActivity extends AppCompatActivity{
 }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.app_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home :
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
-            case R.id.one : Log.d("one", "break"); break;
-            case R.id.two : Log.d("two", "break"); break;
+//            case R.id.one : Log.d("one", "break"); break;
+//            case R.id.two : Log.d("two", "break"); break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -87,7 +89,6 @@ public class MainActivity extends AppCompatActivity{
                     fragment = new MyProfileFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
-
                 case R.id.my_settings :
                     fragment = new MySettingsFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
@@ -97,6 +98,10 @@ public class MainActivity extends AppCompatActivity{
                     fragment = new MySkillFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
+                case R.id.my_main_tab :
+                    fragment = new MainTabFragment();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    break;
                 case R.id.exit :
                     exit();
                     return true;
@@ -104,7 +109,6 @@ public class MainActivity extends AppCompatActivity{
             }
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .addToBackStack(null)
                     .replace(R.id.containerFragment, fragment)
                     .commit();
             return true;

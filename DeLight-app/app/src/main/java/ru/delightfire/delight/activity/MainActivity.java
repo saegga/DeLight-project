@@ -23,6 +23,7 @@ import ru.delightfire.delight.fragment.MainTabFragment;
 import ru.delightfire.delight.fragment.MyProfileFragment;
 import ru.delightfire.delight.fragment.MySettingsFragment;
 import ru.delightfire.delight.fragment.MySkillFragment;
+import ru.delightfire.delight.utils.UserAccount;
 
 /**
  * Created by scaredChatsky on 23.10.2015.
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity{
         navigationView.setNavigationItemSelectedListener(new DrawerItemClick());
         View headerView = navigationView.inflateHeaderView(R.layout.element_header_drawer);
         nameDrawer = (TextView) headerView.findViewById(R.id.drawer_name);
-        nameDrawer.setText("ЮзерНейм");//todo сделать синглтон для хранения логина юзера , сохранение в момент onPause
+        nameDrawer.setText(UserAccount.getInstance().getLoginUser(this));
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         toolbar.setNavigationIcon(R.mipmap.ic_menu_black_24dp);
         setSupportActionBar(toolbar);
@@ -73,8 +74,6 @@ public class MainActivity extends AppCompatActivity{
             case android.R.id.home :
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
-//            case R.id.one : Log.d("one", "break"); break;
-//            case R.id.two : Log.d("two", "break"); break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void exit() {
-        DelightUser.deleteUser(this);
+        UserAccount.getInstance().deleteUser(this);
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

@@ -15,6 +15,7 @@ import com.koushikdutta.ion.Ion;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.DelightUser;
+import ru.delightfire.delight.utils.UserAccount;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -63,8 +64,8 @@ public class LoginActivity extends AppCompatActivity {
                                 }
 
                                 if (user != null) {
-                                     user.saveUser(getApplicationContext());
-                                     redirectToMain();
+                                    UserAccount.getInstance().saveUser(getApplicationContext(), user);
+                                    redirectToMain();
                                 }
                                 ////TODO: Errors
                             }

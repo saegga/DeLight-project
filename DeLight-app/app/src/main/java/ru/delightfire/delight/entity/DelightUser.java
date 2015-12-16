@@ -52,18 +52,19 @@ public class DelightUser extends DelightPerson{
         this.password = password;
     }
 
-    public void saveUser(Context context){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_AUTH, Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString(PREF_LOGIN, login);
-                                    editor.putString(PREF_PASSWORD, password);
-                                    editor.commit();
-        // добавить сохранение остальных полей при добавлении инфы
+    public String getLogin() {
+        return login;
     }
-    public static void deleteUser(Context context){
-        SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_AUTH, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.commit();
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

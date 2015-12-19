@@ -29,7 +29,6 @@ import ru.delightfire.delight.entity.DelightTraining;
  */
 public class MainTabFragment extends Fragment {
 
-    private static final int REQUEST_ADD = 2;
 
     @Nullable
     @Override

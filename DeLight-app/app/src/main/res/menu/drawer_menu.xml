@@ -5,6 +5,11 @@
     <group
         android:checkableBehavior="single">
         <item
+            android:id="@+id/my_main_tab"
+            android:title="События"
+            android:icon="@mipmap/ic_view_list_black_24dp"
+            />
+        <item
             android:id="@+id/my_profile"
             android:icon="@mipmap/ic_assignment_ind_black_24dp"
             android:title="Мой профиль" />
@@ -18,7 +23,8 @@
             android:title="Навыки" />
         <item
             android:id="@+id/exit"
-            android:title="выход"/>
+            android:title="выход"
+            android:icon="@mipmap/ic_exit_to_app_black_24dp"/>
     </group>
 
 </menu>

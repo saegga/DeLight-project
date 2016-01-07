@@ -52,6 +52,10 @@ public class LoginActivity extends AppCompatActivity {
                         .setCallback(new FutureCallback<JsonObject>() {
                             @Override
                             public void onCompleted(Exception e, JsonObject result) {
+                                if(e != null){
+                                    Log.d("Login acticity: " , e.getMessage());
+                                    return;
+                                }
                                 Log.d("Response:: ", result.toString());
 
                                 DelightUser user = null;
@@ -67,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                                     UserAccount.getInstance().saveUser(getApplicationContext(), user);
                                     redirectToMain();
                                 }
-                                ////TODO: Errors
                             }
                         });
             }

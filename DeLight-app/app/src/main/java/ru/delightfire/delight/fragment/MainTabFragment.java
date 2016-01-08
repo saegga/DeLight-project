@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.transform.Result;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.activity.AddEventActivity;
@@ -29,6 +39,8 @@ import ru.delightfire.delight.entity.DelightTraining;
  */
 public class MainTabFragment extends Fragment {
 
+    private static final String TAG = "MainFragment";
+    public static final String FETCH_ALL_TRAININGS = "http://delightfireapp.16mb.com/app/androidQueries/get/get_all_trainings.php";
 
     @Nullable
     @Override
@@ -94,6 +106,18 @@ public class MainTabFragment extends Fragment {
     //TODO: Инициализация всех событий
     private List<DelightTraining> initEvents() {
         List<DelightTraining> trainings = new ArrayList<>();
+        Ion.with(this).load("POST", FETCH_ALL_TRAININGS)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if (e != null) {
+                            Log.d(TAG, e.getMessage());
+                            return;
+                        }
+                        Log.d(TAG, result.toString());
+                    }
+                });
 
         DelightTraining first = null;
 

@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by sergei on 06.01.2016.
  */
 public class SQLiteOpen extends SQLiteOpenHelper {
-
+    /*
+    * create database, tables
+    * */
     public SQLiteOpen(Context context, String name, int version){
         super(context, name, null, version);
 

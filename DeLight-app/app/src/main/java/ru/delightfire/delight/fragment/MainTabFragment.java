@@ -40,7 +40,7 @@ import ru.delightfire.delight.entity.DelightTraining;
 public class MainTabFragment extends Fragment {
 
     private static final String TAG = "MainFragment";
-    public static final String FETCH_ALL_TRAININGS = "http://delightfireapp.16mb.com/app/androidQueries/get/get_all_trainings.php";
+    public static final String FETCH_ALL_EVENTS = "http://delightfireapp.16mb.com/app/androidQueries/get/get_all_events.php";
 
     @Nullable
     @Override
@@ -106,7 +106,9 @@ public class MainTabFragment extends Fragment {
     //TODO: Инициализация всех событий
     private List<DelightTraining> initEvents() {
         List<DelightTraining> trainings = new ArrayList<>();
-        Ion.with(this).load("POST", FETCH_ALL_TRAININGS)
+        // получаем все события
+        // // TODO: 08.01.2016 сделать адаптер под все события
+        Ion.with(this).load("POST", FETCH_ALL_EVENTS)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override

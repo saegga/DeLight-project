@@ -5,7 +5,7 @@
 
     $response = array(); 
 	
-	$result = $db->getConnection()->query("select *from trainings");
+	$result = $db->getConnection()->query("select training_id, name, owner_login, concat_ws(' - ', start_time, end_time) as time, dayOfWeek, agenda, place from trainings");
 		 if (!empty($result)) {
 			if ($result->num_rows > 0) {
 			while($raw = mysqli_fetch_object($result)){

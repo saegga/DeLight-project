@@ -1,5 +1,7 @@
 package ru.delightfire.delight.entity;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,10 +13,12 @@ import java.util.List;
  */
 public class DelightShow extends DelightEvent {
 
+    @Expose(deserialize = false)
+    private int id;
     /**
      * Дата выступления
      */
-    private Date date;
+    private  String date;
 
     /**
      * Заказчик
@@ -25,21 +29,37 @@ public class DelightShow extends DelightEvent {
      * Номера в выступлении
      */
     private List<DelightPerformance> performances;
+    /*
+       название шоу
+   * */
+    private String name;
+    /*
+    * описание шоу
+    * */
+    private String description;
+    /*
+    *  место проведения
+    * */
+    private String place;
 
-    public DelightShow(Date d, String agenda, String login, String name){
-        super(agenda, login, name);
-        date = d;
-    }
+    /*
+    *  деньги
+    * */
+    private String money;
 
-    public DelightShow(Date d, String login, String name) {
-        super(login, name);
-        date = d;
-    }
+    @Expose(deserialize = false)
+    private int customId;
 
-    public DelightShow(String login, String name, Date date, DelightClient client, List<DelightPerformance> performances) {
-        super(login, name);
-        this.date = date;
-        this.client = client;
-        this.performances = performances;
+
+//    public DelightShow(Date d, String agenda, String login, String name){
+//        super(agenda, login, name);
+//        date = d;
+//    }
+
+    public DelightShow(String d, String description, String name, String money, String place) {
+        super(description, name, d);
+        this.money = money;
+        this.place = place;
+        // добавить клиента
     }
 }

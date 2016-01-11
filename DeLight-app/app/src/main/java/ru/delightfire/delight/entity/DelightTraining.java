@@ -1,5 +1,9 @@
 package ru.delightfire.delight.entity;
 
+import android.support.annotation.Nullable;
+
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +11,16 @@ import java.util.List;
  * Created by scaredChatsky on 24.10.2015.
  */
 public class DelightTraining extends DelightEvent{
+    /*
+    * id тренировки
+    * */
+    @Expose (deserialize = false)
+    private int trainingId;
+    /**
+     * логин создавшего событие
+     */
 
+    private String ownerLogin;
     /**
      * Присутствующие пользователи
      */
@@ -16,17 +29,26 @@ public class DelightTraining extends DelightEvent{
     /**
      * Время
      */
-    String time;
+    private String time;
 
     /**
      * День недели
      */
-    String dayOfWeek;
+    private String dayOfWeek;
+    /*
+    * место события
+    * */
+    private String place;
+
+    /*
+     описание события
+    * */
+    private String agenda;
 
 
-    public DelightTraining(String agenda, String login, String name){
-        super(agenda, login, name);
-        usersOnTraining = new ArrayList<DelightUser>();
+    public DelightTraining(String agenda,String name,String dayOfWeek, String time, String place){
+        super(agenda, name, dayOfWeek, time);
+        usersOnTraining = new ArrayList<>();
     }
 
     public DelightTraining(String login, String name, List<DelightUser> usersOnTraining, String time, String dayOfWeek) {
@@ -38,6 +60,21 @@ public class DelightTraining extends DelightEvent{
 
     public DelightTraining(String login, String name){
         super(login, name);
+    }
+
+    public DelightTraining() {
+       //super();
+    }
+
+    public DelightTraining(String agenda, String name, String dateEvent, String timeEvent, String place, String ownerLogin, List<DelightUser> usersOnTraining) {
+        super(agenda, name, dateEvent, timeEvent);
+        usersOnTraining = new ArrayList<>();
+        this.ownerLogin = ownerLogin;
+        this.usersOnTraining = usersOnTraining;
+        this.time = timeEvent;
+        this.dayOfWeek = dateEvent;
+        this.place = place;
+        this.agenda = agenda;
     }
 
     /**
@@ -56,6 +93,19 @@ public class DelightTraining extends DelightEvent{
         usersOnTraining.remove(user);
     }
 
+    public String getTime() {
+        return time;
+    }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
 
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
 }

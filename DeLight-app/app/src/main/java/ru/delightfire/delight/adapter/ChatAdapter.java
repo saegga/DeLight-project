@@ -46,15 +46,15 @@ public class ChatAdapter extends BaseAdapter {
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ChatMessage chatMessageItem = listChatMessages.get(position);
 
-       if(convertView == null){
-           if(chatMessageItem.isYourMsg()){
-               convertView = layoutInflater.inflate(R.layout.element_right_chat_dialog,
-                       null);
-           }else{
-               convertView = layoutInflater.inflate(R.layout.element_left_chat_dialog,
-                       null);
-           }
-       }
+        if (convertView == null) {
+            if (chatMessageItem.isYourMsg()) {
+                convertView = layoutInflater.inflate(R.layout.element_right_chat_dialog,
+                        null);
+            } else {
+                convertView = layoutInflater.inflate(R.layout.element_left_chat_dialog,
+                        null);
+            }
+        }
         TextView textMsg = (TextView) convertView.findViewById(R.id.textMsg);
         TextView nameMsg = (TextView) convertView.findViewById(R.id.nameMsg);
         textMsg.setText(chatMessageItem.getMessage());

@@ -53,13 +53,13 @@ public class SQLiteFields {
 
     public static final String CREATE_TABLE_USER = "create table " + TABLE_USER + " (" +
             ID + " integer primary key autoincrement," +
-            LOGIN + " varchar(20) not null,"    +
+            LOGIN + " varchar(20) not null," +
             PASSWORD + " varchar(40) not null," +
-            FIRST_NAME + " varchar(20),"        +
-            LAST_NAME + " varchar(40),"         +
-            ROLE + " varchar(20),"  +
-            SALT + " varchar(13) not null,"  +
-            COOKIE + " varchar(50),"+
+            FIRST_NAME + " varchar(20)," +
+            LAST_NAME + " varchar(40)," +
+            ROLE + " varchar(20)," +
+            SALT + " varchar(13) not null," +
+            COOKIE + " varchar(50)," +
             PHONE + " varchar(20))";
 
     public static final String CREATE_TABLE_TRAINING = "create table " + TABLE_TRAININGS + " (" +
@@ -106,21 +106,21 @@ public class SQLiteFields {
             SHOW_ID + " integer not null," +
             PERF_ID + " integer not null)";
 
-    public static final String  CREATE_TABLE_MEET = "create table " + TABLE_MEET + " (" +
+    public static final String CREATE_TABLE_MEET = "create table " + TABLE_MEET + " (" +
             ID + " integer primary key autoincrement," +
             NAME + " varchar(20) not null default 'встреча'," +
             DATE + " datetime not null," +
             AGENDA + " varchar(255)," +
             PLACE + " varchar(40) not null)";
 
-    public static final String CREATE_MEET_MEMBER = "create table " +  TABLE_MEET_MEMBER + " (" +
+    public static final String CREATE_MEET_MEMBER = "create table " + TABLE_MEET_MEMBER + " (" +
             ID + " integer primary key autoincrement," +
             USER_ID + " integer not null," +
             MEET_ID + " integer not null)";
 
     public static final String CREATE_TABLE_REQUISITE = "create table " + TABLE_REQUISITE + " (" +
             ID + " integer primary key autoincrement," +
-            NAME +  " varchar(30) not null)";
+            NAME + " varchar(30) not null)";
 
     public static final String CREATE_TABLE_HAVE_REQUISITE = "create table " + TABLE_HAVE_REQUISITE + " (" +
             ID + " integer primary key autoincrement," +
@@ -151,8 +151,8 @@ public class SQLiteFields {
             PASSWORD + "," +
             FIRST_NAME + "," +
             LAST_NAME + "," +
-            ROLE  + "," +
-            SALT  + "," +
+            ROLE + "," +
+            SALT + "," +
             PHONE + ") " + "values (?,?,?,?,?,?,?)";
     public static final String INSERT_TRAINING = "insert into " + TABLE_TRAININGS + " (" +
             NAME + "," +
@@ -161,7 +161,7 @@ public class SQLiteFields {
             END_TIME + "," +
             DAY_OF_WEEK + "," +
             AGENDA + "," +
-            PLACE + ") " + "values (?,?,?,?,?,?,?)" ;
+            PLACE + ") " + "values (?,?,?,?,?,?,?)";
     public static final String INSERT_MEET = "insert into " + TABLE_MEET + " (" +
             NAME + "," +
             DATE + "," +
@@ -170,18 +170,18 @@ public class SQLiteFields {
     public static final String INSERT_SHOW = "insert into " + TABLE_SHOW + " (" +
             NAME + "," +
             DATE + "," +
-            DESCRIPTION  + "," +
-            PLACE  + "," +
-            MONEY  + "," +
+            DESCRIPTION + "," +
+            PLACE + "," +
+            MONEY + "," +
             CUSTOMERS_ID + ") " + "values (?,?,?,?,?,?)";
-    public static final String INSERT_CUSTOMERS =  "insert into " + TABLE_CUSTOMERS + " (" +
+    public static final String INSERT_CUSTOMERS = "insert into " + TABLE_CUSTOMERS + " (" +
             NAME + "," +
             PHONE + ") " + "values (?,?)";
-    public static final String INSERT_REQUISITE =  "insert into " + TABLE_REQUISITE + " (" +
+    public static final String INSERT_REQUISITE = "insert into " + TABLE_REQUISITE + " (" +
             NAME + ") " + "values (?)";
     public static final String INSERT_PERFORMANCE = "insert into " + TABLE_PERFORMANCE + " (" +
             NAME + "," +
-            DESCRIPTION  + ") " + "values (?,?)";
+            DESCRIPTION + ") " + "values (?,?)";
     public static final String INSERT_EVENT_PLACES = "insert into " + TABLE_EVENT_PLACES + " (" +
             NAME + "," +
             ADDRESS + ") " + "values (?,?)";

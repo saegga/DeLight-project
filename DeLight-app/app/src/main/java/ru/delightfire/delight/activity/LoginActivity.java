@@ -45,29 +45,23 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Ion library for async query
                 Ion.with(getApplicationContext())
-                        .load("POST", "http://delightfireapp.16mb.com/app/androidQueries/auth/db_user_check.php")
+                        .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/auth/db_user_check")
                         .setBodyParameter("login", login)
                         .setBodyParameter("password", password)
                         .asJsonObject()
                         .setCallback(new FutureCallback<JsonObject>() {
                             @Override
                             public void onCompleted(Exception e, JsonObject result) {
-                                if(e != null){
-                                    Log.d("Login acticity: " , e.getMessage());
+
+                                if (e != null) {
+                                    Log.d("Login acticity: ", e.getMessage());
                                     return;
                                 }
+
                                 Log.d("Response:: ", result.toString());
 
-                                DelightUser user = null;
-
                                 if (result.get("success").getAsInt() == 1) {
-                                    JsonObject userInfo = result.get("user").getAsJsonObject();
-//                                    user = new DelightUser(login, password, userInfo.get("first_name").getAsString(),
-//                                            userInfo.get("last_name").getAsString());
-                                    user = new DelightUser(login, password);
-                                }
-
-                                if (user != null) {
+                                    DelightUser user = new DelightUser(login, password);
                                     UserAccount.getInstance().saveUser(getApplicationContext(), user);
                                     redirectToMain();
                                 }
@@ -81,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         SharedPreferences sharedPreferences = getSharedPreferences(DelightUser.PREF_AUTH, MODE_PRIVATE);
-        if(sharedPreferences.contains(DelightUser.PREF_LOGIN)){
+        if (sharedPreferences.contains(DelightUser.PREF_LOGIN)) {
             redirectToMain();
         }
     }

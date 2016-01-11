@@ -50,7 +50,7 @@ public class MainTabFragment extends Fragment{
     private static final String TAG = "MainFragment";
     private ListView listViewEvent;
     private EventAdapter eventAdapter;
-    public static final String FETCH_ALL_EVENTS = "http://delightfireapp.16mb.com/app/androidQueries/get/get_all_events.php";
+    public static final String FETCH_ALL_EVENTS = "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_events.php";
 
     @Nullable
     @Override

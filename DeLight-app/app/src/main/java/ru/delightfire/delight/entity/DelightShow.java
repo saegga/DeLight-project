@@ -2,13 +2,12 @@ package ru.delightfire.delight.entity;
 
 import com.google.gson.annotations.Expose;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by scaredChatsky on 24.10.2015.
  * Событие в ленте событий - выступление (концерт)
+ *
  * @author scaredChatsky
  */
 public class DelightShow extends DelightEvent {
@@ -18,7 +17,7 @@ public class DelightShow extends DelightEvent {
     /**
      * Дата выступления
      */
-    private  String date;
+    private String date;
 
     /**
      * Заказчик

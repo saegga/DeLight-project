@@ -3,6 +3,7 @@ package ru.delightfire.delight.entity;
 /**
  * Created by scaredChatsky on 24.10.2015.
  * Абстрактный класс, описывающий общие поля и методы для работы с людьми, пользователями
+ *
  * @author scaredChatsky
  */
 public abstract class DelightPerson {
@@ -31,7 +32,7 @@ public abstract class DelightPerson {
         this.lastName = lastName;
     }
 
-    public DelightPerson(){
+    public DelightPerson() {
 
     }
 }

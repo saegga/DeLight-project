@@ -3,8 +3,9 @@ package ru.delightfire.delight.entity;
 /**
  * Created by sergei on 02.11.2015.
  * Сообщение в чате
+ *
  * @author sergei
- * TODO: JavaDoc!
+ *         TODO: JavaDoc!
  */
 public class ChatMessage {
 
@@ -16,14 +17,17 @@ public class ChatMessage {
     //Целесообразно, наверное, хранить логин отправившего и сравнивать его со своим в методе isYoutMsg?
     private boolean yourMsg;
     private String name;
+
     public ChatMessage(String message) {
         this.message = message;
     }
-    public ChatMessage(String message, String name){
+
+    public ChatMessage(String message, String name) {
         this.name = name;
         this.message = message;
     }
-    public ChatMessage(String message, String name, boolean yourMsg){
+
+    public ChatMessage(String message, String name, boolean yourMsg) {
         this.name = name;
         this.yourMsg = yourMsg;
         this.message = message;

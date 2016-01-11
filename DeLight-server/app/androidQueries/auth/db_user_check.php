@@ -1,10 +1,12 @@
 <?php
  
-require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
+require_once '../../../db/db_connect.php';
 
 if (isset($_POST["login"]) && isset($_POST["password"])){
 
 	$db = new DB_CONNECT();
+
+	$db->getConnection()->query("SET NAMES utf8");
 
 	$login = $_POST["login"];
 	$password = $_POST["password"];
@@ -14,7 +16,6 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
 	$login = $_POST["login"];
 	
 	$result = $db->getConnection()->query("SELECT * FROM users WHERE login = '$login'");
-
 
 	if (!empty($result)) {
         if ($result->num_rows > 0) {

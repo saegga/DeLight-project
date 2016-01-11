@@ -1,4 +1,5 @@
 package ru.delightfire.delight.activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -6,19 +7,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.entity.DelightUser;
 import ru.delightfire.delight.fragment.MainTabFragment;
 import ru.delightfire.delight.fragment.MyProfileFragment;
 import ru.delightfire.delight.fragment.MySettingsFragment;
@@ -28,7 +23,7 @@ import ru.delightfire.delight.utils.UserAccount;
 /**
  * Created by scaredChatsky on 23.10.2015.
  */
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
 
@@ -44,13 +39,12 @@ public class MainActivity extends AppCompatActivity{
 
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainerMain);
-        if(fragment == null){
+        if (fragment == null) {
             fragment = new MainTabFragment();
             manager.beginTransaction()
                     .add(R.id.containerFragment, fragment)
                     .commit();
         }
-
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -66,45 +60,46 @@ public class MainActivity extends AppCompatActivity{
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-}
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case android.R.id.home :
+        switch (item.getItemId()) {
+            case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private class DrawerItemClick implements NavigationView.OnNavigationItemSelectedListener{
+    private class DrawerItemClick implements NavigationView.OnNavigationItemSelectedListener {
 
         @Override
         public boolean onNavigationItemSelected(MenuItem item) {
             Fragment fragment = null;
-            switch (item.getItemId()){
-                case R.id.my_profile :
+            switch (item.getItemId()) {
+                case R.id.my_profile:
                     fragment = new MyProfileFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
-                case R.id.my_settings :
+                case R.id.my_settings:
                     fragment = new MySettingsFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
 
-                case R.id.my_skill :
+                case R.id.my_skill:
                     fragment = new MySkillFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
-                case R.id.my_main_tab :
+                case R.id.my_main_tab:
                     fragment = new MainTabFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
-                case R.id.exit :
+                case R.id.exit:
                     exit();
                     return true;
-                default: break;
+                default:
+                    break;
             }
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()

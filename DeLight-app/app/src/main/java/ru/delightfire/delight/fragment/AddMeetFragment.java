@@ -37,6 +37,7 @@ public class AddMeetFragment extends Fragment implements View.OnClickListener {
     private Date dateTime;
     private TextView dateMeetView;
     private Button btnSaveMeet;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,10 +48,10 @@ public class AddMeetFragment extends Fragment implements View.OnClickListener {
         btnSaveMeet = (Button) view.findViewById(R.id.btn_save);
         btnSaveMeet.setOnClickListener(saveListener);
         btnSetDate.setOnClickListener(this);
-        if(calendar == null){
+        if (calendar == null) {
             calendar = Calendar.getInstance();
         }
-        if(savedInstanceState != null && savedInstanceState.containsKey(DATE_MEET_BUNDLE_KEY)){
+        if (savedInstanceState != null && savedInstanceState.containsKey(DATE_MEET_BUNDLE_KEY)) {
             dateTime = new Date();//
             dateTime.setTime(savedInstanceState.getLong(DATE_MEET_BUNDLE_KEY));
             DateFormat df = DateFormat.getDateTimeInstance
@@ -102,10 +103,11 @@ public class AddMeetFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(dateTime != null){
+        if (dateTime != null) {
             outState.putLong(DATE_MEET_BUNDLE_KEY, dateTime.getTime());
         }
     }
+
     View.OnClickListener saveListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

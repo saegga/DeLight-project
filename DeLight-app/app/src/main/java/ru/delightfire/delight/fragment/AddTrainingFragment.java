@@ -48,6 +48,7 @@ public class AddTrainingFragment extends Fragment implements View.OnClickListene
     private String[] arrDays;
     private String day;
     private Button btnSaveTraining;
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Nullable
     @Override
@@ -57,23 +58,23 @@ public class AddTrainingFragment extends Fragment implements View.OnClickListene
         timeDataView = (TextView) view.findViewById(R.id.time_data);
         usersSpinner = (Spinner) view.findViewById(R.id.list_users);
         SpinnerAdapter adapter = new ArrayAdapter<>(getActivity(),
-                R.layout.spinner_user_row, R.id.user_name ,getArrays());
+                R.layout.spinner_user_row, R.id.user_name, getArrays());
         usersSpinner.setAdapter(adapter);
         dayOfWeek = (TextView) view.findViewById(R.id.day_of_week_data);
         btnSetTime = (Button) view.findViewById(R.id.btn_set_time);
         btnSetTime.setOnClickListener(this);
         btnSaveTraining = (Button) view.findViewById(R.id.btn_save);
         //btnSaveTraining.setOnClickListener(saveListener);
-        if(calendar == null){
-          calendar = Calendar.getInstance();
+        if (calendar == null) {
+            calendar = Calendar.getInstance();
         }
-        if(savedInstanceState != null){
-            if(savedInstanceState.containsKey(TIME_BUNDLE_KEY)){
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(TIME_BUNDLE_KEY)) {
                 timeData = savedInstanceState.getString(TIME_BUNDLE_KEY);
                 timeDataView.setText(timeData);
             }
 
-            if(savedInstanceState.containsKey(DAY_BUNDLE_KEY)){
+            if (savedInstanceState.containsKey(DAY_BUNDLE_KEY)) {
                 day = savedInstanceState.getString(DAY_BUNDLE_KEY);
                 dayOfWeek.setText(day);
             }
@@ -107,7 +108,8 @@ public class AddTrainingFragment extends Fragment implements View.OnClickListene
         });
         dialog.show();
     }
-    private ArrayList<String> getArrays(){
+
+    private ArrayList<String> getArrays() {
         ArrayList<String> list = new ArrayList<>();
         list.add("first");
         list.add("first");
@@ -119,13 +121,14 @@ public class AddTrainingFragment extends Fragment implements View.OnClickListene
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(timeData!= null) {
+        if (timeData != null) {
             outState.putString(TIME_BUNDLE_KEY, timeData);
         }
-        if(day != null){
+        if (day != null) {
             outState.putString(DAY_BUNDLE_KEY, day);
         }
     }
+
     public AbsListView.OnItemClickListener itemGridListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -139,6 +142,7 @@ public class AddTrainingFragment extends Fragment implements View.OnClickListene
         super.onCreate(savedInstanceState);
         arrDays = getResources().getStringArray(R.array.arr_days_full);
     }
+
     View.OnClickListener saveListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

@@ -16,7 +16,7 @@ import ru.delightfire.delight.entity.DelightTraining;
  * Created by scaredChatsky on 25.10.2015.
  * Adapter for DelightTraining entity
  */
-public class TrainingAdapter extends BaseAdapter{
+public class TrainingAdapter extends BaseAdapter {
 
     /**
      * Collection of trainings
@@ -50,11 +50,11 @@ public class TrainingAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        if (view == null){
+        if (view == null) {
             view = layoutInflater.inflate(R.layout.element_list_row_event, parent, false);
         }
 
-        DelightTraining delightTraining= getDelightTraining(position);
+        DelightTraining delightTraining = getDelightTraining(position);
 
         TextView textView = (TextView) view.findViewById(R.id.description_event);
         textView.setText(delightTraining.getName());
@@ -62,7 +62,7 @@ public class TrainingAdapter extends BaseAdapter{
         return view;
     }
 
-    private DelightTraining getDelightTraining(int position){
+    private DelightTraining getDelightTraining(int position) {
         return (DelightTraining) getItem(position);
     }
 }

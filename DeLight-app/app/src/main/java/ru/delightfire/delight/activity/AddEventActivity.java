@@ -28,11 +28,12 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
     private FragmentTransaction transaction;
     private int check = -1;
     Fragment actionFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-        group = (RadioGroup)(findViewById(R.id.group_choose));
+        group = (RadioGroup) (findViewById(R.id.group_choose));
         btnPerformance = (RadioButton) findViewById(R.id.btn_performance);
         btnMeet = (RadioButton) findViewById(R.id.btn_meet);
         btnTraining = (RadioButton) findViewById(R.id.btn_training);
@@ -46,17 +47,17 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         transaction = manager.beginTransaction();
         check = checkedId;
-        switch (checkedId){
-            case  R.id.btn_performance :
+        switch (checkedId) {
+            case R.id.btn_performance:
                 actionFragment = new AddShowFragment();
                 createActionFragment();
                 break;
-            case  R.id.btn_meet :
+            case R.id.btn_meet:
                 actionFragment = new AddMeetFragment();
                 createActionFragment();
-                Log.d("AddEventActivity", "check" + checkedId );
+                Log.d("AddEventActivity", "check" + checkedId);
                 break;
-            case  R.id.btn_training :
+            case R.id.btn_training:
                 actionFragment = new AddTrainingFragment();
                 createActionFragment();
                 Log.d("AddEventActivity", "check" + checkedId);
@@ -67,10 +68,10 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        if(actionFragment != null){
+        if (actionFragment != null) {
             //manager.putFragment(outState, FRAGMENT_ADD_SAVE_STATE, actionFragment);
         }
-        if(check != -1){
+        if (check != -1) {
             outState.putInt(BUNDLE_KEY_STATE_CHECK, check);
         }
         super.onSaveInstanceState(outState);
@@ -88,19 +89,20 @@ public class AddEventActivity extends AppCompatActivity implements RadioGroup.On
     @Override
     protected void onResume() {
         super.onResume();
-        if(actionFragment != null){
+        if (actionFragment != null) {
 //            transaction = manager.beginTransaction();
 //            transaction.replace(R.id.add_event_container , actionFragment);
 //            transaction.commit();
         }
     }
-    private void createActionFragment(){
-        if(manager.getFragments() != null){
+
+    private void createActionFragment() {
+        if (manager.getFragments() != null) {
             Log.d("AddEventActivity", "replace");
-            transaction.replace(R.id.add_event_container , actionFragment);
-        }else{
+            transaction.replace(R.id.add_event_container, actionFragment);
+        } else {
             Log.d("AddEventActivity", "add");
-            transaction.add(R.id.add_event_container , actionFragment);
+            transaction.add(R.id.add_event_container, actionFragment);
         }
     }
 }

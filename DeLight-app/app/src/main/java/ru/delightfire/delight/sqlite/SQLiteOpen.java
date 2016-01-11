@@ -11,7 +11,7 @@ public class SQLiteOpen extends SQLiteOpenHelper {
     /*
     * create database, tables
     * */
-    public SQLiteOpen(Context context, String name, int version){
+    public SQLiteOpen(Context context, String name, int version) {
         super(context, name, null, version);
 
     }
@@ -43,7 +43,7 @@ public class SQLiteOpen extends SQLiteOpenHelper {
         recreateDb(db);
     }
 
-    public void recreateDb(SQLiteDatabase db){
+    public void recreateDb(SQLiteDatabase db) {
         db.execSQL(SQLiteFields.DELETE_DATA_CUSTOMERS);
         db.execSQL(SQLiteFields.DELETE_DATA_EVENT_PLACES);
         db.execSQL(SQLiteFields.DELETE_DATA_HAVE_REQUISITE);

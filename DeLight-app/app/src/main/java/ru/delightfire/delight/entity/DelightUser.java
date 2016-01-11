@@ -1,14 +1,12 @@
 package ru.delightfire.delight.entity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 /**
  * Created by scaredChatsky on 24.10.2015.
  * Участник команды
+ *
  * @author scaredChastky
  */
-public class DelightUser extends DelightPerson{
+public class DelightUser extends DelightPerson {
 
     /**
      * Может ли открывать зал
@@ -17,6 +15,7 @@ public class DelightUser extends DelightPerson{
 
     /**
      * Роль участника в группе
+     *
      * @see DeliteRole
      */
     private DeliteRole role;
@@ -32,22 +31,21 @@ public class DelightUser extends DelightPerson{
      * Пароль
      */
     private String password;
-    /*
-        ключи для сохранения пользователя
-    * */
+
+    /**
+     * ключи для сохранения пользователя
+     */
     public static final String PREF_AUTH = "pref_auth";
-    public static final String PREF_FIRST_NAME = "pref_first_name";
-    public static final String PREF_LAST_NAME = "pref_last_name";
     public static final String PREF_LOGIN = "pref_login";
     public static final String PREF_PASSWORD = "pref_password";
 
-    public DelightUser(String login, String password, String firstName, String lastName){
+    public DelightUser(String login, String password, String firstName, String lastName) {
         super(firstName, lastName);
         this.login = login;
         this.password = password;
     }
 
-    public DelightUser(String login, String password){
+    public DelightUser(String login, String password) {
         this.login = login;
         this.password = password;
     }

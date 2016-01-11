@@ -46,7 +46,7 @@ public class RegistrationUserDataInputFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Ion.with(getActivity())
-                        .load("POST", "http://delightfireapp.16mb.com/app/androidQueries/create/db_user_create.php")
+                        .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/create/db_user_create.php")
                         .setBodyParameter("login", registerLogin.getText().toString())
                         .setBodyParameter("password", registerPassword.getText().toString())
                         .asJsonObject()
@@ -55,7 +55,7 @@ public class RegistrationUserDataInputFragment extends Fragment {
                             public void onCompleted(Exception e, JsonObject result) {
                                 DelightUser user = null;
 
-                                if (result.get("success").getAsInt() == 1){
+                                if (result.get("success").getAsInt() == 1) {
                                     user = new DelightUser(registerLogin.getText().toString(),
                                             registerPassword.getText().toString());
                                 }

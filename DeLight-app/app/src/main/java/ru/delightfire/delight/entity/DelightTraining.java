@@ -1,7 +1,5 @@
 package ru.delightfire.delight.entity;
 
-import android.support.annotation.Nullable;
-
 import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
@@ -10,11 +8,11 @@ import java.util.List;
 /**
  * Created by scaredChatsky on 24.10.2015.
  */
-public class DelightTraining extends DelightEvent{
+public class DelightTraining extends DelightEvent {
     /*
     * id тренировки
     * */
-    @Expose (deserialize = false)
+    @Expose(deserialize = false)
     private int trainingId;
     /**
      * логин создавшего событие
@@ -46,7 +44,7 @@ public class DelightTraining extends DelightEvent{
     private String agenda;
 
 
-    public DelightTraining(String agenda,String name,String dayOfWeek, String time, String place){
+    public DelightTraining(String agenda, String name, String dayOfWeek, String time, String place) {
         super(agenda, name, dayOfWeek, time);
         usersOnTraining = new ArrayList<>();
     }
@@ -58,12 +56,12 @@ public class DelightTraining extends DelightEvent{
         this.dayOfWeek = dayOfWeek;
     }
 
-    public DelightTraining(String login, String name){
+    public DelightTraining(String login, String name) {
         super(login, name);
     }
 
     public DelightTraining() {
-       //super();
+        //super();
     }
 
     public DelightTraining(String agenda, String name, String dateEvent, String timeEvent, String place, String ownerLogin, List<DelightUser> usersOnTraining) {
@@ -79,17 +77,19 @@ public class DelightTraining extends DelightEvent{
 
     /**
      * Добавление нового пользователя
+     *
      * @param user
      */
-    public void addUser(DelightUser user){
+    public void addUser(DelightUser user) {
         usersOnTraining.add(user);
     }
 
     /**
      * Удаление пользователя
+     *
      * @param user
      */
-    public void deleteUser(DelightUser user){
+    public void deleteUser(DelightUser user) {
         usersOnTraining.remove(user);
     }
 

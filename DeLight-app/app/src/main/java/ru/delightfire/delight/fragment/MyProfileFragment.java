@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import ru.delightfire.delight.R;
 
 /**
@@ -18,6 +16,7 @@ import ru.delightfire.delight.R;
 public class MyProfileFragment extends Fragment {
 
     TextView text;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

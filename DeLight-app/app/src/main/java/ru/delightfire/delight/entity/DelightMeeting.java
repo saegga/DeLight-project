@@ -2,11 +2,10 @@ package ru.delightfire.delight.entity;
 
 import com.google.gson.annotations.Expose;
 
-import java.util.Date;
-
 /**
  * Created by scaredChatsky on 24.10.2015.
  * Класс реализующий поля и методы для работы со встречами/произвольными событиями
+ *
  * @author scaredChatsky
  * @see DelightEvent
  */
@@ -34,7 +33,7 @@ public class DelightMeeting extends DelightEvent {
     private String place;
 
 
-    public DelightMeeting(String d, String agenda, String name, String place){
+    public DelightMeeting(String d, String agenda, String name, String place) {
         super(agenda, name, d);
         this.place = place;
         // todo поля

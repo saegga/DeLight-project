@@ -11,7 +11,7 @@ import ru.delightfire.delight.fragment.RegistrationUserDataInputFragment;
 /**
  * Created by scaredChatsky on 06.11.2015.
  */
-public class RegisterActivity extends AppCompatActivity{
+public class RegisterActivity extends AppCompatActivity {
 
     final private FragmentManager fragmentManager = getSupportFragmentManager();
 

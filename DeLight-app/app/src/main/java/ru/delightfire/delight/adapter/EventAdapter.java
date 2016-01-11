@@ -13,7 +13,6 @@ import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.DelightEvent;
 import ru.delightfire.delight.entity.DelightMeeting;
 import ru.delightfire.delight.entity.DelightShow;
-import ru.delightfire.delight.entity.DelightTraining;
 
 /**
  * Created by sergei on 09.01.2016.
@@ -49,7 +48,7 @@ public class EventAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        if(view == null){
+        if (view == null) {
             view = layoutInflater.inflate(R.layout.element_list_row_event, parent, false);
         }
         DelightEvent event = events.get(position);
@@ -61,9 +60,9 @@ public class EventAdapter extends BaseAdapter {
         titleEvent.setText(event.getName());
         descEvent.setText(event.getAgenda());
 
-        if(event instanceof DelightMeeting || event instanceof DelightShow){
+        if (event instanceof DelightMeeting || event instanceof DelightShow) {
             dateEvent.setText(event.getDateEvent());
-        }else{
+        } else {
             time.setText(event.getTimeEvent());
             dateEvent.setText(event.getDateEvent());
         }

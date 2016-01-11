@@ -14,32 +14,42 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
 
-import com.google.gson.JsonArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-import org.json.JSONArray;
-
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import javax.xml.transform.Result;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.activity.AddEventActivity;
 import ru.delightfire.delight.adapter.ChatAdapter;
+import ru.delightfire.delight.adapter.EventAdapter;
 import ru.delightfire.delight.adapter.TrainingAdapter;
 import ru.delightfire.delight.entity.ChatMessage;
+import ru.delightfire.delight.entity.DelightEvent;
+import ru.delightfire.delight.entity.DelightMeeting;
+import ru.delightfire.delight.entity.DelightShow;
 import ru.delightfire.delight.entity.DelightTraining;
+import ru.delightfire.delight.utils.DelightMeetDeserializer;
+import ru.delightfire.delight.utils.DelightShowDeserializer;
+import ru.delightfire.delight.utils.DelightTrainingDeserializer;
 
 
 /**
  * Created by sergei on 12.11.2015.
  */
-public class MainTabFragment extends Fragment {
+public class MainTabFragment extends Fragment{
+
 
     private static final String TAG = "MainFragment";
+    private ListView listViewEvent;
+    private EventAdapter eventAdapter;
     public static final String FETCH_ALL_EVENTS = "http://delightfireapp.16mb.com/app/androidQueries/get/get_all_events.php";
 
     @Nullable
@@ -66,11 +76,11 @@ public class MainTabFragment extends Fragment {
 
         tabs.setCurrentTab(0);
 
-        ListView listView = (ListView) view.findViewById(R.id.events_list);
+        listViewEvent = (ListView) view.findViewById(R.id.events_list);
         ListView listMessages = (ListView) view.findViewById(R.id.listView_chat_messages);
 
-        TrainingAdapter adapter = new TrainingAdapter(getActivity(), initEvents());
-        listView.setAdapter(adapter);
+         //eventAdapter = new EventAdapter(getActivity(), );
+        //listViewEvent.setAdapter(adapter);
 
 
         ChatAdapter chatAdapter = new ChatAdapter(getActivity(), initMessage());
@@ -97,6 +107,17 @@ public class MainTabFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        initEvents(new IonCallback() {
+            @Override
+            public void onResult(List<DelightEvent> events) {
+                eventAdapter = new EventAdapter(getActivity(), events);
+                listViewEvent.setAdapter(eventAdapter);
+            }
+        });
+    }
 
     @Deprecated
     private void sendMessage(String msg) {
@@ -104,11 +125,11 @@ public class MainTabFragment extends Fragment {
     }
 
     //TODO: Инициализация всех событий
-    private List<DelightTraining> initEvents() {
-        List<DelightTraining> trainings = new ArrayList<>();
+
+    private void initEvents(final IonCallback callback) {
+
         // получаем все события
-        // // TODO: 08.01.2016 сделать адаптер под все события
-        Ion.with(this).load("POST", FETCH_ALL_EVENTS)
+       Ion.with(this).load("POST", FETCH_ALL_EVENTS)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
@@ -117,15 +138,41 @@ public class MainTabFragment extends Fragment {
                             Log.d(TAG, e.getMessage());
                             return;
                         }
+                        Gson gson;
+                        Type trainingType = new TypeToken<List<DelightTraining>>() {}.getType(); // тип для списка объектов
+                        Type showType = new TypeToken<List<DelightShow>>() {}.getType();
+                        Type meetType = new TypeToken<List<DelightMeeting>>() {}.getType();
+                        List<DelightEvent> events = new ArrayList<>();
+                        List<DelightTraining> trainings;
+                        List<DelightShow> shows;
+                        List<DelightMeeting> meets;
+
+                        gson = new GsonBuilder().
+                                registerTypeAdapter(trainingType, new DelightTrainingDeserializer())
+                                .create();
+                        trainings = gson.fromJson(result.toString(), trainingType); // массив тренировок
+
+                        gson = new GsonBuilder()
+                                .registerTypeAdapter(showType, new DelightShowDeserializer())
+                                .create();
+                        shows = gson.fromJson(result.toString(), showType);
+
+
+                        gson = new GsonBuilder()
+                                .registerTypeAdapter(meetType, new DelightMeetDeserializer())
+                                .create();
+                        meets = gson.fromJson(result.toString(), meetType);
+
+                        events.addAll(trainings);
+                        events.addAll(shows);
+                        events.addAll(meets);
+                        callback.onResult(events);
+                        Log.d(TAG, Arrays.asList(events).toString());
                         Log.d(TAG, result.toString());
+
                     }
                 });
-
-        DelightTraining first = null;
-
-        //trainings.add(first);
-
-        return trainings;
+        //return null;
     }
 
     @Deprecated
@@ -146,5 +193,9 @@ public class MainTabFragment extends Fragment {
             startActivity(intent);
         }
     };
+
+    public interface IonCallback{
+        void onResult(List<DelightEvent> events);
+    }
 
 }

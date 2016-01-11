@@ -21,18 +21,41 @@ public abstract class DelightEvent {
      * Название события
      */
     protected String name;
+    /*
+    *  Дата события
+    * */
+    protected String dateEvent;
+    /*
+    * время события для тренировки
+    * */
+    protected String timeEvent;
+    /*
+    *   место события
+    * */
+    protected String place;
+
+    // вызов констуктора для события в список
+    protected DelightEvent (String agenda, String name, String dateEvent,String timeEvent){
+        this.name = name;
+        this.agenda = agenda;
+        this.dateEvent = dateEvent;
+        this.timeEvent = timeEvent;
+
+    }
 
     /**
      * Инициализация полей {@link DelightEvent#agenda}, {@link DelightEvent#ownerLogin},
      * {@link DelightEvent#name}
      * @param agenda Описание события
-     * @param login Логин пользователя, создавшего событие
+     * @param dateEvent полная дата события
      * @param name Имя события
+     *
      */
-    protected DelightEvent(String agenda, String login, String name){
+    protected DelightEvent(String agenda, String name, String dateEvent){
         this.name = name;
         this.agenda = agenda;
-        this.ownerLogin = login;
+        this.dateEvent = dateEvent;
+
     }
 
     /**
@@ -44,6 +67,9 @@ public abstract class DelightEvent {
     protected DelightEvent(String login, String name){
         this.name = name;
         this.ownerLogin = login;
+    }
+
+    public DelightEvent() {
     }
 
     /**
@@ -68,5 +94,17 @@ public abstract class DelightEvent {
      */
     public String getName() {
         return name;
+    }
+
+    public String getAgenda() {
+        return agenda;
+    }
+
+    public String getDateEvent() {
+        return dateEvent;
+    }
+
+    public String getTimeEvent() {
+        return timeEvent;
     }
 }

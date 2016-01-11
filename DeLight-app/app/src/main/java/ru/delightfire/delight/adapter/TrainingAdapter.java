@@ -56,7 +56,7 @@ public class TrainingAdapter extends BaseAdapter{
 
         DelightTraining delightTraining= getDelightTraining(position);
 
-        TextView textView = (TextView) view.findViewById(R.id.artist);
+        TextView textView = (TextView) view.findViewById(R.id.description_event);
         textView.setText(delightTraining.getName());
 
         return view;

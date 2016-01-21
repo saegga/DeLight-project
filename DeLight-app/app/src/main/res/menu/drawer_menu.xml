@@ -6,7 +6,7 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/my_main_tab"
-            android:title="События"
+            android:title="Расписание"
             android:icon="@mipmap/ic_view_list_black_24dp"
             />
         <item

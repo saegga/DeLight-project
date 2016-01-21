@@ -1,34 +1,26 @@
 package ru.delightfire.delight.entity;
 
-import android.view.View;
+import android.widget.BaseAdapter;
 
 /**
  * Created by scaredChatsky on 21.01.2016.
  */
 public class DelightPageInfo {
 
-    public DelightPageInfo(String title, View view) {
+    public DelightPageInfo(String title, BaseAdapter adapter) {
         this.title = title;
-        this.view = view;
+        this.adapter = adapter;
     }
 
-    private View view;
+    private BaseAdapter adapter;
 
     private String title;
 
-    public View getView() {
-        return view;
-    }
-
-    public void setView(View view) {
-        this.view = view;
+    public BaseAdapter getAdapter(){
+        return this.adapter;
     }
 
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

@@ -1,11 +1,13 @@
-package ru.delightfire.delight.activity;
+package ru.delightfire.delight.fragment;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,18 +19,23 @@ import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.DelightUser;
 import ru.delightfire.delight.utils.UserAccount;
 
-public class LoginActivity extends AppCompatActivity {
+/**
+ * Created by scaredChatsky on 21.01.2016.
+ */
+public class LoginFragment extends Fragment {
 
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_register, container, false);
 
-        final Button registerBtn = (Button) findViewById(R.id.btnRegistrationActivity);
+        final Button registerBtn = (Button) rootView.findViewById(R.id.btnRegistrationActivity);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+
+
             }
         });
 
@@ -69,20 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }
         });
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        SharedPreferences sharedPreferences = getSharedPreferences(DelightUser.PREF_AUTH, MODE_PRIVATE);
-        if (sharedPreferences.contains(DelightUser.PREF_LOGIN)) {
-            redirectToMain();
-        }
-    }
-
-    private void redirectToMain() {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        return rootView;
     }
 }

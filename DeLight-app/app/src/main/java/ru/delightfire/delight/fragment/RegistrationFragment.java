@@ -22,7 +22,7 @@ import ru.delightfire.delight.entity.DelightUser;
 /**
  * Created by sergei on 04.11.2015.
  */
-public class RegistrationUserDataInputFragment extends Fragment {
+public class RegistrationFragment extends Fragment {
 
     private EditText registerLogin;
     private EditText registerPassword;

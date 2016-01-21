@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.delightfire.delight.entity.DelightMeeting;
+import ru.delightfire.delight.entity.subject.DelightMeeting;
 
 /**
  * Created by sergei on 10.01.2016.

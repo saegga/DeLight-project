@@ -12,21 +12,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LaunchActivity">
+        <activity android:name=".ui.activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".ui.activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.LaunchActivity" />
+                android:value=".ui.activity.LaunchActivity" />
         </activity>
-        <activity android:name=".activity.AddEventActivity">
+        <activity android:name=".ui.activity.AddEventActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value=".ui.activity.MainActivity" />
         </activity>
     </application>
 

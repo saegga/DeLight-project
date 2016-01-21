@@ -3,7 +3,7 @@ package ru.delightfire.delight.sqlite;
 /**
  * Created by sergei on 06.01.2016.
  */
-public class SQLiteFields {
+class SQLiteFields {
 
     public static final String TABLE_USER = "users";
     public static final String TABLE_TRAININGS = "trainings";

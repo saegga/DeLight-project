@@ -3,7 +3,7 @@ package ru.delightfire.delight.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import ru.delightfire.delight.entity.DelightUser;
+import ru.delightfire.delight.entity.subject.DelightUser;
 
 /**
  * Created by sergei on 15.12.2015.

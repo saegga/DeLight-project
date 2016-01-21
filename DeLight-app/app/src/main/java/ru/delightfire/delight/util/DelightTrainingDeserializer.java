@@ -10,7 +10,7 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import ru.delightfire.delight.entity.DelightTraining;
+import ru.delightfire.delight.entity.subject.DelightTraining;
 
 /**
  * Created by scaredChatsky on 06.12.2015.

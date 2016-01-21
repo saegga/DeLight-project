@@ -37,10 +37,14 @@ public class MainFragment extends Fragment {
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.vp_fragment_main);
 
         List<DelightPageInfo> pages = new ArrayList<>();
+
         View schedule = inflater.inflate(R.layout.element_schedule_page, viewPager, false);
         DelightPageInfo schedulePage = new DelightPageInfo("Расписание", schedule);
         pages.add(schedulePage);
-        pages.add(schedulePage);
+
+        View chat = inflater.inflate(R.layout.element_chat_page, viewPager, false);
+        DelightPageInfo chatPage = new DelightPageInfo("Чат", chat);
+        pages.add(chatPage);
 
         TabLayout tabLayout = (TabLayout) rootView.findViewById(R.id.tl_fragment_main);
 

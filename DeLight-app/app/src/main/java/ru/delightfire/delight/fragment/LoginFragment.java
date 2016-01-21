@@ -18,7 +18,7 @@ import com.koushikdutta.ion.Ion;
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.activity.LaunchActivity;
 import ru.delightfire.delight.entity.DelightUser;
-import ru.delightfire.delight.utils.UserAccount;
+import ru.delightfire.delight.util.UserAccount;
 
 /**
  * Created by scaredChatsky on 21.01.2016.

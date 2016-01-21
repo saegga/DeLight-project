@@ -1,4 +1,4 @@
-package ru.delightfire.delight.utils;
+package ru.delightfire.delight.util;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;

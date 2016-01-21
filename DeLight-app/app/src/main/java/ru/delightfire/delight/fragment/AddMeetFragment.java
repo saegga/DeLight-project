@@ -41,7 +41,7 @@ public class AddMeetFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_meet, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_meeting, container, false);
         editAgenda = (EditText) view.findViewById(R.id.agenda_meet_input);
         btnSetDate = (Button) view.findViewById(R.id.btn_meet_set_date);
         dateMeetView = (TextView) view.findViewById(R.id.meet_data);

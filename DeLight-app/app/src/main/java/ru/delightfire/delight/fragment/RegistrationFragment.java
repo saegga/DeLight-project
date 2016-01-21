@@ -22,10 +22,10 @@ import ru.delightfire.delight.entity.DelightUser;
 /**
  * Created by sergei on 04.11.2015.
  */
-public class RegistrationUserDataInputFragment extends Fragment {
+public class RegistrationFragment extends Fragment {
 
-    private EditText registerLogin;
-    private EditText registerPassword;
+    private EditText login;
+    private EditText password;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,19 +36,19 @@ public class RegistrationUserDataInputFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_data_input, container, false);
+        View view = inflater.inflate(R.layout.fragment_registration, container, false);
 
-        registerLogin = (EditText) view.findViewById(R.id.input_register_login);
-        registerPassword = (EditText) view.findViewById(R.id.input_register_password);
+        login = (EditText) view.findViewById(R.id.acet_fragment_registration_input_login);
+        password = (EditText) view.findViewById(R.id.acet_fragment_registration_input_password);
 
-        AppCompatButton registrationConfirmButton = (AppCompatButton) view.findViewById(R.id.btn_register_confirm);
+        AppCompatButton registrationConfirmButton = (AppCompatButton) view.findViewById(R.id.btn_fragment_registration_register_confirm);
         registrationConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Ion.with(getActivity())
                         .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/create/db_user_create.php")
-                        .setBodyParameter("login", registerLogin.getText().toString())
-                        .setBodyParameter("password", registerPassword.getText().toString())
+                        .setBodyParameter("login", login.getText().toString())
+                        .setBodyParameter("password", password.getText().toString())
                         .asJsonObject()
                         .setCallback(new FutureCallback<JsonObject>() {
                             @Override
@@ -56,8 +56,8 @@ public class RegistrationUserDataInputFragment extends Fragment {
                                 DelightUser user = null;
 
                                 if (result.get("success").getAsInt() == 1) {
-                                    user = new DelightUser(registerLogin.getText().toString(),
-                                            registerPassword.getText().toString());
+                                    user = new DelightUser(login.getText().toString(),
+                                            password.getText().toString());
                                 }
 
                                 if (user != null) {

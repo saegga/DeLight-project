@@ -39,7 +39,7 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_show, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_performance, container, false);
         datePerformance = (TextView) view.findViewById(R.id.date_performance);
         chooseDate = (Button) view.findViewById(R.id.choose_date);
         chooseDate.setOnClickListener(this);

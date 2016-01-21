@@ -1,4 +1,4 @@
-package ru.delightfire.delight.utils;
+package ru.delightfire.delight.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -14,11 +14,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.fragment.MainTabFragment;
+import ru.delightfire.delight.fragment.MainFragment;
 import ru.delightfire.delight.fragment.MyProfileFragment;
-import ru.delightfire.delight.fragment.MySettingsFragment;
-import ru.delightfire.delight.fragment.MySkillFragment;
-import ru.delightfire.delight.utils.UserAccount;
+import ru.delightfire.delight.util.UserAccount;
 
 /**
  * Created by scaredChatsky on 23.10.2015.
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
 
     private Toolbar toolbar;
-    private TextView nameDrawer;
+    private TextView drawerName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,20 +36,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentManager manager = getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentById(R.id.fragmentContainerMain);
+        Fragment fragment = manager.findFragmentById(R.id.fl_activity_main_content);
         if (fragment == null) {
-            fragment = new MainTabFragment();
+            fragment = new MainFragment();
             manager.beginTransaction()
-                    .add(R.id.containerFragment, fragment)
+                    .add(R.id.fl_activity_main_content, fragment)
                     .commit();
         }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new DrawerItemClick());
-        View headerView = navigationView.inflateHeaderView(R.layout.element_header_drawer);
-        nameDrawer = (TextView) headerView.findViewById(R.id.drawer_name);
-        nameDrawer.setText(UserAccount.getInstance().getLoginUser(this));
+        View headerView = navigationView.inflateHeaderView(R.layout.element_drawer_header);
+        drawerName = (TextView) headerView.findViewById(R.id.drawer_name);
+        drawerName.setText(UserAccount.getInstance().getLoginUser(this));
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         toolbar.setNavigationIcon(R.mipmap.ic_menu_black_24dp);
         setSupportActionBar(toolbar);
@@ -78,41 +76,37 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
-                case R.id.my_profile:
+                case R.id.profile:
                     fragment = new MyProfileFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
-                case R.id.my_settings:
-                    fragment = new MySettingsFragment();
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                    break;
-
-                case R.id.my_skill:
-                    fragment = new MySkillFragment();
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                    break;
-                case R.id.my_main_tab:
-                    fragment = new MainTabFragment();
+                case R.id.schedule:
+                    fragment = new MainFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
                 case R.id.exit:
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    
                     exit();
                     return true;
                 default:
                     break;
             }
+
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.containerFragment, fragment)
+                    .replace(R.id.fl_activity_main_content, fragment)
                     .commit();
+
             return true;
         }
     }
 
     private void exit() {
         UserAccount.getInstance().deleteUser(this);
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Intent intent = new Intent(MainActivity.this, LaunchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
+
 }

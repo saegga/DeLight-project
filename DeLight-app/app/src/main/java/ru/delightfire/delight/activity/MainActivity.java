@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FragmentManager manager = getSupportFragmentManager();
-        Fragment fragment = manager.findFragmentById(R.id.fragmentContainerMain);
+        Fragment fragment = manager.findFragmentById(R.id.containerFragment);
         if (fragment == null) {
             fragment = new MainTabFragment();
             manager.beginTransaction()

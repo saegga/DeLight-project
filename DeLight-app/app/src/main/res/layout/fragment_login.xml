@@ -11,7 +11,7 @@
         android:layout_width="@dimen/btns_login_width"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:id="@+id/btnAuth"
+        android:id="@+id/btn_fragment_login_auth"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
@@ -22,10 +22,10 @@
         android:layout_width="@dimen/btns_login_width"
         android:layout_height="wrap_content"
         android:text="@string/register"
-        android:id="@+id/btnRegistrationActivity"
+        android:id="@+id/btn_fragment_login_registration_start"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
-        android:layout_below="@id/btnAuth"
+        android:layout_below="@id/btn_fragment_login_auth"
         android:background="@drawable/btn_registration_activity_start"/>
 
     <android.support.design.widget.TextInputLayout
@@ -33,11 +33,11 @@
         android:textColorHint="@color/white"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btnAuth"
+        android:layout_above="@id/btn_fragment_login_auth"
         android:theme="@style/TextLabel"
-        android:id="@+id/input_password_layout">
+        android:id="@+id/til_fragment_login_input_password">
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/input_password"
+            android:id="@+id/acet_fragment_login_input_password"
             android:layout_width="@dimen/btns_login_width"
             android:textColor="@color/white"
             android:layout_height="wrap_content"
@@ -50,10 +50,10 @@
         android:textColorHint="@color/white"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:layout_above="@id/input_password_layout"
+        android:layout_above="@id/til_fragment_login_input_password"
         android:theme="@style/TextLabel">
         <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/input_login"
+            android:id="@+id/acet_fragment_login_input_login"
             android:layout_width="@dimen/btns_login_width"
             android:textColor="@color/white"
             android:layout_height="wrap_content"

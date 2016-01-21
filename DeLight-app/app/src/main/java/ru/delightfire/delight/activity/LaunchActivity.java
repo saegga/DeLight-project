@@ -32,11 +32,12 @@ public class LaunchActivity extends AppCompatActivity {
             Fragment loginFragment = new LoginFragment();
 
             manager.beginTransaction()
-                    .replace()
+                    .replace(R.id.fl_activity_launch_content_frame, loginFragment)
+                    .commit();
         }
     }
 
-    private void redirectToMain() {
+    public void redirectToMain() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

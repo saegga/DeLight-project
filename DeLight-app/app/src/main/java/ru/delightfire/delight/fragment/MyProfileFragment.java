@@ -20,7 +20,7 @@ public class MyProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
         text = (TextView) view.findViewById(R.id.test);
         text.setText("Профиль");
         return view;

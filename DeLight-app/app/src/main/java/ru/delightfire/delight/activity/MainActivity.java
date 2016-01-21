@@ -16,8 +16,6 @@ import android.widget.TextView;
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.fragment.MainFragment;
 import ru.delightfire.delight.fragment.MyProfileFragment;
-import ru.delightfire.delight.fragment.MySettingsFragment;
-import ru.delightfire.delight.fragment.MySkillFragment;
 import ru.delightfire.delight.util.UserAccount;
 
 /**
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new DrawerItemClick());
-        View headerView = navigationView.inflateHeaderView(R.layout.element_header_drawer);
+        View headerView = navigationView.inflateHeaderView(R.layout.element_drawer_header);
         drawerName = (TextView) headerView.findViewById(R.id.drawer_name);
         drawerName.setText(UserAccount.getInstance().getLoginUser(this));
         toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -78,24 +76,17 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(MenuItem item) {
             Fragment fragment = null;
             switch (item.getItemId()) {
-                case R.id.my_profile:
+                case R.id.profile:
                     fragment = new MyProfileFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
-                case R.id.my_settings:
-                    fragment = new MySettingsFragment();
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                    break;
-
-                case R.id.my_skill:
-                    fragment = new MySkillFragment();
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                    break;
-                case R.id.my_main_tab:
+                case R.id.schedule:
                     fragment = new MainFragment();
                     drawerLayout.closeDrawer(GravityCompat.START);
                     break;
                 case R.id.exit:
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    
                     exit();
                     return true;
                 default:

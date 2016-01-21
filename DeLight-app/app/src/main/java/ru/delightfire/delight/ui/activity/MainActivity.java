@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.mikepenz.materialdrawer.DrawerBuilder;
+
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.ui.fragment.MainFragment;
 import ru.delightfire.delight.util.UserAccount;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
 
         setSupportActionBar(toolbar);
+
+        new DrawerBuilder().withActivity(this).build();
 
     }
 

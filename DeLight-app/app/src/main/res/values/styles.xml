@@ -3,7 +3,7 @@
     <style name="AppTheme" parent="MaterialDrawerTheme">
         <item name="colorAccent">@color/white</item>
         <item name="material_drawer_selected_text">@color/white</item>
-        <item name="material_drawer_selected">@color/btn_login_color</item>
+        <item name="material_drawer_selected">@color/colorAccent</item>
         <item name="material_drawer_background">@color/mainBackground</item>
     </style>
 

@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class DelightShow extends DelightEvent {
 
-    @Expose(deserialize = false)
     private int id;
     /**
      * Дата выступления

@@ -67,8 +67,7 @@ public class SheduleFragment extends Fragment {
         tabLayout = (TabLayout) rootView.findViewById(R.id.tl_fragment_main);
         pagerAdapter = new ViewPagerAdapter(pages, getActivity());
 
-        return rootView;
-    }
+        return rootView;    }
 
     private void initData() {
         final LoadingChecker checker = new LoadingChecker(3);

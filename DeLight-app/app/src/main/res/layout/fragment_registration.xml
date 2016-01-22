@@ -15,7 +15,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/btn_login"
+        android:background="@drawable/btn_auth"
         android:text="@string/register"
         android:textColor="@color/white" />
 

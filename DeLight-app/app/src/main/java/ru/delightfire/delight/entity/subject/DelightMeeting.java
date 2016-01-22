@@ -1,7 +1,5 @@
 package ru.delightfire.delight.entity.subject;
 
-import com.google.gson.annotations.Expose;
-
 /**
  * Created by scaredChatsky on 24.10.2015.
  * Класс реализующий поля и методы для работы со встречами/произвольными событиями
@@ -11,7 +9,6 @@ import com.google.gson.annotations.Expose;
  */
 public class DelightMeeting extends DelightEvent {
 
-    @Expose(deserialize = false)
     private int id;
     /**
      * Дата события

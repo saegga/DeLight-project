@@ -2,11 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginTop="15dp"
-    android:background="@drawable/selector_list"
+    android:background="@drawable/lest_row_event_selector"
     android:orientation="horizontal"
     android:padding="5dp">
 
@@ -42,9 +38,8 @@
             android:id="@+id/tv_element_list_row_event_start_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"
-            android:textColor="#10bcc9"
             android:textSize="12sp"
+            android:gravity="end"
             android:textStyle="bold" />
 
         <TextView

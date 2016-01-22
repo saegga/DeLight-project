@@ -47,8 +47,5 @@ public class UserAccount {
         editor.commit();
     }
 
-    public String getLoginUser(Context context) {
-        return getUser(context).getLogin();
-    }
     //todo сделать добавление остальныъх параметров
 }

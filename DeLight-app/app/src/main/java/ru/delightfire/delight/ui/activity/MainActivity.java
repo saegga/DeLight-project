@@ -7,18 +7,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
-import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.ui.fragment.MainFragment;
@@ -42,14 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        FragmentManager manager = getSupportFragmentManager();
-
-        Fragment mainFragment = new MainFragment();
-
-        manager.beginTransaction()
-                .replace(R.id.fl_activity_main_content, mainFragment)
-                .commit();
-
         new DrawerBuilder().withActivity(this).build();
 
         PrimaryDrawerItem scheduleItem = new PrimaryDrawerItem().withName(R.string.schedule);
@@ -57,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
         DividerDrawerItem dividerItem = new DividerDrawerItem();
         SecondaryDrawerItem exitItem = new SecondaryDrawerItem().withName(R.string.exit);
 
-        AccountHeader headerResult = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withHeaderBackground(R.drawable.fab_background)
-                .build();
+        View header = getLayoutInflater().inflate(R.layout.element_drawer_header, null);
+        TextView userName = (TextView) header.findViewById(R.id.user_name);
+        userName.setText(UserAccount.getInstance().getUser(this).getLogin());
 
         Drawer drawer = new DrawerBuilder()
                 .withActivity(this)
-                .withAccountHeader(headerResult)
+                .withHeader(header)
+                .withSelectedItem(0)
                 .withToolbar(toolbar)
                 .addDrawerItems(
                         scheduleItem,
@@ -75,11 +63,28 @@ public class MainActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        switch (position) {
+                            case 0:
+                                FragmentManager manager = getSupportFragmentManager();
+
+                                Fragment mainFragment = new MainFragment();
+
+                                manager.beginTransaction()
+                                        .replace(R.id.fl_activity_main_content, mainFragment)
+                                        .commit();
+                                break;
+                            case 3:
+                                if (true)
+                                    exit();
+                                break;
+                        }
                         return false;
                     }
 
                 })
                 .build();
+
+        drawer.setSelectionAtPosition(0);
 
     }
 

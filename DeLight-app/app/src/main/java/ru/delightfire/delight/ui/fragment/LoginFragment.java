@@ -66,7 +66,7 @@ public class LoginFragment extends Fragment {
                             public void onCompleted(Exception e, JsonObject result) {
 
                                 if (e != null) {
-                                    Log.d("Login activity: ", e.getMessage());
+                                    Log.d("Login::", e.getMessage());
                                     return;
                                 }
 

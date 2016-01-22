@@ -32,10 +32,4 @@ public class DelightMeeting extends DelightEvent {
    * */
     private String place;
 
-
-    public DelightMeeting(String d, String agenda, String name, String place) {
-        super(agenda, name, d);
-        this.place = place;
-        // todo поля
-    }
 }

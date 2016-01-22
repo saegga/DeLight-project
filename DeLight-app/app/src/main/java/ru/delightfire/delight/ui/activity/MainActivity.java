@@ -17,7 +17,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.ui.fragment.MainFragment;
+import ru.delightfire.delight.ui.fragment.SheduleFragment;
 import ru.delightfire.delight.util.UserAccount;
 
 /**
@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        toolbar.setNavigationIcon(R.mipmap.ic_menu_black_24dp);
+        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
 
         setSupportActionBar(toolbar);
 
@@ -67,13 +66,13 @@ public class MainActivity extends AppCompatActivity {
                             case 0:
                                 FragmentManager manager = getSupportFragmentManager();
 
-                                Fragment mainFragment = new MainFragment();
+                                Fragment mainFragment = new SheduleFragment();
 
                                 manager.beginTransaction()
                                         .replace(R.id.fl_activity_main_content, mainFragment)
                                         .commit();
                                 break;
-                            case 3:
+                            case 4:
                                 if (true)
                                     exit();
                                 break;

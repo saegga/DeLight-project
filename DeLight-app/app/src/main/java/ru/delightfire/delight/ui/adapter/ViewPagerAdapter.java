@@ -43,6 +43,9 @@ public class ViewPagerAdapter extends PagerAdapter {
         View itemView = inflater.inflate(R.layout.element_schedule_page, container, false);
         ListView listView = (ListView) itemView.findViewById(R.id.lv_element_schedule_page);
 
+        listView.setDividerHeight(20);
+        listView.setDivider(context.getResources().getDrawable(android.R.color.transparent));
+
         listView.setAdapter(pages.get(position).getAdapter());
 
         container.addView(itemView);

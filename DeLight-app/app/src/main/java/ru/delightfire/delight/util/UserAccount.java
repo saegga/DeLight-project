@@ -24,13 +24,12 @@ public class UserAccount {
         return Holder.instance;
     }
 
-    //методы сохр-я и вытаскивания юзера
     public void saveUser(Context context, DelightUser user) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(DelightUser.PREF_AUTH, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(DelightUser.PREF_LOGIN, user.getLogin());
         editor.putString(DelightUser.PREF_PASSWORD, user.getPassword());
-        editor.commit();
+        editor.apply();
     }
 
     public DelightUser getUser(Context context) {
@@ -44,8 +43,6 @@ public class UserAccount {
         SharedPreferences sharedPreferences = context.getSharedPreferences(DelightUser.PREF_AUTH, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
-
-    //todo сделать добавление остальныъх параметров
 }

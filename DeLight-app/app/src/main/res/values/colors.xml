@@ -12,7 +12,7 @@
     <color name="text_msg_input">#626262</color>
     <color name="btn_send_color">#1d514a</color>
     <color name="colorAccent">#DD4844</color>
-
+    <color name="black">#000</color>
     <color name="fragment_background">#EEEEEE</color>
 
     <color name="secondary_text">#727272</color>

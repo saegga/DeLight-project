@@ -11,8 +11,6 @@ import java.util.List;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.subject.DelightEvent;
-import ru.delightfire.delight.entity.subject.DelightMeeting;
-import ru.delightfire.delight.entity.subject.DelightShow;
 
 /**
  * Created by sergei on 09.01.2016.
@@ -48,24 +46,22 @@ public class EventAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
+
         if (view == null) {
             view = layoutInflater.inflate(R.layout.element_list_row_event, parent, false);
         }
+
         DelightEvent event = events.get(position);
 
-        TextView titleEvent = (TextView) view.findViewById(R.id.title_event);
-        TextView descEvent = (TextView) view.findViewById(R.id.description_event);
-        TextView time = (TextView) view.findViewById(R.id.time_event);
-        TextView dateEvent = (TextView) view.findViewById(R.id.day_event);
-        titleEvent.setText(event.getName());
-        descEvent.setText(event.getAgenda());
+        TextView place = (TextView) view.findViewById(R.id.tv_element_list_row_event_place);
+        TextView date = (TextView) view.findViewById(R.id.tv_element_list_row_event_date);
+        TextView startTime = (TextView) view.findViewById(R.id.tv_element_list_row_event_start_time);
+        TextView endTime = (TextView) view.findViewById(R.id.tv_element_list_row_event_end_time);
 
-        if (event instanceof DelightMeeting || event instanceof DelightShow) {
-            dateEvent.setText(event.getDateEvent());
-        } else {
-            time.setText(event.getTimeEvent());
-            dateEvent.setText(event.getDateEvent());
-        }
+        place.setText(Integer.toString(event.getPlaceId()));
+        date.setText(event.getDate());
+        startTime.setText(event.getStartTime());
+        endTime.setText(event.getEndTime());
 
         return view;
     }

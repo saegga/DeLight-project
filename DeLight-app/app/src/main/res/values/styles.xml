@@ -1,9 +1,10 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="MaterialDrawerTheme">
         <item name="colorAccent">@color/white</item>
+        <item name="material_drawer_selected_text">@color/white</item>
+        <item name="material_drawer_selected">@color/btn_login_color</item>
+        <item name="material_drawer_background">@color/mainBackground</item>
     </style>
 
     <style name="TextLabel" parent="TextAppearance.AppCompat">

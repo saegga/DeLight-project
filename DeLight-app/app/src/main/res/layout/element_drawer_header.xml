@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="wrap_content"
+    android:background="@color/mainBackground"
+    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/drawer_head"
-        android:scaleType="centerCrop" />
     <TextView
-        android:id="@+id/drawer_name"
-        style="@style/TextAppearance.AppCompat.Subhead"
+        android:paddingBottom="16dp"
+        android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="16dp"
-        android:textSize="16sp"
-        android:textColor="#ffffff"
-         />
-</FrameLayout>
+        android:textSize="16sp" />
+
+</RelativeLayout>

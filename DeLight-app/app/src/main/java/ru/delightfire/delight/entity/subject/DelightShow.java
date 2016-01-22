@@ -50,15 +50,4 @@ public class DelightShow extends DelightEvent {
     private int customId;
 
 
-//    public DelightShow(Date d, String agenda, String login, String name){
-//        super(agenda, login, name);
-//        date = d;
-//    }
-
-    public DelightShow(String d, String description, String name, String money, String place) {
-        super(description, name, d);
-        this.money = money;
-        this.place = place;
-        // добавить клиента
-    }
 }

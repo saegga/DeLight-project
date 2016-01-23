@@ -16,7 +16,7 @@
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:layout_centerInParent="true"
-        android:background="@drawable/btn_auth" />
+        style="@style/MainButton"/>
 
     <android.support.v7.widget.AppCompatButton
         android:layout_width="@dimen/btns_login_width"
@@ -26,7 +26,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
         android:layout_below="@id/btn_fragment_login_auth"
-        android:background="@drawable/btn_auth"/>
+        style="@style/MainButton"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"

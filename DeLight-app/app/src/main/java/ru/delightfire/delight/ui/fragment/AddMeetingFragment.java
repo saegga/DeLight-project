@@ -23,7 +23,7 @@ import ru.delightfire.delight.R;
 /**
  * Created by sergei on 24.11.2015.
  */
-public class AddMeetFragment extends Fragment implements View.OnClickListener {
+public class AddMeetingFragment extends Fragment implements View.OnClickListener {
 
     private static final String DATE_MEET_BUNDLE_KEY = "date_meet_bundle_key";
     private EditText editAgenda;

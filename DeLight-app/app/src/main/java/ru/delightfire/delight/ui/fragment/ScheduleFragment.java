@@ -1,5 +1,6 @@
 package ru.delightfire.delight.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +28,8 @@ import java.util.List;
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.subject.DelightEvent;
 import ru.delightfire.delight.entity.support.DelightPageInfo;
+import ru.delightfire.delight.ui.activity.AddEventActivity;
+import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.ui.adapter.EventAdapter;
 import ru.delightfire.delight.ui.adapter.ViewPagerAdapter;
 import ru.delightfire.delight.util.DelightEventDeserializer;
@@ -52,6 +55,8 @@ public class ScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Расписание");
 
         viewPager = (ViewPager) rootView.findViewById(R.id.vp_fragment_main);
 
@@ -87,7 +92,22 @@ public class ScheduleFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("fab::", "click");
+                Intent intent = new Intent(getContext(), AddEventActivity.class);
+                int position = viewPager.getCurrentItem();
+                switch (position){
+                    case 0:
+                        intent.putExtra("attach", position);
+                        startActivityForResult(intent, position);
+                        break;
+                    case 1:
+                        intent.putExtra("attach", position);
+                        startActivityForResult(intent, position);
+                        break;
+                    case 2:
+                        intent.putExtra("attach", position);
+                        startActivityForResult(intent, position);
+                        break;
+                }
             }
         });
 

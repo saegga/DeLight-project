@@ -31,5 +31,9 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="MainButton" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/main_button</item>
+    </style>
+
 
 </resources>

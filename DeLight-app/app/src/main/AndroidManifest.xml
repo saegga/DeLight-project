@@ -12,7 +12,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.LaunchActivity">
+        <activity
+            android:name=".ui.activity.LaunchActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -25,7 +27,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.LaunchActivity" />
         </activity>
-        <activity android:name=".ui.activity.AddEventActivity">
+        <activity
+            android:name=".ui.activity.AddEventActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />

@@ -30,7 +30,6 @@ import ru.delightfire.delight.util.UserAccount;
 public class MainActivity extends AppCompatActivity {
 
     private int currentPosition = 0;
-    private Toolbar toolbar;
 
     private Date currentDate = (Date) Calendar.getInstance().getTime();
 
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tb_activity_main);
 
         setSupportActionBar(toolbar);
 

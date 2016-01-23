@@ -1,14 +1,21 @@
 package ru.delightfire.delight.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -45,8 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
         new DrawerBuilder().withActivity(this).build();
 
-        PrimaryDrawerItem scheduleItem = new PrimaryDrawerItem().withName(R.string.schedule);
-        PrimaryDrawerItem profileItem = new PrimaryDrawerItem().withName(R.string.profile);
+        PrimaryDrawerItem scheduleItem = new PrimaryDrawerItem()
+                .withName(R.string.schedule)
+                .withIcon(FontAwesome.Icon.faw_list);
+        PrimaryDrawerItem profileItem = new PrimaryDrawerItem()
+                .withName(R.string.profile)
+                .withIcon(FontAwesome.Icon.faw_user);
         DividerDrawerItem dividerItem = new DividerDrawerItem();
         SecondaryDrawerItem exitItem = new SecondaryDrawerItem().withName(R.string.exit);
 
@@ -95,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         drawer.setSelectionAtPosition(1);
+
+        IconicsDrawable fabIcon = new IconicsDrawable(this)
+                .icon(FontAwesome.Icon.faw_plus)
+                .color(getResources().getColor(R.color.white))
+                .sizeDp(18);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_activity_main);
+        fab.setImageDrawable(fabIcon);
 
     }
 

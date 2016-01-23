@@ -28,16 +28,12 @@ public class DelightEventDeserializer implements JsonDeserializer<DelightEvent>{
         String endTime = jsonObject.get("end_time").getAsString();
         String placeName = jsonObject.get("place_name").getAsString();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM");
+        String date = jsonObject.get("date").getAsString();
 
-        Date date = null;
-        try {
-            date = format.parse(jsonObject.get("date").getAsString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        int day = Integer.parseInt(date.substring(0, 2));
+        int month = Integer.parseInt(date.substring(3, 5));
 
-        return new DelightEvent(eventId, placeId, date.getMonth(), date.getDay(), startTime, endTime, placeName);
+        return new DelightEvent(eventId, placeId, month, day, startTime, endTime, placeName);
     }
 
 }

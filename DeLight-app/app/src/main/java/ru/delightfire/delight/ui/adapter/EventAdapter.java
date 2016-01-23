@@ -69,10 +69,14 @@ public class EventAdapter extends BaseAdapter {
 
         Date currentDate = Calendar.getInstance().getTime();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM");
+        String convertedDate = format.format(currentDate);
 
-        if (currentDate.getDay() == event.getDay() && currentDate.getMonth() == event.getMonth())
+        int day = Integer.parseInt(convertedDate.substring(0, 2));
+        int month = Integer.parseInt(convertedDate.substring(3, 5));
+
+        if (day == event.getDay() && month == event.getMonth())
             date.setText("Сегодня");
-        else if (currentDate.getDay() == event.getDay() + 1 && currentDate.getMonth() == event.getMonth()) {
+        else if (day == event.getDay() - 1 && month == event.getMonth()) {
             date.setText("Завтра");
         } else {
             date.setText(event.getDay() + " " + event.getMonthName());

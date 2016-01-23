@@ -123,12 +123,12 @@ public class DelightEvent implements Comparable{
     public int compareTo(@NonNull Object another) {
         DelightEvent event = (DelightEvent) another;
 
-        int result = event.getMonth() - this.month;
+        int result = this.month - event.getMonth();
         if (result != 0){
             return result;
         }
 
-        result = event.getDay() - this.day;
+        result = this.day - event.getDay();
         if (result != 0){
             return result;
         }

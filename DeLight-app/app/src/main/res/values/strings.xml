@@ -26,6 +26,13 @@
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>
 
+    <string name="start_time_hint">Начало</string>
+    <string name="end_time_hint">Конец</string>
+    <string name="start_time">18:00</string>
+    <string name="end_time">21:00</string>
+    <string name="date_hint">Дата</string>
+    <string name="place_hint">Место</string>
+
     <string-array name="arr_days_full">
         <item>Понедельник</item>
         <item>Вторник</item>

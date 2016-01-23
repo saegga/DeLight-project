@@ -68,15 +68,6 @@ public class AddShowFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        dialogPicker = new Dialog(getActivity());
-        dialogPicker.setContentView(R.layout.picker_dialog);
-        dialogPicker.setTitle("Выбери дату и время");
-        time = (TimePicker) dialogPicker.findViewById(R.id.timePicker1);
-//        time.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
-//        time.setCurrentMinute(calendar.get(Calendar.MINUTE));
-        time.setIs24HourView(true);
-        date = (DatePicker) dialogPicker.findViewById(R.id.datePicker);
-        setDate = (Button) dialogPicker.findViewById(R.id.btnSet);
         setDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

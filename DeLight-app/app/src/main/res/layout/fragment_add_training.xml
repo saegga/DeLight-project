@@ -23,6 +23,7 @@
                 android:id="@+id/acet_fragment_add_training_place"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:hint="@string/place_hint"
                 android:inputType="time"
                 android:textColor="@color/mainBackground" />
@@ -48,6 +49,7 @@
                 android:id="@+id/acet_fragment_add_training_date"
                 android:layout_width="@dimen/set_date"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:hint="@string/date_hint"
                 android:inputType="time"
                 android:textColor="@color/mainBackground" />
@@ -64,6 +66,7 @@
                 android:id="@+id/acet_fragment_add_training_start_time"
                 android:layout_width="@dimen/set_time"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:hint="@string/start_time_hint"
                 android:inputType="time"
                 android:text="@string/start_time"
@@ -81,6 +84,7 @@
                 android:id="@+id/acet_fragment_add_training_end_time"
                 android:layout_width="@dimen/set_time"
                 android:layout_height="wrap_content"
+                android:focusable="false"
                 android:hint="@string/end_time_hint"
                 android:inputType="time"
                 android:text="@string/end_time"

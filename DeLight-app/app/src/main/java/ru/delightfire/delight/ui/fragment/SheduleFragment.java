@@ -2,6 +2,7 @@ package ru.delightfire.delight.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -16,6 +17,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.iconics.IconicsDrawable;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,6 +42,8 @@ public class SheduleFragment extends Fragment {
     private List<DelightEvent> trainings = new ArrayList<>();
     private List<DelightEvent> performances = new ArrayList<>();
     private List<DelightEvent> meetings = new ArrayList<>();
+
+    private FloatingActionButton fab;
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -69,6 +74,21 @@ public class SheduleFragment extends Fragment {
 
         tabLayout = (TabLayout) rootView.findViewById(R.id.tl_fragment_main);
         pagerAdapter = new ViewPagerAdapter(pages, getActivity());
+
+        IconicsDrawable fabIcon = new IconicsDrawable(getActivity())
+                .icon(FontAwesome.Icon.faw_plus)
+                .color(getResources().getColor(R.color.white))
+                .sizeDp(18);
+
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab_activity_main);
+        fab.setImageDrawable(fabIcon);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("fab::", "click");
+            }
+        });
 
         return rootView;    }
 

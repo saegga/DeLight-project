@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -106,14 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         drawer.setSelectionAtPosition(1);
-
-        IconicsDrawable fabIcon = new IconicsDrawable(this)
-                .icon(FontAwesome.Icon.faw_plus)
-                .color(getResources().getColor(R.color.white))
-                .sizeDp(18);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_activity_main);
-        fab.setImageDrawable(fabIcon);
 
     }
 

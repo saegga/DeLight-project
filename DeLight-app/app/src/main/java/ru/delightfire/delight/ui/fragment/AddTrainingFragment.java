@@ -38,9 +38,12 @@ public class AddTrainingFragment extends Fragment {
 
         AppCompatEditText startTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_start_time);
         AppCompatEditText endTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_end_time);
+
         startTime.setOnClickListener(new SetTimeClickListener());
         endTime.setOnClickListener(new SetTimeClickListener());
+
         startTime.setText(currentTime);
+        endTime.setText((hour+2) + ":00");
 
         return rootView;
     }

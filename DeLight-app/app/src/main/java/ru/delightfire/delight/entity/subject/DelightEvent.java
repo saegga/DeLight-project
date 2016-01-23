@@ -34,13 +34,16 @@ public class DelightEvent implements Comparable{
      */
     protected int placeId;
 
-    public DelightEvent(int eventId, int placeId, int month, int day, String startTime, String endTime) {
+    private String placeName;
+
+    public DelightEvent(int eventId, int placeId, int month, int day, String startTime, String endTime, String placeName) {
         this.eventId = eventId;
         this.placeId = placeId;
         this.month = month;
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.placeName = placeName;
     }
 
     public DelightEvent() {
@@ -133,5 +136,7 @@ public class DelightEvent implements Comparable{
         return 0;
     }
 
-
+    public String getPlaceName() {
+        return placeName;
+    }
 }

@@ -26,6 +26,7 @@ public class DelightEventDeserializer implements JsonDeserializer<DelightEvent>{
         int placeId = jsonObject.get("place_id").getAsInt();
         String startTime = jsonObject.get("start_time").getAsString();
         String endTime = jsonObject.get("end_time").getAsString();
+        String placeName = jsonObject.get("place_name").getAsString();
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM");
 
@@ -36,7 +37,7 @@ public class DelightEventDeserializer implements JsonDeserializer<DelightEvent>{
             e.printStackTrace();
         }
 
-        return new DelightEvent(eventId, placeId, date.getMonth(), date.getDay(), startTime, endTime);
+        return new DelightEvent(eventId, placeId, date.getMonth(), date.getDay(), startTime, endTime, placeName);
     }
 
 }

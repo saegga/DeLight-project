@@ -4,7 +4,7 @@
 
     <item
         android:state_pressed="true"
-        android:color="@color/white"/>
+        android:color="@color/black"/>
 
     <item
        android:color="@color/mainBackground"/>

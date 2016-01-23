@@ -7,6 +7,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ru.delightfire.delight.entity.subject.DelightEvent;
 
@@ -23,9 +26,17 @@ public class DelightEventDeserializer implements JsonDeserializer<DelightEvent>{
         int placeId = jsonObject.get("place_id").getAsInt();
         String startTime = jsonObject.get("start_time").getAsString();
         String endTime = jsonObject.get("end_time").getAsString();
-        String date = jsonObject.get("date").getAsString();
 
-        return new DelightEvent(eventId, placeId, date, startTime, endTime);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM");
+
+        Date date = null;
+        try {
+            date = format.parse(jsonObject.get("date").getAsString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new DelightEvent(eventId, placeId, date.getMonth(), date.getDay(), startTime, endTime);
     }
 
 }

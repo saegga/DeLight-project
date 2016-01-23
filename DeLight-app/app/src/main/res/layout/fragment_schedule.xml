@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <android.support.design.widget.TabLayout
+        style="@style/AppTabLayout"
         android:id="@+id/tl_fragment_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

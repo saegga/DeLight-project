@@ -16,6 +16,9 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.ui.fragment.SheduleFragment;
 import ru.delightfire.delight.util.UserAccount;
@@ -25,7 +28,10 @@ import ru.delightfire.delight.util.UserAccount;
  */
 public class MainActivity extends AppCompatActivity {
 
+    private int currentPosition = 0;
     private Toolbar toolbar;
+
+    private Date currentDate = (Date) Calendar.getInstance().getTime();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,20 +68,25 @@ public class MainActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        switch (position) {
-                            case 0:
-                                FragmentManager manager = getSupportFragmentManager();
+                        if (currentPosition != position) {
+                            switch (position) {
+                                case 1:
+                                    FragmentManager manager = getSupportFragmentManager();
 
-                                Fragment mainFragment = new SheduleFragment();
+                                    Fragment scheduleFragment = new SheduleFragment();
 
-                                manager.beginTransaction()
-                                        .replace(R.id.fl_activity_main_content, mainFragment)
-                                        .commit();
-                                break;
-                            case 4:
-                                if (true)
-                                    exit();
-                                break;
+                                    manager.beginTransaction()
+                                            .replace(R.id.fl_activity_main_content, scheduleFragment)
+                                            .commit();
+                                    currentPosition = 1;
+                                    break;
+                                case 4:
+                                    if (true) {
+                                        currentPosition = 4;
+                                        exit();
+                                    }
+                                    break;
+                            }
                         }
                         return false;
                     }
@@ -83,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build();
 
-        drawer.setSelectionAtPosition(0);
+        drawer.setSelectionAtPosition(1);
 
     }
 
@@ -94,4 +105,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public Date getCurrentDate() {
+        return currentDate;
+    }
 }

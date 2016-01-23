@@ -18,6 +18,9 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import ru.delightfire.delight.R;
@@ -44,7 +47,7 @@ public class SheduleFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.vp_fragment_main);
 
@@ -89,6 +92,8 @@ public class SheduleFragment extends Fragment {
                             for (int i = 0; i < trainingsArray.size(); i++){
                                 trainings.add(gson.fromJson(trainingsArray.get(i), DelightEvent.class));
                             }
+
+                            Collections.sort(trainings);
 
                             if (checker.isLoaded()) {
                                 initView();

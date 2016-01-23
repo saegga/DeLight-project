@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import ru.delightfire.delight.R;
@@ -59,7 +62,18 @@ public class EventAdapter extends BaseAdapter {
         TextView endTime = (TextView) view.findViewById(R.id.tv_element_list_row_event_end_time);
 
         place.setText(Integer.toString(event.getPlaceId()));
-        date.setText(event.getDate());
+
+        Date currentDate = Calendar.getInstance().getTime();
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM");
+
+        if (currentDate.getDay() == event.getDay() && currentDate.getMonth() == event.getMonth())
+            date.setText("Сегодня");
+        else if (currentDate.getDay() == event.getDay() + 1 && currentDate.getMonth() == event.getMonth()) {
+            date.setText("Завтра");
+        } else {
+            date.setText(event.getDay() + " " + event.getMonthName());
+        }
+
         startTime.setText(event.getStartTime());
         endTime.setText(event.getEndTime());
 

@@ -2,7 +2,6 @@
 <resources>
     <color name="colorPrimary">#444273</color>
     <color name="colorPrimaryDark">#1A237E</color>
-    <color name="colorAccent">#D80066</color>
     <color name="mainBackground">#444273</color>
     <color name="back_message_from">#e5e7eb</color>
     <color name="message_from_name">#777777</color>
@@ -12,7 +11,9 @@
     <color name="back_msg_input">#e8e8e8</color>
     <color name="text_msg_input">#626262</color>
     <color name="btn_send_color">#1d514a</color>
-    <color name="btn_login_color">#DD4844</color>
+    <color name="colorAccent">#DD4844</color>
+    <color name="black">#000</color>
+    <color name="fragment_background">#EEEEEE</color>
 
     <color name="secondary_text">#727272</color>
 

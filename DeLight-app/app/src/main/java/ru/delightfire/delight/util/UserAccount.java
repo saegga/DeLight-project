@@ -3,7 +3,7 @@ package ru.delightfire.delight.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import ru.delightfire.delight.entity.DelightUser;
+import ru.delightfire.delight.entity.subject.DelightUser;
 
 /**
  * Created by sergei on 15.12.2015.
@@ -24,13 +24,12 @@ public class UserAccount {
         return Holder.instance;
     }
 
-    //методы сохр-я и вытаскивания юзера
     public void saveUser(Context context, DelightUser user) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(DelightUser.PREF_AUTH, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(DelightUser.PREF_LOGIN, user.getLogin());
         editor.putString(DelightUser.PREF_PASSWORD, user.getPassword());
-        editor.commit();
+        editor.apply();
     }
 
     public DelightUser getUser(Context context) {
@@ -44,11 +43,6 @@ public class UserAccount {
         SharedPreferences sharedPreferences = context.getSharedPreferences(DelightUser.PREF_AUTH, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
-
-    public String getLoginUser(Context context) {
-        return getUser(context).getLogin();
-    }
-    //todo сделать добавление остальныъх параметров
 }

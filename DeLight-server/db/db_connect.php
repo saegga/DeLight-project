@@ -27,6 +27,8 @@ class DB_CONNECT {
         if ($this->con->connect_error){
             die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
         }
+
+        $this->con->query("SET NAMES utf8");
         
         return $this->con;
     }

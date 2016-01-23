@@ -10,7 +10,7 @@ if (isset($_POST["training_id"])) {
 
     $training_id = $_POST['training_id'];
     
-    $result = $db->getConnection()->query("SELECT *FROM trainings WHERE training_id = $training_id");
+    $result = $db->getConnection()->query("SELECT * FROM trainings WHERE training_id = $training_id");
     
     if (!empty($result)) {
         if ($result->num_rows > 0) {

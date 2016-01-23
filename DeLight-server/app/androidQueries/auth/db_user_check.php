@@ -1,12 +1,10 @@
 <?php
- 
+
 require_once '../../../db/db_connect.php';
 
 if (isset($_POST["login"]) && isset($_POST["password"])){
 
 	$db = new DB_CONNECT();
-
-	$db->getConnection()->query("SET NAMES utf8");
 
 	$login = $_POST["login"];
 	$password = $_POST["password"];
@@ -18,33 +16,33 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
 	$result = $db->getConnection()->query("SELECT * FROM users WHERE login = '$login'");
 
 	if (!empty($result)) {
-        if ($result->num_rows > 0) {
+		if ($result->num_rows > 0) {
 
-        	$result = $result->fetch_array();
-        	$salt = $result["salt"];
+			$result = $result->fetch_array();
+			$salt = $result["salt"];
 
-        	$hash = md5(md5($password . md5(sha1($salt))));
+			$hash = md5(md5($password . md5(sha1($salt))));
 
-        	$iterations = 10;
+			$iterations = 10;
 
-	        for ($i = 0; $i < $iterations; ++$i) {
-	            $hash = md5(md5(sha1($hash)));
-	        }
+			for ($i = 0; $i < $iterations; ++$i) {
+				$hash = md5(md5(sha1($hash)));
+			}
 
-        	if ($hash == $result["password"]){
-        		$response["success"] = 1;
+			if ($hash == $result["password"]){
+				$response["success"] = 1;
 
-        		$response["user"] = array();
+				$response["user"] = array();
 
-        		$response["user"]["first_name"] = $result["first_name"];
-        		$response["user"]["last_name"] = $result["last_name"];
+				$response["user"]["first_name"] = $result["first_name"];
+				$response["user"]["last_name"] = $result["last_name"];
 
-        	} else {
-        		$response["success"] = 0;
-        		$response["salt"] = $salt;
-        		$response["password"] = $hash;
+			} else {
+				$response["success"] = 0;
+				$response["salt"] = $salt;
+				$response["password"] = $hash;
 				$response["message"] = "Wrong password";
-        	}
+			}
 
 			echo json_encode($response);
 			
@@ -62,8 +60,8 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
 	}
 } else {
 	$response["success"] = 0;
-    $response["message"] = "Required field(s) is missing";
+	$response["message"] = "Required field(s) is missing";
 
-    echo json_encode($response);
+	echo json_encode($response);
 }
 ?>

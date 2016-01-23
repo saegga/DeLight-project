@@ -1,60 +1,60 @@
 <?php
-	require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
 
-	$db = new DB_CONNECT();
+$db = new DB_CONNECT();
 
-    $response = array(); 
-	
-	$result = $db->getConnection()->query("select training_id, name, owner_login, concat_ws(' - ', start_time, end_time) as time, dayOfWeek, agenda, place from trainings");
-		 if (!empty($result)) {
-			if ($result->num_rows > 0) {
-			while($raw = mysqli_fetch_object($result)){
-				
-				$training[] = $raw;
-			}
-			$response['training'] = array();
-			array_push($response['training'], $training);
-		}
-	}else{
-		$response["success"] = 0;
-        $response["message"] = "error mysql query";	
-	}
-	$result = $db->getConnection()->query("SELECT *FROM `show`");
-	 if (!empty($result)) {
-	
-			if ($result->num_rows > 0) {
-			$show = array();
+$response = array(); 
+
+$result = $db->getConnection()->query("select training_id, name, concat_ws(' - ', start_time, end_time) as time, dayOfWeek, agenda from trainings");
+if (!empty($result)) {
+	if ($result->num_rows > 0) {
+		while($raw = mysqli_fetch_object($result)){
 			
-			while($raw = mysqli_fetch_object($result)){
-				$show[] = $raw;
-			}
-			$response['show'] = array();
-			array_push($response['show'], $show);
+			$training[] = $raw;
 		}
-			
-	}else{
-		$response["success"] = 0;
-        $response["message"] = "error mysql query";
+		$response['training'] = array();
+		array_push($response['training'], $training);
 	}
-	$result = $db->getConnection()->query("SELECT *FROM `meet`") or die(mysqli_error($db->getConnection()));
-	 if (!empty($result)) {
+}else{
+	$response["success"] = 0;
+	$response["message"] = "error mysql query";	
+}
+$result = $db->getConnection()->query("SELECT id, name, date, description FROM `show`");
+if (!empty($result)) {
 	
-			if ($result->num_rows > 0) {
-			$meet = array();
-			
-			while($raw = mysqli_fetch_object($result)){
-				$meet[] = $raw;
-			}
-			$response['meet'] = array();
-			array_push($response['meet'], $meet);
+	if ($result->num_rows > 0) {
+		$show = array();
+		
+		while($raw = mysqli_fetch_object($result)){
+			$show[] = $raw;
 		}
-			$response["success"] = 1;
-	}else{
-		$response["success"] = 0;
-        $response["message"] = "error mysql query";	
+		$response['show'] = array();
+		array_push($response['show'], $show);
 	}
-	unset($db);
-	echo json_encode($response);
+	
+}else{
+	$response["success"] = 0;
+	$response["message"] = "error mysql query";
+}
+$result = $db->getConnection()->query("SELECT id, name, date, agenda FROM `meet`") or die(mysqli_error($db->getConnection()));
+if (!empty($result)) {
+	
+	if ($result->num_rows > 0) {
+		$meet = array();
+		
+		while($raw = mysqli_fetch_object($result)){
+			$meet[] = $raw;
+		}
+		$response['meet'] = array();
+		array_push($response['meet'], $meet);
+	}
+	$response["success"] = 1;
+}else{
+	$response["success"] = 0;
+	$response["message"] = "error mysql query";	
+}
+unset($db);
+echo json_encode($response);
 
 
 ?>

@@ -1,7 +1,5 @@
 package ru.delightfire.delight.entity.subject;
 
-import com.google.gson.annotations.Expose;
-
 import java.util.List;
 
 /**
@@ -10,13 +8,7 @@ import java.util.List;
  *
  * @author scaredChatsky
  */
-public class DelightShow extends DelightEvent {
-
-    private int id;
-    /**
-     * Дата выступления
-     */
-    private String date;
+public class DelightShow extends DelightEventExtended {
 
     /**
      * Заказчик
@@ -27,26 +19,5 @@ public class DelightShow extends DelightEvent {
      * Номера в выступлении
      */
     private List<DelightPerformance> performances;
-    /*
-       название шоу
-   * */
-    private String name;
-    /*
-    * описание шоу
-    * */
-    private String description;
-    /*
-    *  место проведения
-    * */
-    private String place;
-
-    /*
-    *  деньги
-    * */
-    private String money;
-
-    @Expose(deserialize = false)
-    private int customId;
-
-
+    
 }

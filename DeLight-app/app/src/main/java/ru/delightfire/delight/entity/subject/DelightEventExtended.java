@@ -12,4 +12,11 @@ public abstract class DelightEventExtended extends DelightEvent {
 
     protected int ownerId;
 
+    public String getAgenda() {
+        return agenda;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
 }

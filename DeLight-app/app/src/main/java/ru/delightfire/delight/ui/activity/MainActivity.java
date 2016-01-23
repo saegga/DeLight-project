@@ -1,22 +1,15 @@
 package ru.delightfire.delight.ui.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -28,7 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.ui.fragment.SheduleFragment;
+import ru.delightfire.delight.ui.fragment.ScheduleFragment;
 import ru.delightfire.delight.util.UserAccount;
 
 /**
@@ -85,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                                 case 1:
                                     FragmentManager manager = getSupportFragmentManager();
 
-                                    Fragment scheduleFragment = new SheduleFragment();
+                                    Fragment scheduleFragment = new ScheduleFragment();
 
                                     manager.beginTransaction()
                                             .replace(R.id.fl_activity_main_content, scheduleFragment)

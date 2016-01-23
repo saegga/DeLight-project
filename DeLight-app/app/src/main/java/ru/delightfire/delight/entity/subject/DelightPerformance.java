@@ -20,5 +20,5 @@ public class DelightPerformance {
     /**
      * Пользователи, участвующие в номере
      */
-    private List<DelightUser> usersInPerformance;
+    private List<DelightUser> users;
 }

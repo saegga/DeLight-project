@@ -26,14 +26,14 @@ public class DelightEventDeserializer implements JsonDeserializer<DelightEvent>{
         int placeId = jsonObject.get("place_id").getAsInt();
         String startTime = jsonObject.get("start_time").getAsString();
         String endTime = jsonObject.get("end_time").getAsString();
-        String placeName = jsonObject.get("place_name").getAsString();
+        String extra = jsonObject.get("extra").getAsString();
 
         String date = jsonObject.get("date").getAsString();
 
         int day = Integer.parseInt(date.substring(0, 2));
         int month = Integer.parseInt(date.substring(3, 5));
 
-        return new DelightEvent(eventId, placeId, month, day, startTime, endTime, placeName);
+        return new DelightEvent(eventId, placeId, month, day, startTime, endTime, extra);
     }
 
 }

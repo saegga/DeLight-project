@@ -21,29 +21,28 @@ import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.ui.adapter.EventAdapter;
-import ru.delightfire.delight.ui.adapter.ViewPagerAdapter;
 import ru.delightfire.delight.entity.subject.DelightEvent;
 import ru.delightfire.delight.entity.support.DelightPageInfo;
+import ru.delightfire.delight.ui.adapter.EventAdapter;
+import ru.delightfire.delight.ui.adapter.ViewPagerAdapter;
 import ru.delightfire.delight.util.DelightEventDeserializer;
 import ru.delightfire.delight.util.LoadingChecker;
 
 /**
  * Created by sergei on 12.11.2015.
  */
-public class SheduleFragment extends Fragment {
+public class ScheduleFragment extends Fragment {
 
     private List<DelightEvent> trainings = new ArrayList<>();
     private List<DelightEvent> performances = new ArrayList<>();
     private List<DelightEvent> meetings = new ArrayList<>();
 
     private FloatingActionButton fab;
+    final LoadingChecker checker = new LoadingChecker(3);
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -70,7 +69,9 @@ public class SheduleFragment extends Fragment {
         pages.add(performancesPage);
         pages.add(meetingsPage);
 
-        initData();
+        loadEvents("current_trainings", trainings);
+        loadEvents("shows", performances);
+        loadEvents("meetings", meetings);
 
         tabLayout = (TabLayout) rootView.findViewById(R.id.tl_fragment_main);
         pagerAdapter = new ViewPagerAdapter(pages, getActivity());
@@ -90,30 +91,32 @@ public class SheduleFragment extends Fragment {
             }
         });
 
-        return rootView;    }
+        return rootView;
+    }
 
-    private void initData() {
-        final LoadingChecker checker = new LoadingChecker(3);
+    private void loadEvents(String queryParameter, final List<DelightEvent> events) {
 
         Ion.with(this)
-                .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_trainings")
+                .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_events")
+                .setBodyParameter("table", queryParameter)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
                         Log.d("Response::", result.toString());
-                        if (result.get("success").getAsInt() == 1){
+
+                        if (result.get("success").getAsInt() == 1) {
                             Gson gson = new GsonBuilder()
                                     .registerTypeAdapter(DelightEvent.class, new DelightEventDeserializer())
                                     .create();
 
-                            JsonArray trainingsArray = result.get("trainings").getAsJsonArray();
+                            JsonArray eventsArray = result.get("events").getAsJsonArray();
 
-                            for (int i = 0; i < trainingsArray.size(); i++){
-                                trainings.add(gson.fromJson(trainingsArray.get(i), DelightEvent.class));
+                            for (int i = 0; i < eventsArray.size(); i++) {
+                                events.add(gson.fromJson(eventsArray.get(i), DelightEvent.class));
                             }
 
-                            Collections.sort(trainings);
+                            Collections.sort(events);
 
                             if (checker.isLoaded()) {
                                 initView();
@@ -121,38 +124,9 @@ public class SheduleFragment extends Fragment {
                         }
                     }
                 });
-
-        Ion.with(this)
-                .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_trainings")
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        result.toString();
-
-                        if (checker.isLoaded()) {
-                            initView();
-                        }
-                    }
-                });
-
-        Ion.with(this)
-                .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_trainings")
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        result.toString();
-
-                        if (checker.isLoaded()) {
-                            initView();
-                        }
-                    }
-                });
-
     }
 
-    private void initView(){
+    private void initView() {
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }

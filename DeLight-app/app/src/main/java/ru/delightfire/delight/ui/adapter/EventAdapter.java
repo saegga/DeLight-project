@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.koushikdutta.ion.Ion;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -65,7 +63,7 @@ public class EventAdapter extends BaseAdapter {
         TextView startTime = (TextView) view.findViewById(R.id.tv_element_list_row_event_start_time);
         TextView endTime = (TextView) view.findViewById(R.id.tv_element_list_row_event_end_time);
 
-        place.setText(event.getPlaceName());
+        place.setText(event.getExtra());
 
         Date currentDate = Calendar.getInstance().getTime();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM");

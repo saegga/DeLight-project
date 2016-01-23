@@ -40,7 +40,7 @@
     </style>
 
     <style name="MainButton" parent="Base.TextAppearance.AppCompat.Button">
-        <item name="android:background">@drawable/main_button</item>
+        <item name="android:background">@drawable/main_button_selector</item>
     </style>
 
 

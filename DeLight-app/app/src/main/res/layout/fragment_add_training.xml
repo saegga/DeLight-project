@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:background="@drawable/main_button"
+            android:background="@drawable/main_button_selector"
             android:text="@string/cancel" />
 
     </LinearLayout>

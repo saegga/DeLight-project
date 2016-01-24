@@ -29,7 +29,7 @@ import ru.delightfire.delight.util.UserAccount;
  */
 public class AddEventActivity extends AppCompatActivity {
 
-    private int currentPosition = 1;
+    private int currentPosition = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,8 +94,6 @@ public class AddEventActivity extends AppCompatActivity {
 
                 })
                 .build();
-
-        drawer.setSelectionAtPosition(1);
 
         int request = getIntent().getIntExtra("attach", -1);
         Fragment fragment = null;

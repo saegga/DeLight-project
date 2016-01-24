@@ -94,20 +94,8 @@ public class ScheduleFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), AddEventActivity.class);
                 int position = viewPager.getCurrentItem();
-                switch (position){
-                    case 0:
-                        intent.putExtra("attach", position);
-                        startActivityForResult(intent, position);
-                        break;
-                    case 1:
-                        intent.putExtra("attach", position);
-                        startActivityForResult(intent, position);
-                        break;
-                    case 2:
-                        intent.putExtra("attach", position);
-                        startActivityForResult(intent, position);
-                        break;
-                }
+                intent.putExtra("attach", position);
+                startActivityForResult(intent, position);
             }
         });
 
@@ -151,4 +139,8 @@ public class ScheduleFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

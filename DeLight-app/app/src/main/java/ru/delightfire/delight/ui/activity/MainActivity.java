@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -18,9 +17,6 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.ui.fragment.ScheduleFragment;
 import ru.delightfire.delight.util.UserAccount;
@@ -32,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int currentPosition = 0;
 
-    private Date currentDate = (Date) Calendar.getInstance().getTime();
+    private Drawer drawer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         TextView userName = (TextView) header.findViewById(R.id.user_name);
         userName.setText(UserAccount.getInstance().getUser(this).getLogin());
 
-        Drawer drawer = new DrawerBuilder()
+        drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withHeader(header)
                 .withSelectedItem(0)
@@ -103,14 +99,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_CANCELED && data.getIntExtra("position", currentPosition) != currentPosition) {
+            int position = data.getIntExtra("position", currentPosition);
+            drawer.setSelectionAtPosition(position);
+        }
+    }
+
     private void exit() {
         UserAccount.getInstance().deleteUser(this);
         Intent intent = new Intent(MainActivity.this, LaunchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-    }
-
-    public Date getCurrentDate() {
-        return currentDate;
     }
 }

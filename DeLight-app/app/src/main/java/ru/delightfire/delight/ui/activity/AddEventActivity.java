@@ -69,26 +69,12 @@ public class AddEventActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (currentPosition != position) {
-                            switch (position) {
-                                case 1:
-                                    FragmentManager manager = getSupportFragmentManager();
 
-                                    Fragment scheduleFragment = new ScheduleFragment();
+                        Intent data = new Intent();
+                        data.putExtra("position", position);
+                        setResult(RESULT_CANCELED, data);
+                        finish();
 
-                                    manager.beginTransaction()
-                                            .replace(R.id.fl_activity_main_content, scheduleFragment)
-                                            .commit();
-                                    currentPosition = 1;
-                                    break;
-                                case 4:
-                                    if (true) {
-                                        currentPosition = 4;
-                                        exit();
-                                    }
-                                    break;
-                            }
-                        }
                         return false;
                     }
 
@@ -114,13 +100,6 @@ public class AddEventActivity extends AppCompatActivity {
         manager.beginTransaction()
                 .replace(R.id.fl_activity_add_event_content, fragment)
                 .commit();
-    }
-
-    private void exit() {
-        UserAccount.getInstance().deleteUser(this);
-        Intent intent = new Intent(this, LaunchActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
 }

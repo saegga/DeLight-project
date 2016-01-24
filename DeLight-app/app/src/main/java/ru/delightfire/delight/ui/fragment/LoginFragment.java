@@ -11,13 +11,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.ui.activity.LaunchActivity;
 import ru.delightfire.delight.entity.subject.DelightUser;
+import ru.delightfire.delight.ui.activity.LaunchActivity;
 import ru.delightfire.delight.util.UserAccount;
 
 /**
@@ -52,6 +53,11 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                final MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
+                        .title(R.string.loading)
+                        .progress(true, 0)
+                        .show();
+
                 final String login = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
@@ -77,6 +83,7 @@ public class LoginFragment extends Fragment {
                                     UserAccount.getInstance().saveUser(getActivity().getApplicationContext(), user);
                                     ((LaunchActivity) getActivity()).redirectToMain();
                                 }
+                                materialDialog.dismiss();
                             }
                         });
             }

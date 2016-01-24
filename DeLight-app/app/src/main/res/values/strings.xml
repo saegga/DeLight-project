@@ -35,6 +35,8 @@
     <string name="hint_name">Имя</string>
 
     <string name="divider">:</string>
+    <string name="please_wait">Пожалуйста дождитесь окончания загрузки</string>
+    <string name="loading">Загрузка</string>
 
     <string-array name="arr_days_full">
         <item>Понедельник</item>

@@ -36,14 +36,22 @@ public class DelightEvent implements Comparable{
 
     private String extra;
 
-    public DelightEvent(int eventId, int placeId, int month, int day, String startTime, String endTime, String placeName) {
+    public DelightEvent(int eventId, int placeId, int month, int day, String startTime, String endTime, String extra) {
         this.eventId = eventId;
         this.placeId = placeId;
         this.month = month;
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.extra = placeName;
+        this.extra = extra;
+    }
+
+    public DelightEvent(int placeId, int month, int day, String startTime, String endTime) {
+        this.placeId = placeId;
+        this.month = month;
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public DelightEvent() {
@@ -74,7 +82,7 @@ public class DelightEvent implements Comparable{
         return placeId;
     }
 
-    public String getMonthName() {
+    public static String getMonthName(int month) {
         String monthName = null;
 
         switch (month) {

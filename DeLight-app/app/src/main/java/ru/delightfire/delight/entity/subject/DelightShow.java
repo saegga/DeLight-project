@@ -19,5 +19,8 @@ public class DelightShow extends DelightEventExtended {
      * Номера в выступлении
      */
     private List<DelightPerformance> performances;
-    
+
+    public DelightShow(int placeId, int month, int day, String startTime, String endTime) {
+        super(placeId, month, day, startTime, endTime);
+    }
 }

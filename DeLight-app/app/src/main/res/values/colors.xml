@@ -14,9 +14,9 @@
     <color name="colorAccent">#DD4844</color>
     <color name="black">#000</color>
     <color name="fragment_background">#EEEEEE</color>
+    <color name="button_selected">#EE7672</color>
 
     <color name="secondary_text">#727272</color>
 
-    <color name="fab_color">#ff5252</color>
 
 </resources>

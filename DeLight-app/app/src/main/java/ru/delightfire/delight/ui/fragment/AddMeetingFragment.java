@@ -21,21 +21,21 @@ import ru.delightfire.delight.ui.listener.SetTimeClickListener;
 import ru.delightfire.delight.util.LoadingChecker;
 
 /**
- * Created by sergei on 22.11.2015.
+ * Created by sergei on 24.11.2015.
  */
-public class AddShowFragment extends Fragment {
+public class AddMeetingFragment extends Fragment {
 
     private LoadingChecker checker = new LoadingChecker(5);
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_add_show, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_add_meeting, container, false);
 
-        AppCompatEditText startTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_show_start_time);
-        AppCompatEditText endTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_show_end_time);
+        AppCompatEditText startTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_meeting_start_time);
+        AppCompatEditText endTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_meeting_end_time);
 
-        AppCompatEditText date = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_show_date);
+        AppCompatEditText date = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_meeting_date);
 
         Calendar calendar = Calendar.getInstance();
         Integer year = calendar.get(Calendar.YEAR);
@@ -48,8 +48,8 @@ public class AddShowFragment extends Fragment {
 
         date.setText(dayOfMonth + " " + DelightEvent.getMonthName(month + 1) + " " + year);
 
-        AppCompatButton cancelButton = (AppCompatButton) rootView.findViewById(R.id.acb_fragment_add_show_negative);
-        AppCompatButton okButton = (AppCompatButton) rootView.findViewById(R.id.acb_fragment_add_show_positive);
+        AppCompatButton cancelButton = (AppCompatButton) rootView.findViewById(R.id.acb_fragment_add_meeting_negative);
+        AppCompatButton okButton = (AppCompatButton) rootView.findViewById(R.id.acb_fragment_add_meeting_positive);
 
         cancelButton.setOnClickListener(new CancelClickListener(getActivity()));
         okButton.setOnClickListener(new OkClickListener(getActivity()));
@@ -64,7 +64,6 @@ public class AddShowFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((AddEventActivity) getActivity()).getSupportActionBar().setTitle("Добавить выступление");
+        ((AddEventActivity) getActivity()).getSupportActionBar().setTitle("Добавить встручу");
     }
-
 }

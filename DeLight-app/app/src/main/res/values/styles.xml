@@ -15,6 +15,15 @@
         <item name="colorControlActivated">@color/white</item>
     </style>
 
+    <style name="TimeTextLabel" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/mainBackground</item>
+        <item name="android:textSize">20sp</item>
+        <item name="colorAccent">@color/mainBackground</item>
+        <item name="colorControlNormal">@color/mainBackground</item>
+        <item name="colorControlActivated">@color/mainBackground</item>
+        <item name="android:focusable">false</item>
+    </style>
+
     <style name="AppTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/mainBackground</item>
         <item name="tabIndicatorHeight">4dp</item>
@@ -29,6 +38,10 @@
         <item name="android:textColor">@color/mainBackground</item>
         <item name="textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MainButton" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/main_button_selector</item>
     </style>
 
 

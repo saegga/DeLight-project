@@ -14,13 +14,13 @@
         android:layout_margin="5dp">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_fragment_add_meeting_name"
+            android:id="@+id/til_fragment_add_show_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/TimeTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/acet_fragment_add_meeting_name"
+                android:id="@+id/acet_fragment_add_show_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
@@ -40,13 +40,13 @@
         android:orientation="horizontal">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_fragment_add_meeting_place"
+            android:id="@+id/til_fragment_add_show_place"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/TimeTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/acet_fragment_add_meeting_place"
+                android:id="@+id/acet_fragment_add_show_place"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
@@ -66,13 +66,13 @@
         android:orientation="horizontal">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_fragment_add_meeting_date"
+            android:id="@+id/til_fragment_add_show_date"
             android:layout_width="@dimen/set_date"
             android:layout_height="wrap_content"
             android:theme="@style/TimeTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/acet_fragment_add_meeting_date"
+                android:id="@+id/acet_fragment_add_show_date"
                 android:layout_width="@dimen/set_date"
                 android:layout_height="wrap_content"
                 android:focusable="false"
@@ -83,13 +83,13 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_fragment_add_meeting_start_time"
+            android:id="@+id/til_fragment_add_show_start_time"
             android:layout_width="@dimen/set_time"
             android:layout_height="wrap_content"
             android:theme="@style/TimeTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/acet_fragment_add_meeting_start_time"
+                android:id="@+id/acet_fragment_add_show_start_time"
                 android:layout_width="@dimen/set_time"
                 android:layout_height="wrap_content"
                 android:focusable="false"
@@ -101,13 +101,13 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_fragment_add_meeting_end_time"
+            android:id="@+id/til_fragment_add_show_end_time"
             android:layout_width="@dimen/set_time"
             android:layout_height="wrap_content"
             android:theme="@style/TimeTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/acet_fragment_add_meeting_end_time"
+                android:id="@+id/acet_fragment_add_show_end_time"
                 android:layout_width="@dimen/set_time"
                 android:layout_height="wrap_content"
                 android:focusable="false"
@@ -126,8 +126,8 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/acb_fragment_add_show_positive"
             style="@style/MainButton"
-            android:id="@+id/acb_fragment_add_meeting_positive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -135,7 +135,7 @@
             android:text="@string/add" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/acb_fragment_add_meeting_negative"
+            android:id="@+id/acb_fragment_add_show_negative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"

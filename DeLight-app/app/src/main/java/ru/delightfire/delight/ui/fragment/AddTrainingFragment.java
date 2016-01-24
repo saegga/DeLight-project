@@ -1,152 +1,209 @@
 package ru.delightfire.delight.ui.fragment;
 
-import android.annotation.TargetApi;
-import android.app.Dialog;
-import android.os.Build;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.GridView;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
 import java.util.Calendar;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.ui.adapter.DayGridAdapter;
+import ru.delightfire.delight.entity.subject.DelightEvent;
+import ru.delightfire.delight.entity.subject.DelightTraining;
+import ru.delightfire.delight.ui.activity.AddEventActivity;
+import ru.delightfire.delight.ui.listener.CancelClickListener;
+import ru.delightfire.delight.ui.listener.SetDateClickListener;
+import ru.delightfire.delight.ui.listener.SetTimeClickListener;
+import ru.delightfire.delight.util.DelightTrainingSerealizer;
 
 /**
  * Created by sergei on 27.11.2015.
  */
-public class AddTrainingFragment extends Fragment implements View.OnClickListener {
+public class AddTrainingFragment extends Fragment {
 
-    private static final String TIME_BUNDLE_KEY = "time_bundle_key";
-    private static final String DAY_BUNDLE_KEY = "day_bundle_key";
-
-    private TextView dayOfWeek;
-    private TextView timeDataView;
-    private Spinner usersSpinner;
-    private TimePicker timePicker;
-    private Button btnSetTime;
-    private Dialog dialog;
-    private Button btnOk;
-    private Calendar calendar;
-    private GridView grid;
-    private String timeData;
-    private String[] arrDays;
-    private String day;
-    private Button btnSaveTraining;
-
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_training, container, false);
-
-        timeDataView = (TextView) view.findViewById(R.id.time_data);
-        usersSpinner = (Spinner) view.findViewById(R.id.list_users);
-        SpinnerAdapter adapter = new ArrayAdapter<>(getActivity(),
-                R.layout.spinner_user_row, R.id.user_name, getArrays());
-        usersSpinner.setAdapter(adapter);
-        dayOfWeek = (TextView) view.findViewById(R.id.day_of_week_data);
-        btnSetTime = (Button) view.findViewById(R.id.btn_set_time);
-        btnSetTime.setOnClickListener(this);
-        btnSaveTraining = (Button) view.findViewById(R.id.btn_save);
-        //btnSaveTraining.setOnClickListener(saveListener);
-        if (calendar == null) {
-            calendar = Calendar.getInstance();
-        }
-        if (savedInstanceState != null) {
-            if (savedInstanceState.containsKey(TIME_BUNDLE_KEY)) {
-                timeData = savedInstanceState.getString(TIME_BUNDLE_KEY);
-                timeDataView.setText(timeData);
-            }
-
-            if (savedInstanceState.containsKey(DAY_BUNDLE_KEY)) {
-                day = savedInstanceState.getString(DAY_BUNDLE_KEY);
-                dayOfWeek.setText(day);
-            }
-        }
-        grid = (GridView) view.findViewById(R.id.test_grid);
-        DayGridAdapter dayGridAdapter = new DayGridAdapter(getActivity(), R.layout.day_of_week_grid);
-        grid.setAdapter(dayGridAdapter);
-        grid.setOnItemClickListener(itemGridListener);
-        return view;
-    }
-
-    @Override
-    public void onClick(View v) {
-        dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.time_picker);
-        dialog.setTitle("Выбери время");
-        timePicker = (TimePicker) dialog.findViewById(R.id.set_time);
-        timePicker.setIs24HourView(true);
-        btnOk = (Button) dialog.findViewById(R.id.btn_ok);
-        btnOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
-                calendar.set(Calendar.MINUTE, timePicker.getCurrentMinute());
-                DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT);
-                timeData = df.format(calendar.getTime());
-                Log.d("TIme: ", timeData);
-                timeDataView.setText(timeData);
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
-    private ArrayList<String> getArrays() {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("first");
-        list.add("first");
-        list.add("first");
-        list.add("first");
-        return list;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (timeData != null) {
-            outState.putString(TIME_BUNDLE_KEY, timeData);
-        }
-        if (day != null) {
-            outState.putString(DAY_BUNDLE_KEY, day);
-        }
-    }
-
-    public AbsListView.OnItemClickListener itemGridListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            day = arrDays[position];
-            dayOfWeek.setText(day);
-        }
-    };
+    private Spinner place;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        ((AddEventActivity) getActivity()).getSupportActionBar().setTitle("Добавить тренировку");
         super.onCreate(savedInstanceState);
-        arrDays = getResources().getStringArray(R.array.arr_days_full);
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        Fragment fragment = new LoadingFragment();
+        manager.beginTransaction()
+                .add(R.id.fl_activity_add_event_content, fragment, "loading")
+                .show(fragment)
+                .commit();
     }
 
-    View.OnClickListener saveListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_add_training, container, false);
 
-        }
-    };
+        place = (Spinner) rootView.findViewById(R.id.sp_fragment_add_training_place);
+
+        AppCompatEditText startTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_start_time);
+        AppCompatEditText endTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_end_time);
+        AppCompatEditText date = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_date);
+
+        Calendar calendar = Calendar.getInstance();
+        Integer year = calendar.get(Calendar.YEAR);
+        Integer month = calendar.get(Calendar.MONTH);
+        Integer dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        final Integer monthTo = month;
+        final Integer dayTo = dayOfMonth;
+
+        startTime.setOnClickListener(new SetTimeClickListener(getActivity()));
+        endTime.setOnClickListener(new SetTimeClickListener(getActivity()));
+        date.setOnClickListener(new SetDateClickListener(getActivity(), year, month, dayOfMonth));
+
+        date.setText(dayOfMonth + " " + DelightEvent.getMonthName(month + 1) + " " + year);
+
+        AppCompatButton cancelButton = (AppCompatButton) rootView.findViewById(R.id.acb_fragment_add_training_negative);
+        AppCompatButton okButton = (AppCompatButton) rootView.findViewById(R.id.acb_fragment_add_training_positive);
+
+        cancelButton.setOnClickListener(new CancelClickListener(getActivity()));
+
+        startTime.setText("18:00");
+        endTime.setText("21:00");
+
+        final AppCompatEditText startTimeTo = startTime;
+        final AppCompatEditText endTimeTo = endTime;
+
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
+                        .title(R.string.loading)
+                        .progressIndeterminateStyle(true)
+                        .backgroundColorRes(R.color.mainBackground)
+                        .widgetColorRes(R.color.white)
+                        .progress(true, 0)
+                        .show();
+
+                int placeId = place.getSelectedItemPosition() + 1;
+                DelightTraining training = new DelightTraining(placeId, monthTo + 1, dayTo,
+                        getTime(startTimeTo), getTime(endTimeTo));
+
+                Gson gson = new GsonBuilder()
+                        .registerTypeAdapter(DelightTraining.class, new DelightTrainingSerealizer())
+                        .create();
+
+                String json = gson.toJson(training);
+
+                Ion.with(getActivity())
+                        .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/create/create_training")
+                        .setBodyParameter("json", gson.toJson(training))
+                        .asJsonObject()
+                        .setCallback(new FutureCallback<JsonObject>() {
+                            @Override
+                            public void onCompleted(Exception e, JsonObject result) {
+                                materialDialog.dismiss();
+                                if (result != null) {
+                                    if (result.get("success").getAsInt() == 1) {
+                                        new MaterialDialog.Builder(getActivity())
+                                                .title(R.string.success)
+                                                .content(R.string.success_add_training)
+                                                .positiveText(R.string.ok)
+                                                .backgroundColorRes(R.color.mainBackground)
+                                                .positiveColorRes(R.color.white)
+                                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                                    @Override
+                                                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                                                        dialog.dismiss();
+                                                        Intent data = new Intent();
+                                                        getActivity().setResult(Activity.RESULT_OK, data);
+                                                        getActivity().finish();
+                                                    }
+                                                })
+                                                .show();
+                                    } else {
+                                        new MaterialDialog.Builder(getActivity())
+                                                .title(R.string.error)
+                                                .positiveText(R.string.ok)
+                                                .backgroundColorRes(R.color.mainBackground)
+                                                .show();
+                                    }
+                                } else {
+                                    new MaterialDialog.Builder(getActivity())
+                                            .title(R.string.error)
+                                            .positiveText(R.string.ok)
+                                            .backgroundColorRes(R.color.mainBackground)
+                                            .show();
+                                }
+                            }
+                        });
+            }
+        });
+
+        initData();
+
+        return rootView;
+    }
+
+    private void initView() {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        Fragment fragment = manager.findFragmentByTag("loading");
+        manager.beginTransaction()
+                .hide(fragment)
+                .remove(fragment)
+                .commit();
+    }
+
+    private void initData() {
+        Ion.with(getActivity())
+                .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_places")
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        JsonArray array = result.get("places").getAsJsonArray();
+                        String placesArray[] = new String[array.size()];
+                        for (int i = 0; i < placesArray.length; i++) {
+                            placesArray[i] = array.get(i).getAsJsonObject().get("name").getAsString();
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                                R.layout.spinner_item, placesArray);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        place.setAdapter(adapter);
+                        initView();
+                    }
+                });
+    }
+
+    public String getTime(EditText editText) {
+        int hour = Integer.parseInt(editText.getText().toString().substring(0, 2));
+        int minute = Integer.parseInt(editText.getText().toString().substring(3, 5));
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.valueOf(hour).length() == 1 ? new StringBuilder("0").append(hour) : hour);
+        stringBuilder.append(":");
+        stringBuilder.append(String.valueOf(minute).length() == 1 ? new StringBuilder("0").append(minute) : minute);
+
+        return stringBuilder.toString();
+    }
+
 }

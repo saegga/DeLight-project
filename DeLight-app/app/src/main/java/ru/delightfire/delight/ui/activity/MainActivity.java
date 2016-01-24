@@ -17,9 +17,6 @@ import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.ui.fragment.ScheduleFragment;
 import ru.delightfire.delight.util.UserAccount;
@@ -30,9 +27,10 @@ import ru.delightfire.delight.util.UserAccount;
 public class MainActivity extends AppCompatActivity {
 
     private int currentPosition = 0;
-    private Toolbar toolbar;
 
-    private Date currentDate = (Date) Calendar.getInstance().getTime();
+    boolean hardReload = false;
+
+    private Drawer drawer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tb_activity_main);
 
         setSupportActionBar(toolbar);
 
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         TextView userName = (TextView) header.findViewById(R.id.user_name);
         userName.setText(UserAccount.getInstance().getUser(this).getLogin());
 
-        Drawer drawer = new DrawerBuilder()
+        drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withHeader(header)
                 .withSelectedItem(0)
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (currentPosition != position) {
+                        if (currentPosition != position || hardReload) {
                             switch (position) {
                                 case 1:
                                     FragmentManager manager = getSupportFragmentManager();
@@ -83,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                                     manager.beginTransaction()
                                             .replace(R.id.fl_activity_main_content, scheduleFragment)
                                             .commit();
+
                                     currentPosition = 1;
                                     break;
                                 case 4:
@@ -93,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                             }
                         }
+                        if (hardReload)
+                            hardReload = !hardReload;
+
                         return false;
                     }
 
@@ -103,14 +105,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            if (resultCode == RESULT_CANCELED && data.getIntExtra("position", currentPosition) != currentPosition) {
+                int position = data.getIntExtra("position", currentPosition);
+                drawer.setSelectionAtPosition(position);
+            }
+        }
+
+        if (resultCode == RESULT_OK) {
+            hardReload = true;
+            drawer.setSelectionAtPosition(currentPosition);
+        }
+    }
+
     private void exit() {
         UserAccount.getInstance().deleteUser(this);
         Intent intent = new Intent(MainActivity.this, LaunchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-    }
-
-    public Date getCurrentDate() {
-        return currentDate;
     }
 }

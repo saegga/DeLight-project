@@ -6,12 +6,11 @@
     <string name="exit">Выход</string>
 
     <string name="send_msg">Отправить</string>
-    <string name="hint_name">Имя пользователя</string>
+    <string name="hint_login">Имя пользователя</string>
     <string name="hint_password">Пароль</string>
     <string name="check">Проверить</string>
     <string name="login">Вход</string>
     <string name="register">Регистрация</string>
-    <string name="regkey_hint">Введите ключ регистрации</string>
     <string name="text_view_name">Номера:</string>
     <string name="text_view_description">Клиент:</string>
     <string name="text_view_date">Дата:</string>
@@ -23,6 +22,26 @@
     <string name="text_view_agenda">Описание события:</string>
     <string name="choose_date">Выбрать дату</string>
     <string name="save">сохранить</string>
+
+    <string name="add">Добавить</string>
+    <string name="cancel">Отмена</string>
+
+    <string name="start_time_hint">Начало</string>
+    <string name="end_time_hint">Конец</string>
+    <string name="start_time">18:00</string>
+    <string name="end_time">21:00</string>
+    <string name="date_hint">Дата</string>
+    <string name="place_hint">Место:</string>
+    <string name="hint_name">Имя</string>
+
+    <string name="divider">:</string>
+    <string name="please_wait">Пожалуйста дождитесь окончания загрузки</string>
+    <string name="loading">Загрузка</string>
+    <string name="error">Ошибка</string>
+    <string name="check_connection">Проверьте соединение с интернетом</string>
+    <string name="wrong_auth">Неверное имя пользователя или пароль</string>
+    <string name="success">Успешно</string>
+    <string name="success_add_training">Тренировка успешно добавлена</string>
 
     <string-array name="arr_days_full">
         <item>Понедельник</item>

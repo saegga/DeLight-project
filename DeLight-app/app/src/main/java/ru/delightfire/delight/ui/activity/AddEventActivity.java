@@ -1,109 +1,103 @@
 package ru.delightfire.delight.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.TextView;
+
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.ui.fragment.AddMeetFragment;
+import ru.delightfire.delight.ui.fragment.AddMeetingFragment;
 import ru.delightfire.delight.ui.fragment.AddShowFragment;
 import ru.delightfire.delight.ui.fragment.AddTrainingFragment;
+import ru.delightfire.delight.ui.fragment.ScheduleFragment;
+import ru.delightfire.delight.util.UserAccount;
 
 /**
  * Created by sergei on 18.11.2015.
  */
-public class AddEventActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
-    private static final String FRAGMENT_ADD_SAVE_STATE = "fragment_add_save_state";
-    private static final String BUNDLE_KEY_STATE_CHECK = "bundle_key_state_check";
-    private RadioGroup group;
-    private RadioButton btnPerformance;
-    private RadioButton btnMeet;
-    private RadioButton btnTraining;
-    private FragmentManager manager;
-    private FragmentTransaction transaction;
-    private int check = -1;
-    Fragment actionFragment;
+public class AddEventActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_event);
-        group = (RadioGroup) (findViewById(R.id.group_choose));
-        btnPerformance = (RadioButton) findViewById(R.id.btn_performance);
-        btnMeet = (RadioButton) findViewById(R.id.btn_meet);
-        btnTraining = (RadioButton) findViewById(R.id.btn_training);
-        group.setOnCheckedChangeListener(this);
-        manager = getSupportFragmentManager();
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tb_activity_add_event);
+        setSupportActionBar(toolbar);
 
-    }
+        new DrawerBuilder().withActivity(this).build();
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        transaction = manager.beginTransaction();
-        check = checkedId;
-        switch (checkedId) {
-            case R.id.btn_performance:
-                actionFragment = new AddShowFragment();
-                createActionFragment();
+        PrimaryDrawerItem scheduleItem = new PrimaryDrawerItem()
+                .withName(R.string.schedule)
+                .withIcon(FontAwesome.Icon.faw_list);
+        PrimaryDrawerItem profileItem = new PrimaryDrawerItem()
+                .withName(R.string.profile)
+                .withIcon(FontAwesome.Icon.faw_user);
+        DividerDrawerItem dividerItem = new DividerDrawerItem();
+        SecondaryDrawerItem exitItem = new SecondaryDrawerItem().withName(R.string.exit);
+
+        View header = getLayoutInflater().inflate(R.layout.element_drawer_header, null);
+        TextView userName = (TextView) header.findViewById(R.id.user_name);
+        userName.setText(UserAccount.getInstance().getUser(this).getLogin());
+
+        Drawer drawer = new DrawerBuilder()
+                .withActivity(this)
+                .withHeader(header)
+                .withSelectedItem(0)
+                .withToolbar(toolbar)
+                .addDrawerItems(
+                        scheduleItem,
+                        profileItem,
+                        dividerItem,
+                        exitItem
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+
+                        Intent data = new Intent();
+                        data.putExtra("position", position);
+                        setResult(RESULT_CANCELED, data);
+                        finish();
+
+                        return false;
+                    }
+
+                })
+                .build();
+
+        int request = getIntent().getIntExtra("attach", -1);
+        Fragment fragment = null;
+
+        switch (request) {
+            case 0:
+                fragment = new AddTrainingFragment();
                 break;
-            case R.id.btn_meet:
-                actionFragment = new AddMeetFragment();
-                createActionFragment();
-                Log.d("AddEventActivity", "check" + checkedId);
+            case 1:
+                fragment = new AddShowFragment();
                 break;
-            case R.id.btn_training:
-                actionFragment = new AddTrainingFragment();
-                createActionFragment();
-                Log.d("AddEventActivity", "check" + checkedId);
+            case 2:
+                fragment = new AddMeetingFragment();
                 break;
         }
-        transaction.commit();
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .replace(R.id.fl_activity_add_event_content, fragment)
+                .commit();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        if (actionFragment != null) {
-            //manager.putFragment(outState, FRAGMENT_ADD_SAVE_STATE, actionFragment);
-        }
-        if (check != -1) {
-            outState.putInt(BUNDLE_KEY_STATE_CHECK, check);
-        }
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        //super.onRestoreInstanceState(savedInstanceState);
-        check = savedInstanceState.getInt(BUNDLE_KEY_STATE_CHECK);
-        group.check(check);
-        //actionFragment = manager.getFragment(savedInstanceState, FRAGMENT_ADD_SAVE_STATE);
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (actionFragment != null) {
-//            transaction = manager.beginTransaction();
-//            transaction.replace(R.id.add_event_container , actionFragment);
-//            transaction.commit();
-        }
-    }
-
-    private void createActionFragment() {
-        if (manager.getFragments() != null) {
-            Log.d("AddEventActivity", "replace");
-            transaction.replace(R.id.add_event_container, actionFragment);
-        } else {
-            Log.d("AddEventActivity", "add");
-            transaction.add(R.id.add_event_container, actionFragment);
-        }
-    }
 }
-// todo сделать сохранение состояния

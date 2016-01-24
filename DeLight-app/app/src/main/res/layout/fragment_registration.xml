@@ -15,8 +15,18 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/btn_auth"
+        android:background="@drawable/main_button_selector"
         android:text="@string/register"
+        android:textColor="@color/white" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_fragment_registration_cancel"
+        android:layout_width="@dimen/btns_login_width"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_fragment_registration_register_confirm"
+        android:background="@drawable/main_button_selector"
+        android:text="@string/cancel"
         android:textColor="@color/white" />
 
     <android.support.design.widget.TextInputLayout
@@ -49,7 +59,7 @@
             android:id="@+id/acet_fragment_registration_input_login"
             android:layout_width="@dimen/btns_login_width"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_name"
+            android:hint="@string/hint_login"
             android:inputType="text"
             android:textColor="@color/white" />
     </android.support.design.widget.TextInputLayout>

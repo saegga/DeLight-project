@@ -1,10 +1,12 @@
 package ru.delightfire.delight.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,8 @@ import java.util.List;
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.subject.DelightEvent;
 import ru.delightfire.delight.entity.support.DelightPageInfo;
+import ru.delightfire.delight.ui.activity.AddEventActivity;
+import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.ui.adapter.EventAdapter;
 import ru.delightfire.delight.ui.adapter.ViewPagerAdapter;
 import ru.delightfire.delight.util.DelightEventDeserializer;
@@ -41,17 +45,29 @@ public class ScheduleFragment extends Fragment {
     private List<DelightEvent> performances = new ArrayList<>();
     private List<DelightEvent> meetings = new ArrayList<>();
 
-    private FloatingActionButton fab;
     final LoadingChecker checker = new LoadingChecker(3);
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ViewPagerAdapter pagerAdapter;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        Fragment fragment = new LoadingFragment();
+        manager.beginTransaction()
+                .add(R.id.fl_activity_main_content, fragment, "loading")
+                .show(fragment)
+                .commit();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Расписание");
 
         viewPager = (ViewPager) rootView.findViewById(R.id.vp_fragment_main);
 
@@ -81,13 +97,16 @@ public class ScheduleFragment extends Fragment {
                 .color(getResources().getColor(R.color.white))
                 .sizeDp(18);
 
-        fab = (FloatingActionButton) rootView.findViewById(R.id.fab_activity_main);
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_activity_main);
         fab.setImageDrawable(fabIcon);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("fab::", "click");
+                Intent intent = new Intent(getContext(), AddEventActivity.class);
+                int position = viewPager.getCurrentItem();
+                intent.putExtra("attach", position);
+                startActivityForResult(intent, position);
             }
         });
 
@@ -118,6 +137,7 @@ public class ScheduleFragment extends Fragment {
 
                             Collections.sort(events);
 
+                            checker.wasComplete();
                             if (checker.isLoaded()) {
                                 initView();
                             }
@@ -129,6 +149,11 @@ public class ScheduleFragment extends Fragment {
     private void initView() {
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        Fragment fragment = manager.findFragmentByTag("loading");
+        manager.beginTransaction()
+                .hide(fragment)
+                .remove(fragment)
+                .commit();
     }
-
 }

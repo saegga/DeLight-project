@@ -77,7 +77,7 @@ public class EventAdapter extends BaseAdapter {
         else if (day == event.getDay() - 1 && month == event.getMonth()) {
             date.setText("Завтра");
         } else {
-            date.setText(event.getDay() + " " + event.getMonthName());
+            date.setText(event.getDay() + " " + event.getMonthName(event.getMonth()));
         }
 
         startTime.setText(event.getStartTime());

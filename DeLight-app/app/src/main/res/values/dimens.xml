@@ -6,5 +6,5 @@
     <dimen name="btns_login_width">250dp</dimen>
     <dimen name="text_drawer_size">20sp</dimen>
     <dimen name="set_time">60dp</dimen>
-    <dimen name="set_date">150dp</dimen>
+    <dimen name="set_date">160dp</dimen>
 </resources>

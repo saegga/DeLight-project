@@ -74,7 +74,7 @@ public class DelightEvent implements Comparable{
         return placeId;
     }
 
-    public String getMonthName() {
+    public static String getMonthName(int month) {
         String monthName = null;
 
         switch (month) {

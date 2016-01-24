@@ -1,11 +1,14 @@
 package ru.delightfire.delight.ui.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -95,6 +99,7 @@ public class AddTrainingFragment extends Fragment {
                         .title(R.string.loading)
                         .progressIndeterminateStyle(true)
                         .backgroundColorRes(R.color.mainBackground)
+                        .widgetColorRes(R.color.white)
                         .progress(true, 0)
                         .show();
 
@@ -121,18 +126,30 @@ public class AddTrainingFragment extends Fragment {
                                         new MaterialDialog.Builder(getActivity())
                                                 .title(R.string.success)
                                                 .content(R.string.success_add_training)
+                                                .positiveText(R.string.ok)
                                                 .backgroundColorRes(R.color.mainBackground)
+                                                .positiveColorRes(R.color.white)
+                                                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                                    @Override
+                                                    public void onClick(MaterialDialog dialog, DialogAction which) {
+                                                        dialog.dismiss();
+                                                        Intent data = new Intent();
+                                                        getActivity().setResult(Activity.RESULT_OK, data);
+                                                        getActivity().finish();
+                                                    }
+                                                })
                                                 .show();
-
                                     } else {
                                         new MaterialDialog.Builder(getActivity())
                                                 .title(R.string.error)
+                                                .positiveText(R.string.ok)
                                                 .backgroundColorRes(R.color.mainBackground)
                                                 .show();
                                     }
                                 } else {
                                     new MaterialDialog.Builder(getActivity())
                                             .title(R.string.error)
+                                            .positiveText(R.string.ok)
                                             .backgroundColorRes(R.color.mainBackground)
                                             .show();
                                 }

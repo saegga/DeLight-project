@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int currentPosition = 0;
 
+    boolean hardReload = false;
+
     private Drawer drawer;
 
     @Override
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (currentPosition != position) {
+                        if (currentPosition != position || hardReload) {
                             switch (position) {
                                 case 1:
                                     FragmentManager manager = getSupportFragmentManager();
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                                     manager.beginTransaction()
                                             .replace(R.id.fl_activity_main_content, scheduleFragment)
                                             .commit();
+
                                     currentPosition = 1;
                                     break;
                                 case 4:
@@ -89,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                             }
                         }
+                        if (hardReload)
+                            hardReload = !hardReload;
+
                         return false;
                     }
 
@@ -106,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
                 int position = data.getIntExtra("position", currentPosition);
                 drawer.setSelectionAtPosition(position);
             }
+        }
+
+        if (resultCode == RESULT_OK) {
+            hardReload = true;
+            drawer.setSelectionAtPosition(currentPosition);
         }
     }
 

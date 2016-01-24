@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import ru.delightfire.delight.util.LoadingChecker;
+
 /**
  * Created by scaredChatsky on 24.01.2016.
  */

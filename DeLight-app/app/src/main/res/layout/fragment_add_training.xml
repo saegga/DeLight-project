@@ -10,25 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:gravity="center_horizontal"
+        android:gravity="left"
         android:orientation="horizontal">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_fragment_add_training_place"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:text="@string/place_hint"
+            android:textColor="@color/mainBackground"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp"/>
 
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/acet_fragment_add_training_place"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:hint="@string/place_hint"
-                android:inputType="time"
-                android:textColor="@color/mainBackground" />
+        <Spinner
+            android:id="@+id/sp_fragment_add_training_place"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp">
 
-        </android.support.design.widget.TextInputLayout>
+        </Spinner>
 
     </LinearLayout>
 

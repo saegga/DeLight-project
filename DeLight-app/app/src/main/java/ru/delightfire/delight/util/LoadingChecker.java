@@ -16,7 +16,6 @@ public class LoadingChecker {
     }
 
     public synchronized boolean isLoaded() {
-        wasComplete();
         for (int i = 0; i < conditions.size(); i++) {
             if (conditions.get(i))
                 continue;

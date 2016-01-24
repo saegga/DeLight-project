@@ -1,33 +1,30 @@
 <?php
+
+require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
+
+$db = new DB_CONNECT();
+
 $response = array();
 
-if (isset($_POST['name']) && isset($_POST['price']) && isset($_POST['description'])) {
-   
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $description = $_POST['description'];
-    
-    require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
-    
-    $db = new DB_CONNECT();
-    
-    $result = $con->mysqli_query("INSERT INTO products(name, price, description) VALUES('$name', '$price', '$description')");
-    
-    if ($result) {
-        $response["success"] = 1;
-        $response["message"] = "Product successfully created.";
-        
-        echo json_encode($response);
-    } else {
-        $response["success"] = 0;
-        $response["message"] = "Oops! An error occurred.";
-        
-        echo json_encode($response);
-    }
-} else {
+$json = $_POST["json"];
+
+if (isset($_POST["json"])){
+    $json = json_decode($_POST["json"], true);
+
+    $place_id = $json["place_id"];
+    $date = $json["date"];
+    $owner_id = $json["owner_id"];
+    $start_time = $json["start_time"];
+    $end_time = $json["end_time"];
+
+    $db->getConnection()->query("INSERT INTO current_trainings(place_id, date, owner_id, start_time, end_time) "
+        ."VALUES('$place_id', '$date', '$owner_id', '$start_time', '$end_time')");
+    $response["success"] = 1;
+
+} else{
     $response["success"] = 0;
-    $response["message"] = "Required field(s) is missing";
-    
-    echo json_encode($response);
 }
+
+echo json_encode($response);
+
 ?>

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import java.util.Calendar;
 
 import ru.delightfire.delight.entity.subject.DelightEvent;
+import ru.delightfire.delight.util.LoadingChecker;
 
 /**
  * Created by dev on 24.01.2016.
@@ -32,8 +33,6 @@ public class SetDateClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         final EditText editText = (EditText) v;
-
-        Calendar calendar = Calendar.getInstance();
 
         DatePickerDialog pickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
             @Override

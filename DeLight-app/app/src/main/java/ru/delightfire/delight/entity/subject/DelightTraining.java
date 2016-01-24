@@ -31,4 +31,8 @@ public class DelightTraining extends DelightEventExtended {
         usersOnTraining.remove(user);
     }
 
+    public DelightTraining(int placeId, int month, int day, String startTime, String endTime){
+        super(placeId, month, day, startTime, endTime);
+    }
+
 }

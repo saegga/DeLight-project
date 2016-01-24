@@ -18,11 +18,14 @@ import ru.delightfire.delight.ui.listener.CancelClickListener;
 import ru.delightfire.delight.ui.listener.OkClickListener;
 import ru.delightfire.delight.ui.listener.SetDateClickListener;
 import ru.delightfire.delight.ui.listener.SetTimeClickListener;
+import ru.delightfire.delight.util.LoadingChecker;
 
 /**
  * Created by sergei on 24.11.2015.
  */
 public class AddMeetingFragment extends Fragment {
+
+    private LoadingChecker checker = new LoadingChecker(5);
 
     @Nullable
     @Override

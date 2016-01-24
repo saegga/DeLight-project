@@ -19,4 +19,8 @@ public abstract class DelightEventExtended extends DelightEvent {
     public int getOwnerId() {
         return ownerId;
     }
+
+    public DelightEventExtended(int placeId, int month, int day, String startTime, String endTime){
+        super(placeId, month, day, startTime, endTime);
+    }
 }

@@ -137,6 +137,7 @@ public class ScheduleFragment extends Fragment {
 
                             Collections.sort(events);
 
+                            checker.wasComplete();
                             if (checker.isLoaded()) {
                                 initView();
                             }

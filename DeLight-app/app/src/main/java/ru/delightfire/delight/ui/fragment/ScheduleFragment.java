@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,12 +45,22 @@ public class ScheduleFragment extends Fragment {
     private List<DelightEvent> performances = new ArrayList<>();
     private List<DelightEvent> meetings = new ArrayList<>();
 
-    private FloatingActionButton fab;
     final LoadingChecker checker = new LoadingChecker(3);
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ViewPagerAdapter pagerAdapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        Fragment fragment = new LoadingFragment();
+        manager.beginTransaction()
+                .add(R.id.fl_activity_main_content, fragment, "loading")
+                .show(fragment)
+                .commit();
+    }
 
     @Nullable
     @Override
@@ -86,7 +97,7 @@ public class ScheduleFragment extends Fragment {
                 .color(getResources().getColor(R.color.white))
                 .sizeDp(18);
 
-        fab = (FloatingActionButton) rootView.findViewById(R.id.fab_activity_main);
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_activity_main);
         fab.setImageDrawable(fabIcon);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -137,10 +148,11 @@ public class ScheduleFragment extends Fragment {
     private void initView() {
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        Fragment fragment = manager.findFragmentByTag("loading");
+        manager.beginTransaction()
+                .hide(fragment)
+                .remove(fragment)
+                .commit();
     }
 }

@@ -55,6 +55,8 @@ public class LoginFragment extends Fragment {
 
                 final MaterialDialog materialDialog = new MaterialDialog.Builder(getActivity())
                         .title(R.string.loading)
+                        .progressIndeterminateStyle(true)
+                        .backgroundColorRes(R.color.mainBackground)
                         .progress(true, 0)
                         .show();
 
@@ -70,18 +72,35 @@ public class LoginFragment extends Fragment {
                         .setCallback(new FutureCallback<JsonObject>() {
                             @Override
                             public void onCompleted(Exception e, JsonObject result) {
+                                if (result != null) {
+                                    if (e != null) {
+                                        Log.d("Login::", e.getMessage());
+                                        return;
+                                    }
 
-                                if (e != null) {
-                                    Log.d("Login::", e.getMessage());
-                                    return;
-                                }
+                                    Log.d("Response:: ", result.toString());
 
-                                Log.d("Response:: ", result.toString());
-
-                                if (result.get("success").getAsInt() == 1) {
-                                    DelightUser user = new DelightUser(login, password);
-                                    UserAccount.getInstance().saveUser(getActivity().getApplicationContext(), user);
-                                    ((LaunchActivity) getActivity()).redirectToMain();
+                                    if (result.get("success").getAsInt() == 1) {
+                                        DelightUser user = new DelightUser(login, password);
+                                        UserAccount.getInstance().saveUser(getActivity().getApplicationContext(), user);
+                                        ((LaunchActivity) getActivity()).redirectToMain();
+                                    } else {
+                                        new MaterialDialog.Builder(getActivity())
+                                                .title(R.string.error)
+                                                .content(R.string.wrong_auth)
+                                                .backgroundColorRes(R.color.mainBackground)
+                                                .positiveColorRes(R.color.white)
+                                                .positiveText(R.string.ok)
+                                                .show();
+                                    }
+                                } else {
+                                    new MaterialDialog.Builder(getActivity())
+                                            .title(R.string.error)
+                                            .content(R.string.check_connection)
+                                            .backgroundColorRes(R.color.mainBackground)
+                                            .positiveColorRes(R.color.white)
+                                            .positiveText(R.string.ok)
+                                            .show();
                                 }
                                 materialDialog.dismiss();
                             }

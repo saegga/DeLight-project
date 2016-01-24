@@ -37,6 +37,9 @@
     <string name="divider">:</string>
     <string name="please_wait">Пожалуйста дождитесь окончания загрузки</string>
     <string name="loading">Загрузка</string>
+    <string name="error">Ошибка</string>
+    <string name="check_connection">Проверьте соединение с интернетом</string>
+    <string name="wrong_auth">Неверное имя пользователя или пароль</string>
 
     <string-array name="arr_days_full">
         <item>Понедельник</item>

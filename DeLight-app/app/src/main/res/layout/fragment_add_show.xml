@@ -126,6 +126,7 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/acb_fragment_add_show_positive"
             style="@style/MainButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,6 +135,7 @@
             android:text="@string/add" />
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/acb_fragment_add_show_negative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"

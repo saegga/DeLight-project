@@ -45,7 +45,6 @@ public class SetDateClickListener implements View.OnClickListener {
             }
         }, mYear, mMonth, mDayOfMonth);
 
-        pickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Отмена", pickerDialog);
         pickerDialog.show();
     }
 

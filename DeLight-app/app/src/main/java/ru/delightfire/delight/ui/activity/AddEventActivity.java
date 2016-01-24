@@ -29,8 +29,6 @@ import ru.delightfire.delight.util.UserAccount;
  */
 public class AddEventActivity extends AppCompatActivity {
 
-    private int currentPosition = 0;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

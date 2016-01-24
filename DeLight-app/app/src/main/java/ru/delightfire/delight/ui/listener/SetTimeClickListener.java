@@ -2,7 +2,6 @@ package ru.delightfire.delight.ui.listener;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -10,11 +9,11 @@ import android.widget.TimePicker;
 /**
  * Created by scaredChatsky on 24.01.2016.
  */
-public class SetTimeClickListener implements View.OnClickListener{
+public class SetTimeClickListener implements View.OnClickListener {
 
     private Context context;
 
-    public SetTimeClickListener(Context context){
+    public SetTimeClickListener(Context context) {
         this.context = context;
     }
 
@@ -36,7 +35,6 @@ public class SetTimeClickListener implements View.OnClickListener{
             }
         }, hour, minute, true);
         pickerDialog.setTitle("");
-        pickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Отмена", pickerDialog);
         pickerDialog.show();
     }
 

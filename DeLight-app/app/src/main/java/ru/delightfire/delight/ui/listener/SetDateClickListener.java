@@ -47,4 +47,11 @@ public class SetDateClickListener implements View.OnClickListener {
         pickerDialog.show();
     }
 
+    public Integer getmMonth() {
+        return mMonth;
+    }
+
+    public Integer getmDayOfMonth() {
+        return mDayOfMonth;
+    }
 }

@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void exit() {
-        UserAccount.getInstance().deleteUser(this);
-        Intent intent = new Intent(MainActivity.this, LaunchActivity.class);
+        UserAccount.getInstance().deleteUser(getApplicationContext());
+        Intent intent = new Intent(this, LaunchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

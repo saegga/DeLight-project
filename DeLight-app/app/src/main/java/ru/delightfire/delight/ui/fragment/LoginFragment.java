@@ -63,7 +63,6 @@ public class LoginFragment extends Fragment {
                 final String login = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
-                //Ion library for async query
                 Ion.with(getActivity())
                         .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/auth/db_user_check")
                         .setBodyParameter("login", login)

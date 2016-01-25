@@ -10,39 +10,57 @@ import ru.delightfire.delight.entity.subject.DelightUser;
  */
 public class UserAccount {
 
-    private static Context appContext;
+    /**
+     * ключи для сохранения пользователя
+     */
+    public static final String PREF_AUTH = "pref_auth";
+    public static final String PREF_LOGIN = "pref_login";
+    public static final String PREF_PASSWORD = "pref_password";
 
-    private UserAccount(Context context) {
-        appContext = context;
-    }
+    private static DelightUser user;
 
     private static class Holder {
-        private static final UserAccount instance = new UserAccount(appContext);
+        private static final UserAccount instance = new UserAccount();
     }
 
     public static UserAccount getInstance() {
         return Holder.instance;
     }
 
-    public void saveUser(Context context, DelightUser user) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(DelightUser.PREF_AUTH, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(DelightUser.PREF_LOGIN, user.getLogin());
-        editor.putString(DelightUser.PREF_PASSWORD, user.getPassword());
-        editor.apply();
+    public boolean saveUser(Context context, DelightUser user) {
+        if (getUser(context) == null) {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_AUTH, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(PREF_LOGIN, user.getLogin());
+            editor.putString(PREF_PASSWORD, user.getPassword());
+            editor.apply();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public DelightUser getUser(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(DelightUser.PREF_AUTH, Context.MODE_PRIVATE);
-        String login = sharedPreferences.getString(DelightUser.PREF_LOGIN, null);
-        String pass = sharedPreferences.getString(DelightUser.PREF_PASSWORD, null);
-        return new DelightUser(login, pass);
+        if (user == null) {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_AUTH, Context.MODE_PRIVATE);
+            String login = sharedPreferences.getString(PREF_LOGIN, null);
+            String pass = sharedPreferences.getString(PREF_PASSWORD, null);
+            if (login != null && pass != null)
+                user = new DelightUser(login, pass);
+        }
+        return user;
     }
 
-    public void deleteUser(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(DelightUser.PREF_AUTH, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
+    public boolean deleteUser(Context context) {
+        if (getUser(context) != null) {
+            SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_AUTH, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
+            user = null;
+            return true;
+        } else {
+            return false;
+        }
     }
 }

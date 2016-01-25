@@ -16,9 +16,9 @@ public class DelightUser extends DelightPerson {
     /**
      * Роль участника в группе
      *
-     * @see DeliteRole
+     * @see DelightRole
      */
-    private DeliteRole role;
+    private DelightRole role;
 
     /**
      * Онлайн - оффлайн
@@ -34,13 +34,6 @@ public class DelightUser extends DelightPerson {
      * Пароль
      */
     private String password;
-
-    /**
-     * ключи для сохранения пользователя
-     */
-    public static final String PREF_AUTH = "pref_auth";
-    public static final String PREF_LOGIN = "pref_login";
-    public static final String PREF_PASSWORD = "pref_password";
 
     public DelightUser(String login, String password, String firstName, String lastName) {
         super(firstName, lastName);

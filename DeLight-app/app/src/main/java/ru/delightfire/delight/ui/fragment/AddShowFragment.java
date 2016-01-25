@@ -32,7 +32,6 @@ import ru.delightfire.delight.entity.subject.DelightShow;
 import ru.delightfire.delight.ui.activity.AddEventActivity;
 import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.ui.listener.CancelClickListener;
-import ru.delightfire.delight.ui.listener.OkClickListener;
 import ru.delightfire.delight.ui.listener.SetDateClickListener;
 import ru.delightfire.delight.ui.listener.SetTimeClickListener;
 import ru.delightfire.delight.util.DelightShowSerializer;
@@ -138,7 +137,8 @@ public class AddShowFragment extends Fragment {
                                                     public void onClick(MaterialDialog dialog, DialogAction which) {
                                                         dialog.dismiss();
                                                         Intent data = new Intent();
-                                                        data.putExtra(MainActivity.EXTRA_DATA_POSITION, 2);
+                                                        data.putExtra(MainActivity.VIEW_PAGER_POSITION,
+                                                                ((AddEventActivity) getActivity()).getRequest());
                                                         getActivity().setResult(Activity.RESULT_OK, data);
                                                         getActivity().finish();
                                                 }

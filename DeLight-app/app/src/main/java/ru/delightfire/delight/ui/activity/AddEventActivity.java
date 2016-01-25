@@ -29,6 +29,8 @@ import ru.delightfire.delight.util.UserAccount;
  */
 public class AddEventActivity extends AppCompatActivity {
 
+    private int request;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +71,8 @@ public class AddEventActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 
                         Intent data = new Intent();
-                        data.putExtra("position", position);
+                        data.putExtra(MainActivity.DRAWER_POSITION, position);
+                        data.putExtra(MainActivity.VIEW_PAGER_POSITION, getRequest());
                         setResult(RESULT_CANCELED, data);
                         finish();
 
@@ -79,7 +82,7 @@ public class AddEventActivity extends AppCompatActivity {
                 })
                 .build();
 
-        int request = getIntent().getIntExtra("attach", -1);
+        request = getIntent().getIntExtra(MainActivity.VIEW_PAGER_POSITION, -1);
         Fragment fragment = null;
 
         switch (request) {
@@ -100,4 +103,7 @@ public class AddEventActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public int getRequest() {
+        return request;
+    }
 }

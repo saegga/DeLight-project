@@ -18,7 +18,7 @@ public class DelightMeetSerializer implements JsonSerializer<DelightMeeting> {
         JsonObject result = new JsonObject();
 
         result.addProperty("place_id", src.getPlaceId());
-        result.addProperty("name", src.getExtra());
+        result.addProperty("name", src.getName());
 
         StringBuilder builder = new StringBuilder();
         builder.append(String.valueOf(src.getDay()).length() == 1 ? new StringBuilder("0").append(src.getDay()) : src.getDay());

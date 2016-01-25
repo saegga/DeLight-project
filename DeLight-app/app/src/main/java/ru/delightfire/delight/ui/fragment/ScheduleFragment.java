@@ -105,10 +105,29 @@ public class ScheduleFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), AddEventActivity.class);
                 int position = viewPager.getCurrentItem();
-                intent.putExtra("attach", position);
+                intent.putExtra(MainActivity.VIEW_PAGER_POSITION, position);
                 startActivityForResult(intent, position);
             }
         });
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                ((MainActivity) getActivity()).setCurrentViewPagerPosition(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        viewPager.setCurrentItem(((MainActivity) getActivity()).getCurrentViewPagerPosition());
 
         return rootView;
     }
@@ -155,5 +174,21 @@ public class ScheduleFragment extends Fragment {
                 .hide(fragment)
                 .remove(fragment)
                 .commit();
+
+        viewPager.setCurrentItem(((MainActivity) getActivity()).getCurrentViewPagerPosition(), true);
+        /*
+        viewPager.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                viewPager.setCurrentItem(((MainActivity) getActivity()).getCurrentViewPagerPosition(), true);
+            }
+        }, 1000);*/
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 }

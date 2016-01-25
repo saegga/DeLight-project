@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,7 @@ import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.subject.DelightEvent;
 import ru.delightfire.delight.entity.subject.DelightTraining;
 import ru.delightfire.delight.ui.activity.AddEventActivity;
+import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.ui.listener.CancelClickListener;
 import ru.delightfire.delight.ui.listener.SetDateClickListener;
 import ru.delightfire.delight.ui.listener.SetTimeClickListener;
@@ -43,6 +43,7 @@ public class AddTrainingFragment extends Fragment {
 
     private Spinner place;
     private SetDateClickListener dateClickListener;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         ((AddEventActivity) getActivity()).getSupportActionBar().setTitle("Добавить тренировку");
@@ -110,8 +111,6 @@ public class AddTrainingFragment extends Fragment {
                         .registerTypeAdapter(DelightTraining.class, new DelightTrainingSerealizer())
                         .create();
 
-                String json = gson.toJson(training);
-
                 Ion.with(getActivity())
                         .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/create/create_training")
                         .setBodyParameter("json", gson.toJson(training))
@@ -133,6 +132,8 @@ public class AddTrainingFragment extends Fragment {
                                                     public void onClick(MaterialDialog dialog, DialogAction which) {
                                                         dialog.dismiss();
                                                         Intent data = new Intent();
+                                                        data.putExtra(MainActivity.VIEW_PAGER_POSITION,
+                                                                ((AddEventActivity) getActivity()).getRequest());
                                                         getActivity().setResult(Activity.RESULT_OK, data);
                                                         getActivity().finish();
                                                     }

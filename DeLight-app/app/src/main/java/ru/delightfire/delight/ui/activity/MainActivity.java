@@ -26,12 +26,17 @@ import ru.delightfire.delight.util.UserAccount;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private int currentPosition = 0;
+    private int currentDrawerPosition = 0;
+
+    private int currentViewPagerPosition = 0;
 
     boolean hardReload = false;
 
     private Drawer drawer;
-    public static final String EXTRA_DATA_POSITION = "position";
+
+    public static final String DRAWER_POSITION = "position";
+    public static final String VIEW_PAGER_POSITION = "view_pager_position";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        if (currentPosition != position || hardReload) {
+                        if (currentDrawerPosition != position || hardReload) {
                             switch (position) {
                                 case 1:
                                     FragmentManager manager = getSupportFragmentManager();
@@ -82,11 +87,11 @@ public class MainActivity extends AppCompatActivity {
                                             .replace(R.id.fl_activity_main_content, scheduleFragment)
                                             .commit();
 
-                                    currentPosition = 1;
+                                    currentDrawerPosition = 1;
                                     break;
                                 case 4:
                                     if (true) {
-                                        currentPosition = 4;
+                                        currentDrawerPosition = 4;
                                         exit();
                                     }
                                     break;
@@ -109,16 +114,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            if (resultCode == RESULT_CANCELED && data.getIntExtra("position", currentPosition) != currentPosition) {
-                int position = data.getIntExtra("position", currentPosition);
+            if (resultCode == RESULT_CANCELED && data.getIntExtra(DRAWER_POSITION, currentDrawerPosition) != currentDrawerPosition) {
+                int position = data.getIntExtra(DRAWER_POSITION, currentDrawerPosition);
                 drawer.setSelectionAtPosition(position);
+            } else if (resultCode == RESULT_OK) {
+                hardReload = true;
+                drawer.setSelectionAtPosition(currentDrawerPosition);
             }
+
+            currentViewPagerPosition = data.getIntExtra(VIEW_PAGER_POSITION, currentViewPagerPosition);
+
+            System.out.println();
         }
 
-        if (resultCode == RESULT_OK) {
-            hardReload = true;
-            drawer.setSelectionAtPosition(currentPosition);
-        }
+
     }
 
     private void exit() {
@@ -126,5 +135,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LaunchActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    public int getCurrentViewPagerPosition() {
+        return currentViewPagerPosition;
+    }
+
+    public void setCurrentViewPagerPosition(int currentViewPagerPosition) {
+        this.currentViewPagerPosition = currentViewPagerPosition;
     }
 }

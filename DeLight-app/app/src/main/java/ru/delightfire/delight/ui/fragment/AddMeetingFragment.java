@@ -32,25 +32,24 @@ import ru.delightfire.delight.entity.subject.DelightMeeting;
 import ru.delightfire.delight.ui.activity.AddEventActivity;
 import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.ui.listener.CancelClickListener;
-import ru.delightfire.delight.ui.listener.OkClickListener;
 import ru.delightfire.delight.ui.listener.SetDateClickListener;
 import ru.delightfire.delight.ui.listener.SetTimeClickListener;
 import ru.delightfire.delight.util.DelightMeetSerializer;
-import ru.delightfire.delight.util.LoadingChecker;
 
 /**
  * Created by sergei on 24.11.2015.
  */
 public class AddMeetingFragment extends Fragment {
 
-    private LoadingChecker checker = new LoadingChecker(5);
     private SetDateClickListener dateClickListener;
     private Spinner spinner;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         ((AddEventActivity) getActivity()).getSupportActionBar().setTitle("Добавить встречу");
+
         FragmentManager manager = getActivity().getSupportFragmentManager();
         Fragment fragment = new LoadingFragment();
         manager.beginTransaction()
@@ -117,10 +116,10 @@ public class AddMeetingFragment extends Fragment {
                             @Override
                             public void onCompleted(Exception e, JsonObject result) {
                                 materialDialog.dismiss();
-                                if(e != null){
+                                if (e != null) {
                                     return;
                                 }
-                                if(result != null){
+                                if (result != null) {
                                     if (result.get("success").getAsInt() == 1) {
                                         new MaterialDialog.Builder(getActivity())
                                                 .title(R.string.success)
@@ -133,20 +132,21 @@ public class AddMeetingFragment extends Fragment {
                                                     public void onClick(MaterialDialog dialog, DialogAction which) {
                                                         dialog.dismiss();
                                                         Intent data = new Intent();
-                                                        data.putExtra(MainActivity.EXTRA_DATA_POSITION, 2);
+                                                        data.putExtra(MainActivity.VIEW_PAGER_POSITION,
+                                                                ((AddEventActivity) getActivity()).getRequest());
                                                         getActivity().setResult(Activity.RESULT_OK, data);
                                                         getActivity().finish();
                                                     }
                                                 })
                                                 .show();
-                                    }else {
+                                    } else {
                                         new MaterialDialog.Builder(getActivity())
                                                 .title(R.string.error)
                                                 .positiveText(R.string.ok)
                                                 .backgroundColorRes(R.color.mainBackground)
                                                 .show();
                                     }
-                                }else {
+                                } else {
                                     new MaterialDialog.Builder(getActivity())
                                             .title(R.string.error)
                                             .positiveText(R.string.ok)
@@ -160,6 +160,7 @@ public class AddMeetingFragment extends Fragment {
         initDate();
         return rootView;
     }
+
     public String getTime(EditText editText) {
         int hour = Integer.parseInt(editText.getText().toString().substring(0, 2));
         int minute = Integer.parseInt(editText.getText().toString().substring(3, 5));
@@ -172,6 +173,7 @@ public class AddMeetingFragment extends Fragment {
 
         return stringBuilder.toString();
     }
+
     private void initView() {
         FragmentManager manager = getActivity().getSupportFragmentManager();
         Fragment fragment = manager.findFragmentByTag("loading");
@@ -180,6 +182,7 @@ public class AddMeetingFragment extends Fragment {
                 .remove(fragment)
                 .commit();
     }
+
     private void initDate() {
         Ion.with(getActivity())
                 .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_places")

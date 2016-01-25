@@ -43,6 +43,7 @@
     <string name="success">Успешно</string>
     <string name="success_add_training">Тренировка успешно добавлена</string>
     <string name="success_add_show">выступление успешно добавлено</string>
+    <string name="success_add_meet">встреча успешно добавлена</string>
 
     <string-array name="arr_days_full">
         <item>Понедельник</item>

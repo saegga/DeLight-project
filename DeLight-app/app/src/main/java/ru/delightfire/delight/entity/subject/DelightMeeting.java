@@ -29,4 +29,7 @@ public class DelightMeeting extends DelightEvent {
    * */
     private String place;
 
+    public DelightMeeting(int placeId, int month, int day, String startTime, String endTime, String extra) {
+        super(placeId, month, day, startTime, endTime, extra);
+    }
 }

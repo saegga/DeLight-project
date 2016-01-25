@@ -38,23 +38,16 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <!--<android.support.design.widget.TextInputLayout-->
-            <!--android:id="@+id/til_fragment_add_show_place"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:theme="@style/TimeTextLabel">-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Место"
+                android:text="@string/place_hint"
                 android:textColor="@color/mainBackground"
                 android:textSize="20sp"/>
         <Spinner
             android:id="@+id/sp_fragment_add_show_place"
             android:layout_width="wrap_content"
             android:layout_height="50dp"/>
-
-        <!--</android.support.design.widget.TextInputLayout>-->
 
     </LinearLayout>
 

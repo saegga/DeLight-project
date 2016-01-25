@@ -42,7 +42,7 @@ import ru.delightfire.delight.util.DelightTrainingSerealizer;
 public class AddTrainingFragment extends Fragment {
 
     private Spinner place;
-
+    private SetDateClickListener dateClickListener;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         ((AddEventActivity) getActivity()).getSupportActionBar().setTitle("Добавить тренировку");
@@ -64,19 +64,17 @@ public class AddTrainingFragment extends Fragment {
 
         AppCompatEditText startTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_start_time);
         AppCompatEditText endTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_end_time);
-        AppCompatEditText date = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_date);
+        final AppCompatEditText date = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_date);
 
         Calendar calendar = Calendar.getInstance();
         Integer year = calendar.get(Calendar.YEAR);
         Integer month = calendar.get(Calendar.MONTH);
         Integer dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
-        final Integer monthTo = month;
-        final Integer dayTo = dayOfMonth;
-
         startTime.setOnClickListener(new SetTimeClickListener(getActivity()));
         endTime.setOnClickListener(new SetTimeClickListener(getActivity()));
-        date.setOnClickListener(new SetDateClickListener(getActivity(), year, month, dayOfMonth));
+        dateClickListener = new SetDateClickListener(getActivity(), year, month, dayOfMonth);
+        date.setOnClickListener(dateClickListener);
 
         date.setText(dayOfMonth + " " + DelightEvent.getMonthName(month + 1) + " " + year);
 
@@ -102,9 +100,10 @@ public class AddTrainingFragment extends Fragment {
                         .widgetColorRes(R.color.white)
                         .progress(true, 0)
                         .show();
-
                 int placeId = place.getSelectedItemPosition() + 1;
-                DelightTraining training = new DelightTraining(placeId, monthTo + 1, dayTo,
+                int monthTo = dateClickListener.getmMonth() + 1;
+                int dayTo = dateClickListener.getmDayOfMonth();
+                DelightTraining training = new DelightTraining(placeId, monthTo, dayTo,
                         getTime(startTimeTo), getTime(endTimeTo));
 
                 Gson gson = new GsonBuilder()
@@ -205,5 +204,4 @@ public class AddTrainingFragment extends Fragment {
 
         return stringBuilder.toString();
     }
-
 }

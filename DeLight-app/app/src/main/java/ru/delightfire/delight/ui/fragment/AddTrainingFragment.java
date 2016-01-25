@@ -30,7 +30,6 @@ import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.subject.DelightEvent;
 import ru.delightfire.delight.entity.subject.DelightTraining;
 import ru.delightfire.delight.ui.activity.AddEventActivity;
-import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.ui.listener.CancelClickListener;
 import ru.delightfire.delight.ui.listener.SetDateClickListener;
 import ru.delightfire.delight.ui.listener.SetTimeClickListener;
@@ -132,8 +131,6 @@ public class AddTrainingFragment extends Fragment {
                                                     public void onClick(MaterialDialog dialog, DialogAction which) {
                                                         dialog.dismiss();
                                                         Intent data = new Intent();
-                                                        data.putExtra(MainActivity.VIEW_PAGER_POSITION,
-                                                                ((AddEventActivity) getActivity()).getRequest());
                                                         getActivity().setResult(Activity.RESULT_OK, data);
                                                         getActivity().finish();
                                                     }
@@ -179,16 +176,34 @@ public class AddTrainingFragment extends Fragment {
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                        JsonArray array = result.get("places").getAsJsonArray();
-                        String placesArray[] = new String[array.size()];
-                        for (int i = 0; i < placesArray.length; i++) {
-                            placesArray[i] = array.get(i).getAsJsonObject().get("name").getAsString();
+                        if (result != null && e == null) {
+                            JsonArray array = result.get("places").getAsJsonArray();
+                            String placesArray[] = new String[array.size()];
+
+                            for (int i = 0; i < placesArray.length; i++) {
+                                placesArray[i] = array.get(i).getAsJsonObject().get("name").getAsString();
+                            }
+
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                                    R.layout.spinner_item, placesArray);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            place.setAdapter(adapter);
+                            initView();
+                        } else {
+                            new MaterialDialog.Builder(getActivity())
+                                    .title(R.string.error)
+                                    .content(R.string.check_connection)
+                                    .positiveText(R.string.ok)
+                                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(MaterialDialog dialog, DialogAction which) {
+                                            getActivity().setResult(Activity.RESULT_CANCELED);
+                                            getActivity().finish();
+                                        }
+                                    })
+                                    .backgroundColorRes(R.color.mainBackground)
+                                    .show();
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                                R.layout.spinner_item, placesArray);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        place.setAdapter(adapter);
-                        initView();
                     }
                 });
     }

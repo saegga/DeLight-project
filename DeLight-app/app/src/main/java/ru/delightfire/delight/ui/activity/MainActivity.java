@@ -121,10 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 hardReload = true;
                 drawer.setSelectionAtPosition(currentDrawerPosition);
             }
-
             currentViewPagerPosition = data.getIntExtra(VIEW_PAGER_POSITION, currentViewPagerPosition);
-
-            System.out.println();
         }
 
 

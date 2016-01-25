@@ -55,6 +55,8 @@ public class AddEventActivity extends AppCompatActivity {
         TextView userName = (TextView) header.findViewById(R.id.user_name);
         userName.setText(UserAccount.getInstance().getUser(this).getLogin());
 
+        request = getIntent().getIntExtra(MainActivity.VIEW_PAGER_POSITION, -1);
+
         Drawer drawer = new DrawerBuilder()
                 .withActivity(this)
                 .withHeader(header)
@@ -72,7 +74,6 @@ public class AddEventActivity extends AppCompatActivity {
 
                         Intent data = new Intent();
                         data.putExtra(MainActivity.DRAWER_POSITION, position);
-                        data.putExtra(MainActivity.VIEW_PAGER_POSITION, getRequest());
                         setResult(RESULT_CANCELED, data);
                         finish();
 
@@ -82,7 +83,6 @@ public class AddEventActivity extends AppCompatActivity {
                 })
                 .build();
 
-        request = getIntent().getIntExtra(MainActivity.VIEW_PAGER_POSITION, -1);
         Fragment fragment = null;
 
         switch (request) {
@@ -101,9 +101,5 @@ public class AddEventActivity extends AppCompatActivity {
         manager.beginTransaction()
                 .replace(R.id.fl_activity_add_event_content, fragment)
                 .commit();
-    }
-
-    public int getRequest() {
-        return request;
     }
 }

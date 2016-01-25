@@ -30,7 +30,6 @@ import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.subject.DelightEvent;
 import ru.delightfire.delight.entity.subject.DelightMeeting;
 import ru.delightfire.delight.ui.activity.AddEventActivity;
-import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.ui.listener.CancelClickListener;
 import ru.delightfire.delight.ui.listener.SetDateClickListener;
 import ru.delightfire.delight.ui.listener.SetTimeClickListener;
@@ -65,6 +64,7 @@ public class AddMeetingFragment extends Fragment {
 
         AppCompatEditText startTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_meeting_start_time);
         AppCompatEditText endTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_meeting_end_time);
+
         final AppCompatEditText name = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_meeting_name);
         AppCompatEditText date = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_meeting_date);
 
@@ -77,6 +77,7 @@ public class AddMeetingFragment extends Fragment {
 
         startTime.setOnClickListener(new SetTimeClickListener(getActivity()));
         endTime.setOnClickListener(new SetTimeClickListener(getActivity()));
+
         dateClickListener = new SetDateClickListener(getActivity(), year, month, dayOfMonth);
         date.setOnClickListener(dateClickListener);
         date.setText(dayOfMonth + " " + DelightEvent.getMonthName(month + 1) + " " + year);
@@ -100,14 +101,19 @@ public class AddMeetingFragment extends Fragment {
                         .widgetColorRes(R.color.white)
                         .progress(true, 0)
                         .show();
-                String nameMeet = name.getText().toString();
+
+                String eventName = name.getText().toString();
+
                 int monthTo = dateClickListener.getmMonth() + 1;
                 int dayTo = dateClickListener.getmDayOfMonth();
                 int place = spinner.getSelectedItemPosition();
+
                 DelightMeeting meeting = new DelightMeeting(place, monthTo, dayTo,
-                        getTime(startTimeTo), getTime(endTimeTo), nameMeet);
+                        getTime(startTimeTo), getTime(endTimeTo), eventName);
+
                 Gson gson = new GsonBuilder().registerTypeAdapter(DelightMeeting.class,
                         new DelightMeetSerializer()).create();
+
                 Ion.with(getActivity())
                         .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/create/create_meet")
                         .setBodyParameter("json", gson.toJson(meeting))
@@ -116,10 +122,7 @@ public class AddMeetingFragment extends Fragment {
                             @Override
                             public void onCompleted(Exception e, JsonObject result) {
                                 materialDialog.dismiss();
-                                if (e != null) {
-                                    return;
-                                }
-                                if (result != null) {
+                                if (result != null && e == null) {
                                     if (result.get("success").getAsInt() == 1) {
                                         new MaterialDialog.Builder(getActivity())
                                                 .title(R.string.success)
@@ -132,8 +135,6 @@ public class AddMeetingFragment extends Fragment {
                                                     public void onClick(MaterialDialog dialog, DialogAction which) {
                                                         dialog.dismiss();
                                                         Intent data = new Intent();
-                                                        data.putExtra(MainActivity.VIEW_PAGER_POSITION,
-                                                                ((AddEventActivity) getActivity()).getRequest());
                                                         getActivity().setResult(Activity.RESULT_OK, data);
                                                         getActivity().finish();
                                                     }
@@ -150,6 +151,7 @@ public class AddMeetingFragment extends Fragment {
                                     new MaterialDialog.Builder(getActivity())
                                             .title(R.string.error)
                                             .positiveText(R.string.ok)
+                                            .content(R.string.check_connection)
                                             .backgroundColorRes(R.color.mainBackground)
                                             .show();
                                 }
@@ -157,7 +159,7 @@ public class AddMeetingFragment extends Fragment {
                         });
             }
         });
-        initDate();
+        initData();
         return rootView;
     }
 
@@ -165,13 +167,9 @@ public class AddMeetingFragment extends Fragment {
         int hour = Integer.parseInt(editText.getText().toString().substring(0, 2));
         int minute = Integer.parseInt(editText.getText().toString().substring(3, 5));
 
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(String.valueOf(hour).length() == 1 ? new StringBuilder("0").append(hour) : hour);
-        stringBuilder.append(":");
-        stringBuilder.append(String.valueOf(minute).length() == 1 ? new StringBuilder("0").append(minute) : minute);
-
-        return stringBuilder.toString();
+        return (String.valueOf(hour).length() == 1 ? new StringBuilder("0").append(hour) : hour)
+                + ":"
+                + (String.valueOf(minute).length() == 1 ? new StringBuilder("0").append(minute) : minute);
     }
 
     private void initView() {
@@ -183,23 +181,42 @@ public class AddMeetingFragment extends Fragment {
                 .commit();
     }
 
-    private void initDate() {
+    private void initData() {
         Ion.with(getActivity())
                 .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_places")
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                        JsonArray array = result.get("places").getAsJsonArray();
-                        String placesArray[] = new String[array.size()];
-                        for (int i = 0; i < placesArray.length; i++) {
-                            placesArray[i] = array.get(i).getAsJsonObject().get("name").getAsString();
+                        if (result != null && e == null) {
+                            JsonArray array = result.get("places").getAsJsonArray();
+                            String placesArray[] = new String[array.size()];
+
+                            for (int i = 0; i < placesArray.length; i++) {
+                                placesArray[i] = array.get(i).getAsJsonObject().get("name").getAsString();
+                            }
+
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                                    R.layout.spinner_item, placesArray);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinner.setAdapter(adapter);
+
+                            initView();
+                        } else {
+                            new MaterialDialog.Builder(getActivity())
+                                    .title(R.string.error)
+                                    .content(R.string.check_connection)
+                                    .positiveText(R.string.ok)
+                                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(MaterialDialog dialog, DialogAction which) {
+                                            getActivity().setResult(Activity.RESULT_CANCELED);
+                                            getActivity().finish();
+                                        }
+                                    })
+                                    .backgroundColorRes(R.color.mainBackground)
+                                    .show();
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                                R.layout.spinner_item, placesArray);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinner.setAdapter(adapter);
-                        initView();
                     }
                 });
     }

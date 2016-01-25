@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     boolean hardReload = false;
 
     private Drawer drawer;
-
+    public static final String EXTRA_DATA_POSITION = "position";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -54,6 +54,15 @@ public class DelightEvent implements Comparable{
         this.endTime = endTime;
     }
 
+    public DelightEvent(int placeId ,int month, int day, String startTime, String endTime, String extra) {
+        this.month = month;
+        this.day = day;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.placeId = placeId;
+        this.extra = extra;
+    }
+
     public DelightEvent() {
 
     }

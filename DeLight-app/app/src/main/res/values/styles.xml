@@ -43,6 +43,8 @@
     <style name="MainButton" parent="Base.TextAppearance.AppCompat.Button">
         <item name="android:background">@drawable/main_button_selector</item>
     </style>
-
+    <style name="spinner_style">
+        <item name="android:background">@drawable/spinner_corner</item>
+    </style>
 
 </resources>

@@ -16,6 +16,7 @@ public class UserAccount {
     public static final String PREF_AUTH = "pref_auth";
     public static final String PREF_LOGIN = "pref_login";
     public static final String PREF_PASSWORD = "pref_password";
+    public static final String PREF_USER_ID = "pref_user_id";
 
     private static DelightUser user;
 
@@ -31,6 +32,7 @@ public class UserAccount {
         if (getUser(context) == null) {
             SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_AUTH, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(PREF_USER_ID, user.getUserId());
             editor.putString(PREF_LOGIN, user.getLogin());
             editor.putString(PREF_PASSWORD, user.getPassword());
             editor.apply();
@@ -45,8 +47,9 @@ public class UserAccount {
             SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_AUTH, Context.MODE_PRIVATE);
             String login = sharedPreferences.getString(PREF_LOGIN, null);
             String pass = sharedPreferences.getString(PREF_PASSWORD, null);
+            int userId = sharedPreferences.getInt(PREF_USER_ID, -1);
             if (login != null && pass != null)
-                user = new DelightUser(login, pass);
+                user = new DelightUser(userId, login, pass);
         }
         return user;
     }

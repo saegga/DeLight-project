@@ -36,6 +36,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])){
 
 				$response["user"]["first_name"] = $result["first_name"];
 				$response["user"]["last_name"] = $result["last_name"];
+				$response["user"]["user_id"] = $result["user_id"];
 
 			} else {
 				$response["success"] = 0;

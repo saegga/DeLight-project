@@ -15,7 +15,7 @@
         <item name="colorControlActivated">@color/white</item>
     </style>
 
-    <style name="TimeTextLabel" parent="TextAppearance.AppCompat">
+    <style name="MainTextLabel" parent="TextAppearance.AppCompat">
         <item name="android:textColorHint">@color/mainBackground</item>
         <item name="android:textSize">20sp</item>
         <item name="colorAccent">@color/mainBackground</item>
@@ -42,9 +42,6 @@
 
     <style name="MainButton" parent="Base.TextAppearance.AppCompat.Button">
         <item name="android:background">@drawable/main_button_selector</item>
-    </style>
-    <style name="spinner_style">
-        <item name="android:background">@drawable/spinner_corner</item>
     </style>
 
 </resources>

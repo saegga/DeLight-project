@@ -21,7 +21,7 @@
     <string name="choose_time">Выбери время</string>
     <string name="text_view_agenda">Описание события:</string>
     <string name="choose_date">Выбрать дату</string>
-    <string name="save">сохранить</string>
+    <string name="save">Сохранить</string>
     <string name="saving">Сохранение</string>
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>
@@ -33,6 +33,7 @@
     <string name="date_hint">Дата</string>
     <string name="place_hint">Место:</string>
     <string name="hint_name">Имя</string>
+    <string name="hint_name_2">Название</string>
 
     <string name="divider">:</string>
     <string name="please_wait">Пожалуйста дождитесь окончания загрузки</string>
@@ -43,9 +44,9 @@
     <string name="wrong_loading">Ошибка загрузки</string>
     <string name="success">Успешно</string>
     <string name="success_add_training">Тренировка успешно добавлена</string>
-    <string name="success_add_show">выступление успешно добавлено</string>
-    <string name="success_add_meet">встреча успешно добавлена</string>
-    <string name="success_update_user_info">Профиль успешно изменен</string>
+    <string name="success_add_show">Выступление успешно добавлено</string>
+    <string name="success_add_meet">Встреча успешно добавлена</string>
+    <string name="success_update_user_info">Профиль успешно обновлен</string>
     <string name="my_profile_login">Логин:</string>
     <string name="my_profile_first_name">Имя</string>
     <string name="my_profile_last_name">Фамилия</string>

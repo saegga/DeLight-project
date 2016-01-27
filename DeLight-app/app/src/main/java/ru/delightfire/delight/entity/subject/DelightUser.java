@@ -53,6 +53,10 @@ public class DelightUser extends DelightPerson {
         this.password = password;
     }
 
+    public void setRole(DelightRole role) {
+        this.role = role;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -63,5 +67,9 @@ public class DelightUser extends DelightPerson {
 
     public int getUserId() {
         return userId;
+    }
+
+    public DelightRole getRole() {
+        return role;
     }
 }

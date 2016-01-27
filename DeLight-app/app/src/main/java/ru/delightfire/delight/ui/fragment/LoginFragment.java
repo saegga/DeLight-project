@@ -57,6 +57,7 @@ public class LoginFragment extends Fragment {
                         .title(R.string.loading)
                         .progressIndeterminateStyle(true)
                         .backgroundColorRes(R.color.mainBackground)
+                        .widgetColorRes(R.color.white)
                         .progress(true, 0)
                         .show();
 

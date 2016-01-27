@@ -22,4 +22,6 @@ public enum DelightRole {
      */
     LEADER,
 
+    UNASSIGNED,
+
 }

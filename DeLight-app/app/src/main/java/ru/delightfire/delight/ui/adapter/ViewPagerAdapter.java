@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -44,7 +45,16 @@ public class ViewPagerAdapter extends PagerAdapter {
         ListView listView = (ListView) itemView.findViewById(R.id.lv_element_schedule_page);
 
         listView.setDivider(context.getResources().getDrawable(android.R.color.transparent));
-        listView.setDividerHeight(20);
+        listView.setDividerHeight(0);
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                
+
+                return false;
+            }
+        });
 
         listView.setAdapter(pages.get(position).getAdapter());
 

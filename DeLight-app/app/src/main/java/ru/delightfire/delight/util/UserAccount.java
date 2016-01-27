@@ -3,6 +3,7 @@ package ru.delightfire.delight.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import ru.delightfire.delight.entity.subject.DelightRole;
 import ru.delightfire.delight.entity.subject.DelightUser;
 
 /**
@@ -18,7 +19,7 @@ public class UserAccount {
     public static final String PREF_PASSWORD = "pref_password";
     public static final String PREF_USER_ID = "pref_user_id";
 
-    private static DelightUser user;
+    private DelightUser user;
 
     private static class Holder {
         private static final UserAccount instance = new UserAccount();
@@ -65,5 +66,17 @@ public class UserAccount {
         } else {
             return false;
         }
+    }
+
+    public void setUser(DelightUser user) {
+        this.user = user;
+    }
+
+    public boolean hasAddEventPermission() {
+        boolean permission = true;
+        if (user.getRole() == DelightRole.NOVICE || user.getRole() == DelightRole.UNASSIGNED){
+            permission = false;
+        }
+        return permission;
     }
 }

@@ -17,13 +17,13 @@
             android:id="@+id/til_fragment_add_meeting_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_meeting_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_name"
+                android:hint="@string/hint_name_2"
                 android:textColor="@color/mainBackground" />
 
         </android.support.design.widget.TextInputLayout>
@@ -61,7 +61,7 @@
             android:id="@+id/til_fragment_add_meeting_date"
             android:layout_width="@dimen/set_date"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_meeting_date"
@@ -78,7 +78,7 @@
             android:id="@+id/til_fragment_add_meeting_start_time"
             android:layout_width="@dimen/set_time"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_meeting_start_time"
@@ -96,7 +96,7 @@
             android:id="@+id/til_fragment_add_meeting_end_time"
             android:layout_width="@dimen/set_time"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_meeting_end_time"

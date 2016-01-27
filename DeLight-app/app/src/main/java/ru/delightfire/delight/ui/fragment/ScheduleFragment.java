@@ -35,6 +35,7 @@ import ru.delightfire.delight.ui.adapter.EventAdapter;
 import ru.delightfire.delight.ui.adapter.ViewPagerAdapter;
 import ru.delightfire.delight.util.DelightEventDeserializer;
 import ru.delightfire.delight.util.LoadingChecker;
+import ru.delightfire.delight.util.UserAccount;
 
 /**
  * Created by sergei on 12.11.2015.
@@ -98,17 +99,23 @@ public class ScheduleFragment extends Fragment {
                 .sizeDp(18);
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_activity_main);
-        fab.setImageDrawable(fabIcon);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), AddEventActivity.class);
-                int position = viewPager.getCurrentItem();
-                intent.putExtra(MainActivity.VIEW_PAGER_POSITION, position);
-                startActivityForResult(intent, position);
-            }
-        });
+        if (UserAccount.getInstance().hasAddEventPermission()) {
+
+            fab.setImageDrawable(fabIcon);
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), AddEventActivity.class);
+                    int position = viewPager.getCurrentItem();
+                    intent.putExtra(MainActivity.VIEW_PAGER_POSITION, position);
+                    startActivityForResult(intent, position);
+                }
+            });
+        } else {
+            fab.hide();
+        }
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -176,14 +183,6 @@ public class ScheduleFragment extends Fragment {
                 .commit();
 
         viewPager.setCurrentItem(((MainActivity) getActivity()).getCurrentViewPagerPosition(), true);
-        /*
-        viewPager.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                viewPager.setCurrentItem(((MainActivity) getActivity()).getCurrentViewPagerPosition(), true);
-            }
-        }, 1000);*/
     }
 
     @Override

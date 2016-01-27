@@ -18,7 +18,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.ui.fragment.MyProfileFragment;
+import ru.delightfire.delight.ui.fragment.ProfileFragment;
 import ru.delightfire.delight.ui.fragment.ScheduleFragment;
 import ru.delightfire.delight.util.UserAccount;
 
@@ -28,9 +28,9 @@ import ru.delightfire.delight.util.UserAccount;
 public class MainActivity extends AppCompatActivity {
 
     private int currentDrawerPosition = 0;
-
     private int currentViewPagerPosition = 0;
 
+    boolean hardReloadProfile = true;
     boolean hardReload = false;
 
     private Drawer drawer;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     manager = getSupportFragmentManager();
 
-                                    Fragment profileFragment = new MyProfileFragment();
+                                    Fragment profileFragment = new ProfileFragment();
 
                                     manager.beginTransaction()
                                             .replace(R.id.fl_activity_main_content, profileFragment)
@@ -152,5 +152,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void setCurrentViewPagerPosition(int currentViewPagerPosition) {
         this.currentViewPagerPosition = currentViewPagerPosition;
+    }
+
+    public boolean isHardReloadProfile() {
+        return hardReloadProfile;
+    }
+
+    public void setHardReloadProfile(boolean hardReloadProfile) {
+        this.hardReloadProfile = hardReloadProfile;
     }
 }

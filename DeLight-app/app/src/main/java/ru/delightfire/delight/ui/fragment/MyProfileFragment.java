@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -61,10 +62,18 @@ public class MyProfileFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-       // super.onCreateOptionsMenu(menu, inflater);
-
         getActivity().getMenuInflater().inflate(R.menu.menu_profile_toolbar, menu);
-        //inflater.inflate();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        FragmentManager manager = getFragmentManager();
+        Fragment profileEdit = new ProfileEditFragment();
+        manager.beginTransaction()
+                .replace(R.id.fl_activity_main_content, profileEdit)
+                .commit();
+        return super.onOptionsItemSelected(item);
     }
 
     private void loadingUser(){

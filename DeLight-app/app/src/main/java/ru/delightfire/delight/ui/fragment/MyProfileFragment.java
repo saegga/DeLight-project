@@ -40,7 +40,7 @@ public class MyProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        setHasOptionsMenu(true);
         login = (TextView) view.findViewById(R.id.profile_text_login);
         firstName = (TextView) view.findViewById(R.id.profile_text_first_name);
         lastName = (TextView) view.findViewById(R.id.profile_text_last_name);
@@ -61,7 +61,8 @@ public class MyProfileFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        //super.onCreateOptionsMenu(menu, inflater);
+       // super.onCreateOptionsMenu(menu, inflater);
+
         getActivity().getMenuInflater().inflate(R.menu.menu_profile_toolbar, menu);
         //inflater.inflate();
     }

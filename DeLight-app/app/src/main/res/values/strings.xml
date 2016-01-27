@@ -40,10 +40,15 @@
     <string name="error">Ошибка</string>
     <string name="check_connection">Проверьте соединение с интернетом</string>
     <string name="wrong_auth">Неверное имя пользователя или пароль</string>
+    <string name="wrong_loading">Ошибка загрузки</string>
     <string name="success">Успешно</string>
     <string name="success_add_training">Тренировка успешно добавлена</string>
     <string name="success_add_show">выступление успешно добавлено</string>
     <string name="success_add_meet">встреча успешно добавлена</string>
+    <string name="my_profile_login">Логин:</string>
+    <string name="my_profile_first_name">Имя:</string>
+    <string name="my_profile_last_name">Фамилия:</string>
+    <string name="my_profile_phone">Телефон:</string>
 
     <string-array name="arr_days_full">
         <item>Понедельник</item>

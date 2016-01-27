@@ -18,6 +18,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import ru.delightfire.delight.R;
+import ru.delightfire.delight.ui.fragment.MyProfileFragment;
 import ru.delightfire.delight.ui.fragment.ScheduleFragment;
 import ru.delightfire.delight.util.UserAccount;
 
@@ -88,6 +89,17 @@ public class MainActivity extends AppCompatActivity {
                                             .commit();
 
                                     currentDrawerPosition = 1;
+                                    break;
+                                case 2:
+
+                                    manager = getSupportFragmentManager();
+
+                                    Fragment profileFragment = new MyProfileFragment();
+
+                                    manager.beginTransaction()
+                                            .replace(R.id.fl_activity_main_content, profileFragment)
+                                            .commit();
+                                    currentDrawerPosition = 2;
                                     break;
                                 case 4:
                                     if (true) {

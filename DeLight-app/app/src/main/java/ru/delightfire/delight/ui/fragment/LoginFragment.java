@@ -80,7 +80,8 @@ public class LoginFragment extends Fragment {
                                     Log.d("Response:: ", result.toString());
 
                                     if (result.get("success").getAsInt() == 1) {
-                                        DelightUser user = new DelightUser(login, password);
+                                        int userId = result.get("user").getAsJsonObject().get("user_id").getAsInt();
+                                        DelightUser user = new DelightUser(userId, login, password);
                                         UserAccount.getInstance().saveUser(getActivity().getApplicationContext(), user);
                                         ((LaunchActivity) getActivity()).redirectToMain();
                                     } else {

@@ -8,6 +8,7 @@ package ru.delightfire.delight.entity.subject;
  */
 public class DelightUser extends DelightPerson {
 
+    private int userId;
     /**
      * Может ли открывать зал
      */
@@ -46,6 +47,12 @@ public class DelightUser extends DelightPerson {
         this.password = password;
     }
 
+    public DelightUser(int userId, String login, String password) {
+        this.userId = userId;
+        this.login = login;
+        this.password = password;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -54,4 +61,7 @@ public class DelightUser extends DelightPerson {
         return password;
     }
 
+    public int getUserId() {
+        return userId;
+    }
 }

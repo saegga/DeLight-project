@@ -21,7 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_name"
-            android:textColor="@color/mainBackground" />
+            android:inputType="time|text"
+            android:textColor="@color/mainBackground"
+            />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -38,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/my_profile_last_name"
+            android:inputType="time|text"
             android:textColor="@color/mainBackground" />
 
     </android.support.design.widget.TextInputLayout>
@@ -48,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         app:errorEnabled="true"
+
         android:textColorHint="@color/mainBackground"
         android:theme="@style/TimeTextLabel">
 

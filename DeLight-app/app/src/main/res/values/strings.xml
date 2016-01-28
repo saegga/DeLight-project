@@ -22,7 +22,7 @@
     <string name="text_view_agenda">Описание события:</string>
     <string name="choose_date">Выбрать дату</string>
     <string name="save">сохранить</string>
-
+    <string name="saving">Сохранение</string>
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>
 
@@ -45,6 +45,7 @@
     <string name="success_add_training">Тренировка успешно добавлена</string>
     <string name="success_add_show">выступление успешно добавлено</string>
     <string name="success_add_meet">встреча успешно добавлена</string>
+    <string name="success_update_user_info">Профиль успешно изменен</string>
     <string name="my_profile_login">Логин:</string>
     <string name="my_profile_first_name">Имя</string>
     <string name="my_profile_last_name">Фамилия</string>

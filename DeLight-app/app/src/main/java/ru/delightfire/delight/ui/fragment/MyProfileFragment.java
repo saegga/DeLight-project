@@ -33,7 +33,7 @@ public class MyProfileFragment extends Fragment {
     private TextView lastName;
     private TextView phone;
     private TextView status;
-
+    public static final String BUNDLE_USER_DATA = "bundle_user_data";
 
 
 
@@ -103,21 +103,25 @@ public class MyProfileFragment extends Fragment {
                                     .show();
                             return;
                         }
-                        if(result.get("success").getAsInt() == 1){
+                        if (result.get("success").getAsInt() == 1) {
                             Log.d("Response useeer:: ", result.toString());
 
                             String firstNameStr = result.get("user").getAsJsonObject().get("first_name").isJsonNull() ? "" : result.get("user").getAsJsonObject().get("first_name").getAsString();
-                            String lastNameStr =  result.get("user").getAsJsonObject().get("last_name").isJsonNull() ? "" : result.get("user").getAsJsonObject().get("last_name").getAsString();
-                            String phoneNumber =  result.get("user").getAsJsonObject().get("phone").isJsonNull() ? "" : result.get("user").getAsJsonObject().get("phone").getAsString();
+                            String lastNameStr = result.get("user").getAsJsonObject().get("last_name").isJsonNull() ? "" : result.get("user").getAsJsonObject().get("last_name").getAsString();
+                            String phoneNumber = result.get("user").getAsJsonObject().get("phone").isJsonNull() ? "" : result.get("user").getAsJsonObject().get("phone").getAsString();
                             login.setText(result.get("user").getAsJsonObject().get("login").getAsString());
                             firstName.setText(firstNameStr);
                             lastName.setText(lastNameStr);
                             phone.setText(phoneNumber);
                             status.setText(result.get("user").getAsJsonObject().get("role").getAsString());
-                            // // TODO: 26.01.2016 сделать переход на фрагмент редактирования + кнопку в тулбаре редактир-я
+                            // // TODO: 26.01.2016 сделать переход на фрагмент редактирования
                         }
 
                     }
                 });
+    }
+    private void setBundle(String data){
+        Bundle bundle = new Bundle();
+        bundle.putString(BUNDLE_USER_DATA, data);
     }
 }

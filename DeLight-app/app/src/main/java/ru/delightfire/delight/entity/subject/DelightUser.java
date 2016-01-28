@@ -8,6 +8,7 @@ package ru.delightfire.delight.entity.subject;
  */
 public class DelightUser extends DelightPerson {
 
+    private int userId;
     /**
      * Может ли открывать зал
      */
@@ -16,9 +17,9 @@ public class DelightUser extends DelightPerson {
     /**
      * Роль участника в группе
      *
-     * @see DeliteRole
+     * @see DelightRole
      */
-    private DeliteRole role;
+    private DelightRole role;
 
     /**
      * Онлайн - оффлайн
@@ -35,13 +36,6 @@ public class DelightUser extends DelightPerson {
      */
     private String password;
 
-    /**
-     * ключи для сохранения пользователя
-     */
-    public static final String PREF_AUTH = "pref_auth";
-    public static final String PREF_LOGIN = "pref_login";
-    public static final String PREF_PASSWORD = "pref_password";
-
     public DelightUser(String login, String password, String firstName, String lastName) {
         super(firstName, lastName);
         this.login = login;
@@ -53,6 +47,16 @@ public class DelightUser extends DelightPerson {
         this.password = password;
     }
 
+    public DelightUser(int userId, String login, String password) {
+        this.userId = userId;
+        this.login = login;
+        this.password = password;
+    }
+
+    public void setRole(DelightRole role) {
+        this.role = role;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -61,4 +65,11 @@ public class DelightUser extends DelightPerson {
         return password;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public DelightRole getRole() {
+        return role;
+    }
 }

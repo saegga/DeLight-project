@@ -57,13 +57,13 @@ public class LoginFragment extends Fragment {
                         .title(R.string.loading)
                         .progressIndeterminateStyle(true)
                         .backgroundColorRes(R.color.mainBackground)
+                        .widgetColorRes(R.color.white)
                         .progress(true, 0)
                         .show();
 
                 final String login = inputEmail.getText().toString();
                 final String password = inputPassword.getText().toString();
 
-                //Ion library for async query
                 Ion.with(getActivity())
                         .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/auth/db_user_check")
                         .setBodyParameter("login", login)
@@ -81,7 +81,8 @@ public class LoginFragment extends Fragment {
                                     Log.d("Response:: ", result.toString());
 
                                     if (result.get("success").getAsInt() == 1) {
-                                        DelightUser user = new DelightUser(login, password);
+                                        int userId = result.get("user").getAsJsonObject().get("user_id").getAsInt();
+                                        DelightUser user = new DelightUser(userId, login, password);
                                         UserAccount.getInstance().saveUser(getActivity().getApplicationContext(), user);
                                         ((LaunchActivity) getActivity()).redirectToMain();
                                     } else {

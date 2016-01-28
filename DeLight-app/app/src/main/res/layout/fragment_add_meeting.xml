@@ -11,21 +11,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal"
-        android:layout_margin="5dp">
+        android:layout_margin="@dimen/activity_horizontal_margin">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_fragment_add_meeting_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_meeting_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="false"
-                android:hint="@string/hint_name"
-                android:inputType="time"
+                android:hint="@string/hint_name_2"
                 android:textColor="@color/mainBackground" />
 
         </android.support.design.widget.TextInputLayout>
@@ -35,45 +33,39 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="left"
         android:orientation="horizontal">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_fragment_add_meeting_place"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/acet_fragment_add_meeting_place"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="false"
-                android:hint="@string/place_hint"
-                android:inputType="time"
-                android:textColor="@color/mainBackground" />
-
-        </android.support.design.widget.TextInputLayout>
+                android:text="@string/place_hint"
+                android:textColor="@color/mainBackground"
+                android:textSize="20sp"/>
+            <Spinner
+                android:id="@+id/sp_fragment_add_meet_place"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="left"
         android:orientation="horizontal">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_fragment_add_meeting_date"
-            android:layout_width="@dimen/set_date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_meeting_date"
-                android:layout_width="@dimen/set_date"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:hint="@string/date_hint"
@@ -82,11 +74,19 @@
 
         </android.support.design.widget.TextInputLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_height="wrap_content">
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_fragment_add_meeting_start_time"
             android:layout_width="@dimen/set_time"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_meeting_start_time"
@@ -104,7 +104,7 @@
             android:id="@+id/til_fragment_add_meeting_end_time"
             android:layout_width="@dimen/set_time"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_meeting_end_time"

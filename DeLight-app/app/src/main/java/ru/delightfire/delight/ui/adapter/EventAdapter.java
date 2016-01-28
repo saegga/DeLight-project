@@ -59,7 +59,7 @@ public class EventAdapter extends BaseAdapter {
         DelightEvent event = events.get(position);
 
         TextView place = (TextView) view.findViewById(R.id.tv_element_list_row_event_place);
-        TextView date = (TextView) view.findViewById(R.id.tv_element_list_row_event_date);
+        TextView date = (TextView) view.findViewById(R.id.tv_element_list_row_event_extra);
         TextView startTime = (TextView) view.findViewById(R.id.tv_element_list_row_event_start_time);
         TextView endTime = (TextView) view.findViewById(R.id.tv_element_list_row_event_end_time);
 
@@ -84,5 +84,9 @@ public class EventAdapter extends BaseAdapter {
         endTime.setText(event.getEndTime());
 
         return view;
+    }
+
+    public List<DelightEvent> getEvents() {
+        return events;
     }
 }

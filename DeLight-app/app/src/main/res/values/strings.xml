@@ -21,8 +21,8 @@
     <string name="choose_time">Выбери время</string>
     <string name="text_view_agenda">Описание события:</string>
     <string name="choose_date">Выбрать дату</string>
-    <string name="save">сохранить</string>
-
+    <string name="save">Сохранить</string>
+    <string name="saving">Сохранение</string>
     <string name="add">Добавить</string>
     <string name="cancel">Отмена</string>
 
@@ -33,6 +33,15 @@
     <string name="date_hint">Дата</string>
     <string name="place_hint">Место:</string>
     <string name="hint_name">Имя</string>
+    <string name="hint_name_2">Название</string>
+
+    <string name="registration_success">Вы успешно зарегистрированы. Теперь вы можете войти,
+        используя только что созданный логин и пароль</string>
+    <string name="user_exists">Пользователь с таким именем уже существует</string>
+    <string name="login_format">Неверный формат логина. Логин должен состоять только из символов латинского алфавита, цифр, знака подчеркивания и иметь длину от 4 до 20 символов"</string>
+    <string name="password_format">Пароль должен состоять только из символов латинского алфавита, цифр, знака подчеркивания и иметь длину от 6 до 20 символов</string>
+
+    <string name="delete">Удалить</string>
 
     <string name="divider">:</string>
     <string name="please_wait">Пожалуйста дождитесь окончания загрузки</string>
@@ -40,25 +49,17 @@
     <string name="error">Ошибка</string>
     <string name="check_connection">Проверьте соединение с интернетом</string>
     <string name="wrong_auth">Неверное имя пользователя или пароль</string>
+    <string name="wrong_loading">Ошибка загрузки</string>
     <string name="success">Успешно</string>
     <string name="success_add_training">Тренировка успешно добавлена</string>
+    <string name="success_add_show">Выступление успешно добавлено</string>
+    <string name="success_add_meet">Встреча успешно добавлена</string>
+    <string name="success_update_user_info">Профиль успешно обновлен</string>
+    <string name="success_deleted">Событие успешно удалено</string>
 
-    <string-array name="arr_days_full">
-        <item>Понедельник</item>
-        <item>Вторник</item>
-        <item>Среда</item>
-        <item>Четверг</item>
-        <item>Пятница</item>
-        <item>Суббота</item>
-        <item>Воскресенье</item>
-    </string-array>
-    <string-array name="arr_days">
-        <item>Пн</item>
-        <item>Вт</item>
-        <item>Ср</item>
-        <item>Чт</item>
-        <item>Пт</item>
-        <item>Сб</item>
-        <item>Вс</item>
-    </string-array>
+    <string name="my_profile_login">Логин:</string>
+    <string name="my_profile_first_name">Имя</string>
+    <string name="my_profile_last_name">Фамилия</string>
+    <string name="my_profile_phone">Телефон</string>
+
 </resources>

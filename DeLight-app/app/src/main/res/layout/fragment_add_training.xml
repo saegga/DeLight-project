@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/activity_horizontal_margin"
         android:gravity="left"
         android:orientation="horizontal">
 
@@ -18,34 +18,31 @@
             android:layout_height="wrap_content"
             android:text="@string/place_hint"
             android:textColor="@color/mainBackground"
-            android:layout_marginLeft="10dp"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
 
         <Spinner
             android:id="@+id/sp_fragment_add_training_place"
             android:layout_width="wrap_content"
-            android:layout_height="50dp">
-
-        </Spinner>
+            android:layout_height="50dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="left"
         android:orientation="horizontal">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_fragment_add_training_date"
-            android:layout_width="@dimen/set_date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_training_date"
-                android:layout_width="@dimen/set_date"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
                 android:hint="@string/date_hint"
@@ -54,11 +51,19 @@
 
         </android.support.design.widget.TextInputLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:gravity="center_horizontal">
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/til_fragment_add_training_start_time"
             android:layout_width="@dimen/set_time"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_training_start_time"
@@ -76,7 +81,7 @@
             android:id="@+id/til_fragment_add_training_end_time"
             android:layout_width="@dimen/set_time"
             android:layout_height="wrap_content"
-            android:theme="@style/TimeTextLabel">
+            android:theme="@style/MainTextLabel">
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/acet_fragment_add_training_end_time"
@@ -98,8 +103,8 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatButton
-            style="@style/MainButton"
             android:id="@+id/acb_fragment_add_training_positive"
+            style="@style/MainButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"

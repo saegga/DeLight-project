@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin">
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_fragment_registration_register_confirm"
+        android:id="@+id/acb_fragment_registration_register_confirm"
         android:layout_width="@dimen/btns_login_width"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -20,11 +20,11 @@
         android:textColor="@color/white" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_fragment_registration_cancel"
+        android:id="@+id/acb_fragment_registration_cancel"
         android:layout_width="@dimen/btns_login_width"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/btn_fragment_registration_register_confirm"
+        android:layout_below="@id/acb_fragment_registration_register_confirm"
         android:background="@drawable/main_button_selector"
         android:text="@string/cancel"
         android:textColor="@color/white" />
@@ -33,7 +33,7 @@
         android:id="@+id/til_fragment_registration_input_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btn_fragment_registration_register_confirm"
+        android:layout_above="@id/acb_fragment_registration_register_confirm"
         android:gravity="center"
         android:textColorHint="@color/white"
         android:theme="@style/TextLabel">
@@ -43,7 +43,7 @@
             android:layout_width="@dimen/btns_login_width"
             android:layout_height="wrap_content"
             android:hint="@string/hint_password"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textColor="@color/white" />
     </android.support.design.widget.TextInputLayout>
 

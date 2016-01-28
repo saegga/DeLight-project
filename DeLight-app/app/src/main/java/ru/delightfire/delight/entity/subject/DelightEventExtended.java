@@ -10,17 +10,17 @@ public abstract class DelightEventExtended extends DelightEvent {
      */
     protected String agenda;
 
-    protected int ownerId;
+    protected String name;
 
     public String getAgenda() {
         return agenda;
     }
 
-    public int getOwnerId() {
-        return ownerId;
-    }
-
     public DelightEventExtended(int placeId, int month, int day, String startTime, String endTime){
         super(placeId, month, day, startTime, endTime);
+    }
+
+    public String getName() {
+        return name;
     }
 }

@@ -20,7 +20,9 @@ public class DelightShow extends DelightEventExtended {
      */
     private List<DelightPerformance> performances;
 
-    public DelightShow(int placeId, int month, int day, String startTime, String endTime) {
+    public DelightShow(int placeId, int month, int day, String startTime, String endTime, String name) {
         super(placeId, month, day, startTime, endTime);
+        this.name = name;
     }
+
 }

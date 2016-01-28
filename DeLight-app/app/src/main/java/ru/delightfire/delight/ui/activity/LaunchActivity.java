@@ -1,15 +1,14 @@
 package ru.delightfire.delight.ui.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.entity.subject.DelightUser;
 import ru.delightfire.delight.ui.fragment.LoginFragment;
+import ru.delightfire.delight.util.UserAccount;
 
 public class LaunchActivity extends AppCompatActivity {
 
@@ -23,8 +22,7 @@ public class LaunchActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        SharedPreferences sharedPreferences = getSharedPreferences(DelightUser.PREF_AUTH, MODE_PRIVATE);
-        if (sharedPreferences.contains(DelightUser.PREF_LOGIN)) {
+        if (UserAccount.getInstance().getUser(getApplicationContext()) != null) {
             redirectToMain();
         } else {
             FragmentManager manager = getSupportFragmentManager();

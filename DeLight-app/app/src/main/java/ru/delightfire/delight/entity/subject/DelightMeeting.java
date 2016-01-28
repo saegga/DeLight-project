@@ -7,26 +7,10 @@ package ru.delightfire.delight.entity.subject;
  * @author scaredChatsky
  * @see DelightEvent
  */
-public class DelightMeeting extends DelightEvent {
+public class DelightMeeting extends DelightEventExtended {
 
-    private int id;
-    /**
-     * Дата события
-     */
-    private String date;
-
-    /*
-    * краткое название встречи
-    * */
-    private String name;
-    /*
-   * повестка дня что нужно сделать
-   * */
-    private String agenda;
-
-    /*
-   *   место встречи
-   * */
-    private String place;
-
+    public DelightMeeting(int placeId, int month, int day, String startTime, String endTime, String name) {
+        super(placeId, month, day, startTime, endTime);
+        this.name = name;
+    }
 }

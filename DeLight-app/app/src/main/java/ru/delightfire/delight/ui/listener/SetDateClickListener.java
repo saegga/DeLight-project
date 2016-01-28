@@ -2,15 +2,11 @@ package ru.delightfire.delight.ui.listener;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import java.util.Calendar;
-
 import ru.delightfire.delight.entity.subject.DelightEvent;
-import ru.delightfire.delight.util.LoadingChecker;
 
 /**
  * Created by dev on 24.01.2016.
@@ -47,4 +43,11 @@ public class SetDateClickListener implements View.OnClickListener {
         pickerDialog.show();
     }
 
+    public Integer getmMonth() {
+        return mMonth;
+    }
+
+    public Integer getmDayOfMonth() {
+        return mDayOfMonth;
+    }
 }

@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +41,7 @@ import ru.delightfire.delight.util.DelightTrainingSerealizer;
 public class AddTrainingFragment extends Fragment {
 
     private Spinner place;
+    private SetDateClickListener dateClickListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,19 +64,17 @@ public class AddTrainingFragment extends Fragment {
 
         AppCompatEditText startTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_start_time);
         AppCompatEditText endTime = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_end_time);
-        AppCompatEditText date = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_date);
+        final AppCompatEditText date = (AppCompatEditText) rootView.findViewById(R.id.acet_fragment_add_training_date);
 
         Calendar calendar = Calendar.getInstance();
         Integer year = calendar.get(Calendar.YEAR);
         Integer month = calendar.get(Calendar.MONTH);
         Integer dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
-        final Integer monthTo = month;
-        final Integer dayTo = dayOfMonth;
-
         startTime.setOnClickListener(new SetTimeClickListener(getActivity()));
         endTime.setOnClickListener(new SetTimeClickListener(getActivity()));
-        date.setOnClickListener(new SetDateClickListener(getActivity(), year, month, dayOfMonth));
+        dateClickListener = new SetDateClickListener(getActivity(), year, month, dayOfMonth);
+        date.setOnClickListener(dateClickListener);
 
         date.setText(dayOfMonth + " " + DelightEvent.getMonthName(month + 1) + " " + year);
 
@@ -102,16 +100,15 @@ public class AddTrainingFragment extends Fragment {
                         .widgetColorRes(R.color.white)
                         .progress(true, 0)
                         .show();
-
                 int placeId = place.getSelectedItemPosition() + 1;
-                DelightTraining training = new DelightTraining(placeId, monthTo + 1, dayTo,
+                int monthTo = dateClickListener.getmMonth() + 1;
+                int dayTo = dateClickListener.getmDayOfMonth();
+                DelightTraining training = new DelightTraining(placeId, monthTo, dayTo,
                         getTime(startTimeTo), getTime(endTimeTo));
 
                 Gson gson = new GsonBuilder()
                         .registerTypeAdapter(DelightTraining.class, new DelightTrainingSerealizer())
                         .create();
-
-                String json = gson.toJson(training);
 
                 Ion.with(getActivity())
                         .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/create/create_training")
@@ -179,16 +176,34 @@ public class AddTrainingFragment extends Fragment {
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                        JsonArray array = result.get("places").getAsJsonArray();
-                        String placesArray[] = new String[array.size()];
-                        for (int i = 0; i < placesArray.length; i++) {
-                            placesArray[i] = array.get(i).getAsJsonObject().get("name").getAsString();
+                        if (result != null && e == null) {
+                            JsonArray array = result.get("places").getAsJsonArray();
+                            String placesArray[] = new String[array.size()];
+
+                            for (int i = 0; i < placesArray.length; i++) {
+                                placesArray[i] = array.get(i).getAsJsonObject().get("name").getAsString();
+                            }
+
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                                    R.layout.spinner_item, placesArray);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            place.setAdapter(adapter);
+                            initView();
+                        } else {
+                            new MaterialDialog.Builder(getActivity())
+                                    .title(R.string.error)
+                                    .content(R.string.check_connection)
+                                    .positiveText(R.string.ok)
+                                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                                        @Override
+                                        public void onClick(MaterialDialog dialog, DialogAction which) {
+                                            getActivity().setResult(Activity.RESULT_CANCELED);
+                                            getActivity().finish();
+                                        }
+                                    })
+                                    .backgroundColorRes(R.color.mainBackground)
+                                    .show();
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                                R.layout.spinner_item, placesArray);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        place.setAdapter(adapter);
-                        initView();
                     }
                 });
     }
@@ -205,5 +220,4 @@ public class AddTrainingFragment extends Fragment {
 
         return stringBuilder.toString();
     }
-
 }

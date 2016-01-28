@@ -85,4 +85,8 @@ public class EventAdapter extends BaseAdapter {
 
         return view;
     }
+
+    public List<DelightEvent> getEvents() {
+        return events;
+    }
 }

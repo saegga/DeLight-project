@@ -3,6 +3,7 @@ package ru.delightfire.delight.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import ru.delightfire.delight.entity.subject.DelightEvent;
 import ru.delightfire.delight.entity.subject.DelightRole;
 import ru.delightfire.delight.entity.subject.DelightUser;
 
@@ -73,10 +74,14 @@ public class UserAccount {
     }
 
     public boolean hasAddEventPermission() {
-        boolean permission = true;
-        if (user.getRole() == DelightRole.NOVICE || user.getRole() == DelightRole.UNASSIGNED){
-            permission = false;
-        }
-        return permission;
+        return !(user.getRole() == DelightRole.NOVICE || user.getRole() == DelightRole.UNASSIGNED);
+    }
+
+    public boolean hasDeleteEventPermission(DelightEvent event) {
+        return !(user.getRole() == DelightRole.NOVICE
+                || user.getRole() == DelightRole.UNASSIGNED)
+                && (event.getOwnerId() == user.getUserId()
+                || user.getRole() == DelightRole.ADMIN
+                || user.getRole() == DelightRole.LEADER);
     }
 }

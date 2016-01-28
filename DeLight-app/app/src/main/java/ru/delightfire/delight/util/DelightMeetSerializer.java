@@ -28,6 +28,8 @@ public class DelightMeetSerializer implements JsonSerializer<DelightMeeting> {
         result.addProperty("date", builder.toString());
         result.addProperty("start_time", src.getStartTime());
         result.addProperty("end_time", src.getEndTime());
+
+        result.addProperty("owner_id", src.getOwnerId());
         return result;
     }
 }

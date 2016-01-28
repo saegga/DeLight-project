@@ -161,4 +161,16 @@ public class MainActivity extends AppCompatActivity {
     public void setHardReloadProfile(boolean hardReloadProfile) {
         this.hardReloadProfile = hardReloadProfile;
     }
+
+    public Drawer getDrawer() {
+        return drawer;
+    }
+
+    public void setHardReloadDrawer(boolean hardReload) {
+        this.hardReload = hardReload;
+    }
+
+    public int getCurrentDrawerPosition() {
+        return currentDrawerPosition;
+    }
 }

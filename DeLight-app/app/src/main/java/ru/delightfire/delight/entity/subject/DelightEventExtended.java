@@ -12,14 +12,8 @@ public abstract class DelightEventExtended extends DelightEvent {
 
     protected String name;
 
-    protected int ownerId;
-
     public String getAgenda() {
         return agenda;
-    }
-
-    public int getOwnerId() {
-        return ownerId;
     }
 
     public DelightEventExtended(int placeId, int month, int day, String startTime, String endTime){

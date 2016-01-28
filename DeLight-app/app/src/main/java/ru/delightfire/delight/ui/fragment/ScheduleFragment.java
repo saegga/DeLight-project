@@ -34,9 +34,9 @@ import ru.delightfire.delight.ui.activity.AddEventActivity;
 import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.ui.adapter.EventAdapter;
 import ru.delightfire.delight.ui.adapter.ViewPagerAdapter;
+import ru.delightfire.delight.util.ConditionsChecker;
 import ru.delightfire.delight.util.DelightEventDeserializer;
 import ru.delightfire.delight.util.DelightUserDeserializer;
-import ru.delightfire.delight.util.ConditionsChecker;
 import ru.delightfire.delight.util.UserAccount;
 
 /**
@@ -172,38 +172,43 @@ public class ScheduleFragment extends Fragment {
                 .setBodyParameter("user_id", userId)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        if (e != null && result == null) {
-                            new MaterialDialog.Builder(getActivity())
-                                    .title(R.string.error)
-                                    .content(R.string.check_connection)
-                                    .backgroundColorRes(R.color.mainBackground)
-                                    .positiveColorRes(R.color.white)
-                                    .positiveText(R.string.ok)
-                                    .show();
-                        } else if (result.get("success").getAsInt() == 1) {
-                            Gson gson = new GsonBuilder()
-                                    .registerTypeAdapter(DelightEvent.class, new DelightEventDeserializer())
-                                    .create();
+                                 @Override
+                                 public void onCompleted(Exception e, JsonObject result) {
+                                     if (e != null && result == null) {
+                                         new MaterialDialog.Builder(getActivity())
+                                                 .title(R.string.error)
+                                                 .content(R.string.check_connection)
+                                                 .backgroundColorRes(R.color.mainBackground)
+                                                 .positiveColorRes(R.color.white)
+                                                 .positiveText(R.string.ok)
+                                                 .show();
+                                     } else {
+                                         if (result.get("success").getAsInt() == 1) {
+                                             Gson gson = new GsonBuilder()
+                                                     .registerTypeAdapter(DelightEvent.class, new DelightEventDeserializer())
+                                                     .create();
 
-                            JsonArray eventsArray = result.get("events").getAsJsonArray();
+                                             JsonArray eventsArray = result.get("events").getAsJsonArray();
 
-                            for (int i = 0; i < eventsArray.size(); i++) {
-                                events.add(gson.fromJson(eventsArray.get(i), DelightEvent.class));
-                            }
+                                             for (int i = 0; i < eventsArray.size(); i++) {
+                                                 events.add(gson.fromJson(eventsArray.get(i), DelightEvent.class));
+                                             }
 
-                            Collections.sort(events);
+                                             Collections.sort(events);
+                                             
+                                         } else if (result.get("success").getAsInt() == 0 && result.get("message").getAsString().equals("empty result")) {
 
-                            checker.wasComplete();
-                            if (checker.isComplete()) {
-                                initView();
-                            }
-                        } else if (result.get("success").getAsInt() == 0 && result.get("message").getAsString().equals("empty result")){
+                                         }
 
-                        }
-                    }
-                });
+                                         checker.wasComplete();
+                                         if (checker.isComplete()) {
+                                             initView();
+                                         }
+                                     }
+                                 }
+                             }
+
+                );
     }
 
     private void initView() {

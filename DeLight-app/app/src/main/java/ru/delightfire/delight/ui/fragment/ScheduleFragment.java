@@ -199,7 +199,7 @@ public class ScheduleFragment extends Fragment {
                             if (checker.isComplete()) {
                                 initView();
                             }
-                        } else if (result.get("success").getAsInt() == 0 && result.get("message").getAsString().equals("Empty result")){
+                        } else if (result.get("success").getAsInt() == 0 && result.get("message").getAsString().equals("empty result")){
 
                         }
                     }

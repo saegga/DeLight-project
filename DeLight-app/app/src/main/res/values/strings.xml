@@ -35,6 +35,12 @@
     <string name="hint_name">Имя</string>
     <string name="hint_name_2">Название</string>
 
+    <string name="registration_success">Вы успешно зарегистрированы. Теперь вы можете войти,
+        используя только что созданный логин и пароль</string>
+    <string name="user_exists">Пользователь с таким именем уже существует</string>
+    <string name="login_format">Неверный формат логина. Логин должен состоять только из символов латинского алфавита, цифр, знака подчеркивания и иметь длину от 4 до 20 символов"</string>
+    <string name="password_format">Пароль должен состоять только из символов латинского алфавита, цифр, знака подчеркивания и иметь длину от 6 до 20 символов</string>
+
     <string name="divider">:</string>
     <string name="please_wait">Пожалуйста дождитесь окончания загрузки</string>
     <string name="loading">Загрузка</string>
@@ -52,22 +58,4 @@
     <string name="my_profile_last_name">Фамилия</string>
     <string name="my_profile_phone">Телефон</string>
 
-    <string-array name="arr_days_full">
-        <item>Понедельник</item>
-        <item>Вторник</item>
-        <item>Среда</item>
-        <item>Четверг</item>
-        <item>Пятница</item>
-        <item>Суббота</item>
-        <item>Воскресенье</item>
-    </string-array>
-    <string-array name="arr_days">
-        <item>Пн</item>
-        <item>Вт</item>
-        <item>Ср</item>
-        <item>Чт</item>
-        <item>Пт</item>
-        <item>Сб</item>
-        <item>Вс</item>
-    </string-array>
 </resources>

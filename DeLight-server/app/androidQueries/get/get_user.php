@@ -30,7 +30,7 @@ if(isset($_POST["user_id"])){
 			
 			$response['success'] = 1;
 			
-		}else{
+		} else {
 			$response["success"] = 0;
 			$response["message"] = "empty result";
 		}
@@ -39,7 +39,7 @@ if(isset($_POST["user_id"])){
 		$response["success"] = 0;
 		$response["message"] = "mysql error";
 	}
-}else{
+} else {
 	$response["success"] = 0;
 	$response["message"] = "Require field(S) is missing";
 }

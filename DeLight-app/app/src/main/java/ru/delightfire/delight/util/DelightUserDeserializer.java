@@ -30,8 +30,8 @@ public class DelightUserDeserializer implements JsonDeserializer<DelightUser>{
 
         DelightUser user = UserAccount.getInstance().getUser(this.context);
 
-        user.setFirstName(jsonObject.get("first_name") == null ? null : jsonObject.get("first_name").getAsString());
-        user.setLastName(jsonObject.get("last_name") == null ? null : jsonObject.get("last_name").getAsString());
+        user.setFirstName(jsonObject.get("first_name").isJsonNull() ? null : jsonObject.get("first_name").getAsString());
+        user.setLastName(jsonObject.get("last_name").isJsonNull() ? null : jsonObject.get("last_name").getAsString());
 
         if (jsonObject.get("role") != null) {
             user.setRole(DelightRole.valueOf(jsonObject.get("role").getAsString()));
@@ -39,7 +39,7 @@ public class DelightUserDeserializer implements JsonDeserializer<DelightUser>{
             user.setRole(DelightRole.UNASSIGNED);
         }
 
-        user.setPhone(jsonObject.get("phone") == null ? null : jsonObject.get("phone").getAsString());
+        user.setPhone(jsonObject.get("phone").isJsonNull() ? null : jsonObject.get("phone").getAsString());
 
         return user;
     }

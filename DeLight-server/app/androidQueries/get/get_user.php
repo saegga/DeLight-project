@@ -6,16 +6,16 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/db/db_connect.php';
 $response = array();
 
 
-	if(isset($_POST["user_id"])){
+if(isset($_POST["user_id"])){
 	
-		$db = new DB_CONNECT();
-		$id = $_POST["user_id"];
-		$response = array();
-		$result = $db->getConnection()->query("SELECT * FROM users where user_id = '$id'");
+	$db = new DB_CONNECT();
+	$id = $_POST["user_id"];
+	$response = array();
+	$result = $db->getConnection()->query("SELECT * FROM users where user_id = '$id'");
 
 	if (!empty($result)) {
 		$response['user'] = array();
-		 if ($result->num_rows > 0) {
+		if ($result->num_rows > 0) {
 			
 			$user_row = $result->fetch_array();
 			
@@ -29,20 +29,19 @@ $response = array();
 			$response['user'] = $user;
 			
 			$response['success'] = 1;
-			//array_push($response["user"], $user);
-		
-		 }else{
+			
+		}else{
 			$response["success"] = 0;
 			$response["message"] = "empty result";
-		 }
+		}
 	}
 	else {
-	   $response["success"] = 0;
-	   $response["message"] = "mysql error";
+		$response["success"] = 0;
+		$response["message"] = "mysql error";
 	}
 }else{
-		$response["success"] = 0;
-	    $response["message"] = "Require field(S) is missing";
+	$response["success"] = 0;
+	$response["message"] = "Require field(S) is missing";
 }
-	echo json_encode($response);
-	?>
+echo json_encode($response);
+?>

@@ -18,7 +18,7 @@ $response = array();
 		last_name='$last_name', 
 		phone='$phone' where user_id='$id'");
 
-	if ($result) {
+		if ($result) {
 			$response['success'] = 1; 
 	}else{
 			$response["success"] = 0;

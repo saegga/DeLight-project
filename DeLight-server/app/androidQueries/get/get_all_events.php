@@ -7,8 +7,19 @@ $db = new DB_CONNECT();
 $response = array();
 
 $table = $_POST["table"];
+$user_id = $_POST["user_id"];
 
-$result = $db->getConnection()->query("SELECT * FROM $table");
+$user_result = $db->getConnection()->query("SELECT * FROM $users WHERE user_id = '$user_id'");
+
+$user_result = $userResult->fetch_array();
+
+if ($user_result["role"] == "UNASSIGNED"){
+    $access = "public";
+} else {
+    $access = "private";
+}
+
+$result = $db->getConnection()->query("SELECT * FROM $table WHERE access = '$access'");
 
 if (!empty($result)) {
     $response["events"] = array();
@@ -27,9 +38,9 @@ if (!empty($result)) {
 
             if ($table == "current_trainings"){
                 $place_id = $event_row["place_id"];
-                $resultPlace = $db->getConnection()->query("SELECT * FROM places WHERE place_id = '$place_id'");
-                $resultPlace = $resultPlace->fetch_array();
-                $extra = $resultPlace["name"];
+                $result_place = $db->getConnection()->query("SELECT * FROM places WHERE place_id = '$place_id'");
+                $result_place = $result_place->fetch_array();
+                $extra = $result_place["name"];
             } else{
                 $extra = $event_row["name"];
             }

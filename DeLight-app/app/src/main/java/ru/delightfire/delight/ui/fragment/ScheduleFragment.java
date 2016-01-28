@@ -8,11 +8,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -28,13 +28,15 @@ import java.util.List;
 
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.subject.DelightEvent;
+import ru.delightfire.delight.entity.subject.DelightUser;
 import ru.delightfire.delight.entity.support.DelightPageInfo;
 import ru.delightfire.delight.ui.activity.AddEventActivity;
 import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.ui.adapter.EventAdapter;
 import ru.delightfire.delight.ui.adapter.ViewPagerAdapter;
 import ru.delightfire.delight.util.DelightEventDeserializer;
-import ru.delightfire.delight.util.LoadingChecker;
+import ru.delightfire.delight.util.DelightUserDeserializer;
+import ru.delightfire.delight.util.ConditionsChecker;
 import ru.delightfire.delight.util.UserAccount;
 
 /**
@@ -46,11 +48,14 @@ public class ScheduleFragment extends Fragment {
     private List<DelightEvent> performances = new ArrayList<>();
     private List<DelightEvent> meetings = new ArrayList<>();
 
-    final LoadingChecker checker = new LoadingChecker(3);
+    final ConditionsChecker checker = new ConditionsChecker(4);
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ViewPagerAdapter pagerAdapter;
+    private FloatingActionButton fab;
+
+    private DelightUser user = UserAccount.getInstance().getUser(getActivity());
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,32 +95,12 @@ public class ScheduleFragment extends Fragment {
         loadEvents("shows", performances);
         loadEvents("meetings", meetings);
 
+        loadUser();
+
         tabLayout = (TabLayout) rootView.findViewById(R.id.tl_fragment_main);
         pagerAdapter = new ViewPagerAdapter(pages, getActivity());
 
-        IconicsDrawable fabIcon = new IconicsDrawable(getActivity())
-                .icon(FontAwesome.Icon.faw_plus)
-                .color(getResources().getColor(R.color.white))
-                .sizeDp(18);
-
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_activity_main);
-
-        if (UserAccount.getInstance().hasAddEventPermission()) {
-
-            fab.setImageDrawable(fabIcon);
-
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), AddEventActivity.class);
-                    int position = viewPager.getCurrentItem();
-                    intent.putExtra(MainActivity.VIEW_PAGER_POSITION, position);
-                    startActivityForResult(intent, position);
-                }
-            });
-        } else {
-            fab.hide();
-        }
+        fab = (FloatingActionButton) rootView.findViewById(R.id.fab_activity_main);
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -139,18 +124,65 @@ public class ScheduleFragment extends Fragment {
         return rootView;
     }
 
-    private void loadEvents(String queryParameter, final List<DelightEvent> events) {
+    private void loadUser() {
 
-        Ion.with(this)
-                .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_events")
-                .setBodyParameter("table", queryParameter)
+        final String userId = String.valueOf(user.getUserId());
+
+        Ion.with(getActivity())
+                .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_user")
+                .setBodyParameter("user_id", userId)
                 .asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
-                        Log.d("Response::", result.toString());
+                        if (e != null && result == null) {
+                            new MaterialDialog.Builder(getActivity())
+                                    .title(R.string.error)
+                                    .content(R.string.check_connection)
+                                    .backgroundColorRes(R.color.mainBackground)
+                                    .positiveColorRes(R.color.white)
+                                    .positiveText(R.string.ok)
+                                    .show();
+                        } else if (result.get("success").getAsInt() == 1) {
 
-                        if (result.get("success").getAsInt() == 1) {
+                            Gson gson = new GsonBuilder()
+                                    .registerTypeAdapter(DelightUser.class, new DelightUserDeserializer(getActivity()))
+                                    .create();
+
+                            UserAccount.getInstance().setUser(gson.fromJson(result.get("user"), DelightUser.class));
+
+                            ((MainActivity) getActivity()).setHardReloadProfile(false);
+
+                            checker.wasComplete();
+                            if (checker.isComplete()) {
+                                initView();
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void loadEvents(String queryParameter, final List<DelightEvent> events) {
+
+        final String userId = String.valueOf(user.getUserId());
+
+        Ion.with(this)
+                .load("POST", "http://delightfire-sunteam.rhcloud.com/app/androidQueries/get/get_all_events")
+                .setBodyParameter("table", queryParameter)
+                .setBodyParameter("user_id", userId)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if (e != null && result == null) {
+                            new MaterialDialog.Builder(getActivity())
+                                    .title(R.string.error)
+                                    .content(R.string.check_connection)
+                                    .backgroundColorRes(R.color.mainBackground)
+                                    .positiveColorRes(R.color.white)
+                                    .positiveText(R.string.ok)
+                                    .show();
+                        } else if (result.get("success").getAsInt() == 1) {
                             Gson gson = new GsonBuilder()
                                     .registerTypeAdapter(DelightEvent.class, new DelightEventDeserializer())
                                     .create();
@@ -164,9 +196,11 @@ public class ScheduleFragment extends Fragment {
                             Collections.sort(events);
 
                             checker.wasComplete();
-                            if (checker.isLoaded()) {
+                            if (checker.isComplete()) {
                                 initView();
                             }
+                        } else if (result.get("success").getAsInt() == 0 && result.get("message").getAsString().equals("Empty result")){
+
                         }
                     }
                 });
@@ -183,6 +217,28 @@ public class ScheduleFragment extends Fragment {
                 .commit();
 
         viewPager.setCurrentItem(((MainActivity) getActivity()).getCurrentViewPagerPosition(), true);
+
+        if (UserAccount.getInstance().hasAddEventPermission()) {
+
+            IconicsDrawable fabIcon = new IconicsDrawable(getActivity())
+                    .icon(FontAwesome.Icon.faw_plus)
+                    .colorRes(R.color.white)
+                    .sizeDp(18);
+
+            fab.setImageDrawable(fabIcon);
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), AddEventActivity.class);
+                    int position = viewPager.getCurrentItem();
+                    intent.putExtra(MainActivity.VIEW_PAGER_POSITION, position);
+                    startActivityForResult(intent, position);
+                }
+            });
+        } else {
+            fab.hide();
+        }
     }
 
     @Override

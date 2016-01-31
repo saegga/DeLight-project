@@ -3,6 +3,7 @@
 
     <string name="schedule">Расписание</string>
     <string name="profile">Профиль</string>
+    <string name="feed">Новости</string>
     <string name="exit">Выход</string>
 
     <string name="send_msg">Отправить</string>

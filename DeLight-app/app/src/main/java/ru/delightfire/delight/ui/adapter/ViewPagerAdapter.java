@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(final ViewGroup container, int position) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = inflater.inflate(R.layout.element_schedule_page, container, false);
-        ListView listView = (ListView) itemView.findViewById(R.id.lv_element_schedule_page);
+        final ListView listView = (ListView) itemView.findViewById(R.id.lv_element_schedule_page);
 
         listView.setDivider(context.getResources().getDrawable(android.R.color.transparent));
         listView.setDividerHeight(0);
@@ -64,6 +65,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("LongClick: ", position + "" );
                 final DelightEvent event = ((EventAdapter) pages.get(activity
                         .getCurrentViewPagerPosition()).getAdapter()).getEvents().get(position);
 
@@ -138,6 +140,12 @@ public class ViewPagerAdapter extends PagerAdapter {
                             })
                             .show();
                 }
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Log.d("Click: ", position + "" );
+                    }
+                });
 
                 return false;
             }

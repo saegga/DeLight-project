@@ -53,9 +53,15 @@ public class MainActivity extends AppCompatActivity {
         PrimaryDrawerItem scheduleItem = new PrimaryDrawerItem()
                 .withName(R.string.schedule)
                 .withIcon(FontAwesome.Icon.faw_list);
+
         PrimaryDrawerItem profileItem = new PrimaryDrawerItem()
                 .withName(R.string.profile)
                 .withIcon(FontAwesome.Icon.faw_user);
+
+        PrimaryDrawerItem feedItem = new PrimaryDrawerItem()
+                .withName(R.string.feed)
+                .withIcon(FontAwesome.Icon.faw_rss);
+
         DividerDrawerItem dividerItem = new DividerDrawerItem();
         SecondaryDrawerItem exitItem = new SecondaryDrawerItem().withName(R.string.exit);
 
@@ -71,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 .addDrawerItems(
                         scheduleItem,
                         profileItem,
+                        feedItem,
                         dividerItem,
                         exitItem
                 )

@@ -34,7 +34,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />
         </activity>
-        <activity android:name=".ui.activity.DetailEventActivity"/>
     </application>
 
 </manifest>

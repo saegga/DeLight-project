@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import ru.delightfire.delight.R;
-import ru.delightfire.delight.ui.fragment.DetailEventFragment;
+import ru.delightfire.delight.ui.fragment.DetailShowFragment;
 
 /**
  * Created by sergei on 30.01.2016.
@@ -24,7 +24,7 @@ public class DetailEventActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         Fragment detailFragment = manager.findFragmentById(R.id.fl_activity_detail_event);
         if(detailFragment == null){
-            detailFragment = new DetailEventFragment();
+            detailFragment = new DetailShowFragment();
             manager.beginTransaction()
                     .add(R.id.fl_activity_detail_event, detailFragment)
                     .commit();

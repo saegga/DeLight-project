@@ -2,6 +2,7 @@ package ru.delightfire.delight.ui.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -23,6 +24,7 @@ import java.util.List;
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.subject.DelightEvent;
 import ru.delightfire.delight.entity.support.DelightPageInfo;
+import ru.delightfire.delight.ui.activity.DetailEventActivity;
 import ru.delightfire.delight.ui.activity.MainActivity;
 import ru.delightfire.delight.util.UserAccount;
 
@@ -61,11 +63,11 @@ public class ViewPagerAdapter extends PagerAdapter {
 
         listView.setDivider(context.getResources().getDrawable(android.R.color.transparent));
         listView.setDividerHeight(0);
-
+        listView.setLongClickable(true);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("LongClick: ", position + "" );
+                Log.d("LongClick: ", position + "");
                 final DelightEvent event = ((EventAdapter) pages.get(activity
                         .getCurrentViewPagerPosition()).getAdapter()).getEvents().get(position);
 
@@ -140,14 +142,15 @@ public class ViewPagerAdapter extends PagerAdapter {
                             })
                             .show();
                 }
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Log.d("Click: ", position + "" );
-                    }
-                });
-
-                return false;
+                return true;
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("Click ", "click");
+                        Intent i = new Intent(context.getApplicationContext(), DetailEventActivity.class);
+                        context.startActivity(i);
             }
         });
 

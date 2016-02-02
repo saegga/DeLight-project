@@ -25,6 +25,19 @@
         android:textColor="@color/mainBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/place_show"
+        android:textSize="18sp"
+        android:textColor="@color/mainBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/address_show"
+        android:textSize="18sp"
+        android:textColor="@color/mainBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -34,13 +47,13 @@
             android:id="@+id/start_time_show"
             android:textSize="18sp"
             android:textColor="@color/mainBackground"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/end_time_show"
             android:textSize="18sp"
             android:textColor="@color/mainBackground"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>

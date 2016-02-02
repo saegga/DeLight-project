@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -38,6 +40,7 @@ public class DetailShowFragment extends Fragment {
     private TextView dateShow;
     private TextView descriptionShow;
     private TextView placeShow;
+    private TextView addressShow;
     private TextView startTimeShow, endTimeShow;
     private ActionBar toolbar;
     private int eventId;
@@ -56,7 +59,10 @@ public class DetailShowFragment extends Fragment {
         descriptionShow = (TextView) view.findViewById(R.id.description_show);
         startTimeShow = (TextView) view.findViewById(R.id.start_time_show);
         endTimeShow = (TextView) view.findViewById(R.id.end_time_show);
+        placeShow = (TextView) view.findViewById(R.id.place_show);
+        addressShow = (TextView) view.findViewById(R.id.address_show);
 
+        loadDetailShow();
         return view;
     }
 
@@ -94,7 +100,22 @@ public class DetailShowFragment extends Fragment {
                                     .show();
                             return;
                         }else if(result.get("success").getAsInt() == 1){
-                            
+                            Log.d("suss", result.toString());
+                            String name = result.get("show").getAsJsonObject().get("name").getAsString();
+                            String date = result.get("show").getAsJsonObject().get("date").getAsString();
+                            String description = result.get("show").getAsJsonObject().get("description").getAsString();
+                            String start = result.get("show").getAsJsonObject().get("start_time").getAsString();
+                            String end = result.get("show").getAsJsonObject().get("end_time").getAsString();
+                            String address = result.get("show").getAsJsonObject().get("address").getAsString();
+                            String place = result.get("show").getAsJsonObject().get("p_name").getAsString();
+
+                            nameShow.setText(name);
+                            dateShow.setText(date);
+                            descriptionShow.setText(description);
+                            startTimeShow.setText(start + " - ");
+                            endTimeShow.setText(end);
+                            placeShow.setText(place);
+                            addressShow.setText(address);
                         }
                     }
                 });

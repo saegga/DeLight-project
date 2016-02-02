@@ -23,7 +23,7 @@ public class DetailEventActivity extends AppCompatActivity {
     public static final String BUNDLE_EVENT_ID = "bundle_event_id";
     private int eventType;
     private int eventId;
-   //todo пакуем event_id в аргумент
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

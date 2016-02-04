@@ -21,4 +21,13 @@ public class DelightPerformance {
      * Пользователи, участвующие в номере
      */
     private List<DelightUser> users;
+
+    public DelightPerformance(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public void setUsers(List<DelightUser> users) {
+        this.users = users;
+    }
 }

@@ -1,5 +1,6 @@
 package ru.delightfire.delight.util;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -7,7 +8,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
+import ru.delightfire.delight.entity.subject.DelightPerformance;
 import ru.delightfire.delight.entity.subject.DelightShow;
 
 /**
@@ -17,6 +21,20 @@ public class DelightShowDeserializer implements JsonDeserializer<DelightShow> {
 
     @Override
     public DelightShow deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+
+        if(json.getAsJsonObject().has("performances")){
+            List<DelightPerformance> listPerformances = new ArrayList<>();
+            JsonArray perf = ((JsonObject) json).getAsJsonArray("performances");
+            for (int i = 0; i < perf.size(); i++) {
+                String namePerformance = perf.get(i).getAsJsonObject().get("p_name").getAsString();
+                String description = perf.get(i).getAsJsonObject().get("description").getAsString();
+                listPerformances.add(new DelightPerformance(namePerformance, description));
+            }
+
+       }
+
+
+
         JsonObject obj = json.getAsJsonObject();
         String name = obj.get("show").getAsJsonObject().get("name").getAsString();
         String date = obj.get("show").getAsJsonObject().get("date").getAsString();
@@ -31,3 +49,4 @@ public class DelightShowDeserializer implements JsonDeserializer<DelightShow> {
         return new DelightShow(month, day, start, end, name, description);
     }
 }
+// todo сделать запрос + реализовать вывод всего и переход на редактирование

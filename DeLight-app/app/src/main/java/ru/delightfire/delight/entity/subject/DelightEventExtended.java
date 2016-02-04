@@ -20,6 +20,10 @@ public abstract class DelightEventExtended extends DelightEvent {
         super(placeId, month, day, startTime, endTime);
     }
 
+    public DelightEventExtended(int month, int day, String startTime, String endTime) {
+        super(month, day, startTime, endTime);
+    }
+
     public String getName() {
         return name;
     }

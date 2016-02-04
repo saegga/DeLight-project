@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,10 +25,13 @@ import com.koushikdutta.ion.Ion;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 
+import java.util.List;
+
 import ru.delightfire.delight.R;
 import ru.delightfire.delight.entity.subject.DelightShow;
 import ru.delightfire.delight.ui.activity.DetailEventActivity;
 import ru.delightfire.delight.util.DelightEventDeserializer;
+import ru.delightfire.delight.util.DelightShowDeserializer;
 import ru.delightfire.delight.util.DelightShowSerializer;
 
 /**
@@ -100,24 +104,22 @@ public class DetailShowFragment extends Fragment {
                                     .show();
                             return;
                         }else if(result.get("success").getAsInt() == 1){
-                            Log.d("suss", result.toString());
-                            String name = result.get("show").getAsJsonObject().get("name").getAsString();
-                            String date = result.get("show").getAsJsonObject().get("date").getAsString();
-                            String description = result.get("show").getAsJsonObject().get("description").getAsString();
-                            String start = result.get("show").getAsJsonObject().get("start_time").getAsString();
-                            String end = result.get("show").getAsJsonObject().get("end_time").getAsString();
-                            String address = result.get("show").getAsJsonObject().get("address").getAsString();
-                            String place = result.get("show").getAsJsonObject().get("p_name").getAsString();
+                            Gson gson = new GsonBuilder()
+                                    .registerTypeAdapter(DelightShow.class, new DelightShowDeserializer())
+                                    .create();
+                            DelightShow show = gson.fromJson(result, DelightShow.class);
 
-                            nameShow.setText(name);
-                            dateShow.setText(date);
-                            descriptionShow.setText(description);
-                            startTimeShow.setText(start + " - ");
-                            endTimeShow.setText(end);
-                            placeShow.setText(place);
-                            addressShow.setText(address);
+                            nameShow.setText(show.getName());
+                            dateShow.setText(show.getDay() + " " + DelightShow.getMonthName(show.getMonth()));
+                            descriptionShow.setText(show.getAgenda());
+                            startTimeShow.setText(show.getStartTime() + " - ");
+                            endTimeShow.setText(show.getEndTime());
+
+//                            placeShow.setText(place);
+//                            addressShow.setText(address);
                         }
                     }
                 });
     }
 }
+//todo перенести get_show в директорию проекта + сделать переход на фрагмент изменения + кнопки + для других событий

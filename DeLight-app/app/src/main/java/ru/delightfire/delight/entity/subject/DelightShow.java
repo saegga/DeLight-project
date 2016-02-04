@@ -25,4 +25,9 @@ public class DelightShow extends DelightEventExtended {
         this.name = name;
     }
 
+    public DelightShow(int month, int day, String startTime, String endTime, String name, String agenda) {
+        super(month, day, startTime, endTime);
+        this.name = name;
+        this.agenda = agenda;
+    }
 }
